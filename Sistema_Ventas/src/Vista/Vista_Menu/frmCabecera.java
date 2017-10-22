@@ -204,7 +204,12 @@ public class frmCabecera extends javax.swing.JInternalFrame {
                 padre.add(frmMenuInicioSeguridad);
                 frmMenuInicioSeguridad.show();
                 break;
-            default:
+            case "alm":
+                frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero();
+                padre.add(frmMenuInicioAlmacenero);
+                frmMenuInicioAlmacenero.show();
+                break;
+            default :
                 frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero();
                 padre.add(frmMenuInicioAlmacenero);
                 frmMenuInicioAlmacenero.show();
