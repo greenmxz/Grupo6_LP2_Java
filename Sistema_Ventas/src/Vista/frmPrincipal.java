@@ -29,7 +29,7 @@ public class frmPrincipal extends javax.swing.JFrame {
     public frmPrincipal(String nombreUsuario) {
         initComponents();
         this.setNombreUsuario(nombreUsuario);
-        System.out.println(this.getNombreUsuario());
+        //System.out.println(this.getNombreUsuario());
         
         
         frmCabecera cabecera = new frmCabecera(jdpPrincipal, getNombreUsuario());
