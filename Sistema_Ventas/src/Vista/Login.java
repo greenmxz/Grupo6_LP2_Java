@@ -212,8 +212,8 @@ public class Login extends javax.swing.JFrame {
         
         //System.out.println(getNombreUsuario());
      
-            if ((nombreUsuario=="log")||(nombreUsuario=="seg")||(nombreUsuario=="alm")){
-                frmPrincipal frmPrincipal = new frmPrincipal( getNombreUsuario());  
+            if ((nombreUsuario.equalsIgnoreCase("log"))||(nombreUsuario.equalsIgnoreCase("seg"))||(nombreUsuario.equalsIgnoreCase("alm"))){
+                frmPrincipal frmPrincipal = new frmPrincipal( getNombreUsuario()); 
                 //frmPrincipal.setNombreUsuario(this.getNombreUsuario());
                 frmPrincipal.setVisible(true);
                 this.dispose(); 
