@@ -39,6 +39,11 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
         setBorder(null);
 
         btnGuiaRemision.setText("Guia de remisión");
+        btnGuiaRemision.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuiaRemisionActionPerformed(evt);
+            }
+        });
 
         btnDespachoPedido.setText("Despacho pedido");
 
@@ -65,6 +70,13 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuiaRemisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiaRemisionActionPerformed
+        // TODO add your handling code here:
+        frmGenerarGuiaRemision frmGuia = new frmGenerarGuiaRemision();
+        frmGuia.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnGuiaRemisionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
