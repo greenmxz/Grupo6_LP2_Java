@@ -28,18 +28,10 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnGuiaRemision" min="-2" pref="165" max="-2" attributes="0"/>
-                          <Component id="btnDespachoPedido" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="Cerrar" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="btnGuiaRemision" min="-2" pref="165" max="-2" attributes="0"/>
+                  <Component id="btnDespachoPedido" alignment="0" min="-2" pref="165" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
@@ -52,9 +44,7 @@
               <Component id="btnDespachoPedido" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
               <Component id="btnGuiaRemision" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace pref="85" max="32767" attributes="0"/>
-              <Component id="Cerrar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+              <EmptySpace pref="137" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,14 +59,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Despacho pedido"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="Cerrar">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Cerrar Temporal"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CerrarActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

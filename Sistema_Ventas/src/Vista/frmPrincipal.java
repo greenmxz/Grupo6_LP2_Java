@@ -31,7 +31,8 @@ public class frmPrincipal extends javax.swing.JFrame {
         this.setNombreUsuario(nombreUsuario);
         //System.out.println(this.getNombreUsuario());
         
-        
+        this.setResizable(false);
+        //this.setUndecorated(false);
         frmCabecera cabecera = new frmCabecera(jdpPrincipal, getNombreUsuario());
         jdpPrincipal.add(cabecera);
         //cabecera.show();

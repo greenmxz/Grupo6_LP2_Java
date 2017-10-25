@@ -21,8 +21,6 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
  enum Estado {Abierto,Cerrado,Nuevo}
 public class frmCabecera extends javax.swing.JInternalFrame {
-
-    
     private String nombreUsuario;
     private JDesktopPane padre;
     private frmMenuInicioLogistica frmMenuInicioLogistica;
@@ -46,12 +44,14 @@ public class frmCabecera extends javax.swing.JInternalFrame {
         setNombreUsuario(nombreUsuario);
         lblNombreUsuario.setText(getNombreUsuario());
         this.padre=padre;
-        
-        
-        ////PARA EL DISEÑO DEL PANEL cabecera 
+        inicializar();
+          
+    }
+    private void inicializar(){
+////PARA EL DISEÑO DEL PANEL cabecera 
 //        ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
 //        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
-
+        
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setBorder(null);
         this.setLocation(0,0);
@@ -63,6 +63,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
         ImageIcon icono = new ImageIcon (img.getImage().
                 getScaledInstance(btnMenu.getWidth(), btnMenu.getHeight(), Image.SCALE_SMOOTH));
         btnMenu.setIcon(icono);
+        
         ///boton cerrar sesion
         btnCerrarSesion.setBounds(0,0,23,21);
         ImageIcon img2 = new ImageIcon(getClass().getResource("/Imagenes/power-button-off.png"));
@@ -76,11 +77,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
         ImageIcon iconoPerfil = new ImageIcon (imgPerfil.getImage().
                 getScaledInstance(ImagenPerfil.getWidth(), ImagenPerfil.getHeight(), Image.SCALE_SMOOTH));
         ImagenPerfil.setIcon(iconoPerfil);
-        
-           
-                
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,28 +189,79 @@ public class frmCabecera extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuActionPerformed
-        
-        switch (nombreUsuario) {
-            case "log":
-                frmMenuInicioLogistica= new frmMenuInicioLogistica();
-                padre.add(frmMenuInicioLogistica);
-                frmMenuInicioLogistica.show();
-                break;
-            case "seg":
-                frmMenuInicioSeguridad= new frmMenuInicioSeguridad();
-                padre.add(frmMenuInicioSeguridad);
-                frmMenuInicioSeguridad.show();
-                break;
-            case "alm":
-                frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero();
-                padre.add(frmMenuInicioAlmacenero);
-                frmMenuInicioAlmacenero.show();
-                break;
-            default :
-                frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero();
-                padre.add(frmMenuInicioAlmacenero);
-                frmMenuInicioAlmacenero.show();
-                break;
+        if (estado == Estado.Cerrado){//Si está abierto el menu
+            switch (nombreUsuario) {
+                case "log":
+                     if (frmMenuInicioLogistica!=null){
+                        frmMenuInicioLogistica.show();
+                        estado=Estado.Abierto;
+                    }else{
+                        frmMenuInicioLogistica= new frmMenuInicioLogistica();
+                        padre.add(frmMenuInicioLogistica);
+                        frmMenuInicioLogistica.show();
+                        estado=Estado.Abierto;
+                    }
+                    break;
+                case "seg":
+                    if (frmMenuInicioSeguridad!=null){
+                        frmMenuInicioSeguridad.show();
+                        estado=Estado.Abierto;
+                    }else{
+                        frmMenuInicioSeguridad= new frmMenuInicioSeguridad();
+                        padre.add(frmMenuInicioSeguridad);
+                        frmMenuInicioSeguridad.show();
+                        estado=Estado.Abierto;
+                    }
+                    break;
+                case "alm":
+                    if (frmMenuInicioAlmacenero!=null){
+                        frmMenuInicioAlmacenero.show();
+                        estado=Estado.Abierto;
+                    }else{
+                        frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero();
+                        padre.add(frmMenuInicioAlmacenero);
+                        frmMenuInicioAlmacenero.show();
+                        estado=Estado.Abierto;
+                    }
+                    break;
+                default :
+                    if (frmMenuInicioAlmacenero!=null){
+                        
+                        
+                        frmMenuInicioAlmacenero.show();
+                        estado=Estado.Abierto;
+                    }else{
+                        frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero();
+                        padre.add(frmMenuInicioAlmacenero);
+                        frmMenuInicioAlmacenero.show();
+                        estado=Estado.Abierto;
+                    }
+                    break;
+            }
+        }else{
+            switch (nombreUsuario) {
+                case "log":
+                    //padre.removeAll();
+                    frmMenuInicioLogistica.hide();
+                    estado=Estado.Cerrado;
+                    break;
+                case "seg":
+                    frmMenuInicioSeguridad.hide();
+                    estado=Estado.Cerrado;
+                    //padre.removeAll();
+                    break;
+                case "alm":
+                    frmMenuInicioAlmacenero.hide();
+                    estado=Estado.Cerrado;
+                    //padre.removeAll();
+                    break;
+                default :
+                    frmMenuInicioAlmacenero.hide();  
+                    estado=Estado.Cerrado;
+                    //padre.removeAll();
+                    //padre.remove(frmMenuInicioAlmacenero);
+                    break;
+            }
         }
         
         
@@ -222,6 +270,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         // TODO add your handling code here:
         //this.dispose();
+  
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
 

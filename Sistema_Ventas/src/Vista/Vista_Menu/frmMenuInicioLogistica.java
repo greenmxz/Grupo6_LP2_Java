@@ -11,8 +11,9 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  *
  * @author Moises
  */
-public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
 
+public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
+    private Estado estado ;
     /**
      * Creates new form frmMenuInicioLogistica
      */
@@ -20,6 +21,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         initComponents();
         this.setLocation(0,111);
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        estado=Estado.Abierto;
     }
 
     /**
@@ -34,7 +36,6 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         btnOrdenCompra = new javax.swing.JButton();
         btnProductosAgotados = new javax.swing.JButton();
         btnReportesGerenciales = new javax.swing.JButton();
-        Cerrar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(136, 161, 192));
         setBorder(null);
@@ -45,28 +46,17 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
 
         btnReportesGerenciales.setText("Reportes gerenciales");
 
-        Cerrar.setText("Cerrar Temporal");
-        Cerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CerrarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(12, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnReportesGerenciales, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                     .addComponent(btnProductosAgotados, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                     .addComponent(btnOrdenCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
-                .addComponent(Cerrar)
-                .addGap(35, 35, 35))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,22 +67,14 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
                 .addComponent(btnProductosAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addComponent(btnReportesGerenciales, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                .addComponent(Cerrar)
-                .addGap(23, 23, 23))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_CerrarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Cerrar;
     private javax.swing.JButton btnOrdenCompra;
     private javax.swing.JButton btnProductosAgotados;
     private javax.swing.JButton btnReportesGerenciales;

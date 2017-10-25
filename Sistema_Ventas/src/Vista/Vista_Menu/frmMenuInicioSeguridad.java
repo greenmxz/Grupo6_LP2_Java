@@ -32,19 +32,11 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnCuentasAcceso = new javax.swing.JButton();
-        Cerrar = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(136, 161, 192));
         setBorder(null);
 
         btnCuentasAcceso.setText("Cuentas de acceso");
-
-        Cerrar.setText("Cerrar Temporal");
-        Cerrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CerrarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -54,32 +46,20 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(btnCuentasAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
                 .addGap(20, 20, 20))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(Cerrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(btnCuentasAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addComponent(Cerrar)
-                .addGap(108, 108, 108))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void CerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CerrarActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-    }//GEN-LAST:event_CerrarActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Cerrar;
     private javax.swing.JButton btnCuentasAcceso;
     // End of variables declaration//GEN-END:variables
 }
