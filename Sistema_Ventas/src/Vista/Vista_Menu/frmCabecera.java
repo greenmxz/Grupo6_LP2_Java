@@ -277,7 +277,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
     private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
         // TODO add your handling code here:
         //this.dispose();
-  
+        System.exit(0);
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
 
