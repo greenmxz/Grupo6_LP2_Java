@@ -5,6 +5,9 @@
  */
 package Vista.Vista_Menu;
 
+import Vista.frmOrdenCompra;
+import Vista.frmProductosAgotados;
+import Vista.frmReportesGerenciales;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -14,12 +17,15 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
     private Estado estado ;
+    private frmCabecera padre;
     /**
      * Creates new form frmMenuInicioLogistica
      */
-    public frmMenuInicioLogistica() {
+    public frmMenuInicioLogistica(frmCabecera padre) {
         initComponents();
         this.setLocation(0,111);
+        //this.contenedorPadre = contenedorPadre;
+        this.padre=padre;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         estado=Estado.Abierto;
     }
@@ -41,10 +47,25 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         setBorder(null);
 
         btnOrdenCompra.setText("Orden de compra");
+        btnOrdenCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrdenCompraActionPerformed(evt);
+            }
+        });
 
         btnProductosAgotados.setText("Productos agotados");
+        btnProductosAgotados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProductosAgotadosActionPerformed(evt);
+            }
+        });
 
         btnReportesGerenciales.setText("Reportes gerenciales");
+        btnReportesGerenciales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesGerencialesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,6 +93,37 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnProductosAgotadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosAgotadosActionPerformed
+        // TODO add your handling code here:
+        frmProductosAgotados frmProductosAgotados = new frmProductosAgotados();
+        padre.getDesktopPane().add(frmProductosAgotados);
+        frmProductosAgotados.show();
+        this.hide();
+//        this.getDesktopPane().getTopLevelAncestor().getEstado();
+        this.estado=Estado.Cerrado;
+        padre.setEstado(Estado.Cerrado);
+    }//GEN-LAST:event_btnProductosAgotadosActionPerformed
+
+    private void btnOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenCompraActionPerformed
+        // TODO add your handling code here:
+        frmOrdenCompra frmOrdenCompra = new frmOrdenCompra();
+        padre.getDesktopPane().add(frmOrdenCompra);
+        frmOrdenCompra.show();
+        this.hide();
+        padre.setEstado(Estado.Cerrado);
+        this.estado=Estado.Cerrado;
+    }//GEN-LAST:event_btnOrdenCompraActionPerformed
+
+    private void btnReportesGerencialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesGerencialesActionPerformed
+        // TODO add your handling code here:
+        frmReportesGerenciales frmReportesGerenciales = new frmReportesGerenciales();
+        padre.getDesktopPane().add(frmReportesGerenciales);
+        frmReportesGerenciales.show();
+        this.hide();
+        this.estado=Estado.Cerrado;
+        padre.setEstado(Estado.Cerrado);
+    }//GEN-LAST:event_btnReportesGerencialesActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

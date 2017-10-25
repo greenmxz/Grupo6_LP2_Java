@@ -6,6 +6,7 @@
 package Vista;
 
 import Vista.Vista_Menu.frmCabecera;
+import javax.swing.JDesktopPane;
 
 /**
  *
@@ -13,8 +14,17 @@ import Vista.Vista_Menu.frmCabecera;
  */
 public class frmPrincipal extends javax.swing.JFrame {
     private static String nombreUsuario;
+
     
+    private  JDesktopPane jdpPrin;
     
+        public JDesktopPane getJdpPrincipal() {
+        return jdpPrincipal;
+    }
+
+    public  void setJdpPrincipal(JDesktopPane jdpPrincipal) {
+        this.jdpPrincipal = jdpPrincipal;
+    }
     public String getNombreUsuario() {
         return nombreUsuario;
     }
@@ -30,11 +40,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         initComponents();
         this.setNombreUsuario(nombreUsuario);
         //System.out.println(this.getNombreUsuario());
-        
+        this.jdpPrin=jdpPrincipal;
         this.setResizable(false);
         //this.setUndecorated(false);
-        frmCabecera cabecera = new frmCabecera(jdpPrincipal, getNombreUsuario());
-        jdpPrincipal.add(cabecera);
+        
+        frmCabecera cabecera = new frmCabecera(jdpPrin, getNombreUsuario());
+        jdpPrin.add(cabecera);
+        //cabecera.show();
         //cabecera.show();
     }
 

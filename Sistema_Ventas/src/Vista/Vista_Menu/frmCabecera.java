@@ -30,6 +30,14 @@ public class frmCabecera extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmCabecera
      */
+    
+        public Estado getEstado() {
+        return estado;
+    }
+
+    public void setEstado(Estado estado) {
+        this.estado = estado;
+    }
     public String getNombreUsuario() {
         return nombreUsuario;
     }
@@ -196,7 +204,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
                         frmMenuInicioLogistica.show();
                         estado=Estado.Abierto;
                     }else{
-                        frmMenuInicioLogistica= new frmMenuInicioLogistica();
+                        frmMenuInicioLogistica= new frmMenuInicioLogistica(this);
                         padre.add(frmMenuInicioLogistica);
                         frmMenuInicioLogistica.show();
                         estado=Estado.Abierto;
@@ -248,18 +256,17 @@ public class frmCabecera extends javax.swing.JInternalFrame {
                 case "seg":
                     frmMenuInicioSeguridad.hide();
                     estado=Estado.Cerrado;
-                    //padre.removeAll();
+
                     break;
                 case "alm":
                     frmMenuInicioAlmacenero.hide();
                     estado=Estado.Cerrado;
-                    //padre.removeAll();
+
                     break;
                 default :
                     frmMenuInicioAlmacenero.hide();  
                     estado=Estado.Cerrado;
-                    //padre.removeAll();
-                    //padre.remove(frmMenuInicioAlmacenero);
+
                     break;
             }
         }
