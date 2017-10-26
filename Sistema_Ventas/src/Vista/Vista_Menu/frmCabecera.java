@@ -226,7 +226,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
                         frmMenuInicioAlmacenero.show();
                         estado=Estado.Abierto;
                     }else{
-                        frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero();
+                        frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero(this);
                         padre.add(frmMenuInicioAlmacenero);
                         frmMenuInicioAlmacenero.show();
                         estado=Estado.Abierto;
@@ -239,7 +239,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
                         frmMenuInicioAlmacenero.show();
                         estado=Estado.Abierto;
                     }else{
-                        frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero();
+                        frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero(this);
                         padre.add(frmMenuInicioAlmacenero);
                         frmMenuInicioAlmacenero.show();
                         estado=Estado.Abierto;

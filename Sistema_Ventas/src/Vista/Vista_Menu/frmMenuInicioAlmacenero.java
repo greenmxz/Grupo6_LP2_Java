@@ -5,6 +5,8 @@
  */
 package Vista.Vista_Menu;
 
+import Vista.frmGenerarGuiaRemision;
+import Vista.frmOrdenCompra;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -16,11 +18,16 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmMenuInicioAlmacenero
      */
-    public frmMenuInicioAlmacenero() {
+    private Estado estado ;
+    private frmCabecera padre;
+    
+    public frmMenuInicioAlmacenero(frmCabecera padre) {
         initComponents();
         this.setLocation(0,111);
-        
+        //this.contenedorPadre = contenedorPadre;
+        this.padre=padre;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+        estado=Estado.Abierto;
     }
 
     /**
@@ -72,10 +79,12 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuiaRemisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiaRemisionActionPerformed
-        // TODO add your handling code here:
-        frmGenerarGuiaRemision frmGuia = new frmGenerarGuiaRemision();
-        frmGuia.setVisible(true);
-        this.setVisible(false);
+        frmGenerarGuiaRemision frmGuiaRem = new frmGenerarGuiaRemision(padre);
+        padre.getDesktopPane().add(frmGuiaRem);
+        frmGuiaRem.show();
+        this.hide();
+        padre.setEstado(Estado.Cerrado);
+        this.estado=Estado.Cerrado;
     }//GEN-LAST:event_btnGuiaRemisionActionPerformed
 
 
