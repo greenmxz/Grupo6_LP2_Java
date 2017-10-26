@@ -5,6 +5,8 @@
  */
 package Vista.Vista_Menu;
 
+import Vista.frmGenerarGuiaRemision;
+import Vista.frmOpcionesCuenta;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -16,9 +18,13 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmMenuInicioSeguridad
      */
-    public frmMenuInicioSeguridad() {
+    private Estado estado ;
+    private frmCabecera padre;
+    
+    public frmMenuInicioSeguridad(frmCabecera padre) {
         initComponents();
         this.setLocation(0,111);
+        this.padre = padre;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
     }
 
@@ -37,6 +43,11 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
         setBorder(null);
 
         btnCuentasAcceso.setText("Cuentas de acceso");
+        btnCuentasAcceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCuentasAccesoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -57,6 +68,15 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCuentasAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuentasAccesoActionPerformed
+        frmOpcionesCuenta frmOpc = new frmOpcionesCuenta(padre);
+        padre.getDesktopPane().add(frmOpc);
+        frmOpc.show();
+        this.hide();
+        padre.setEstado(Estado.Cerrado);
+        this.estado=Estado.Cerrado;
+    }//GEN-LAST:event_btnCuentasAccesoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
