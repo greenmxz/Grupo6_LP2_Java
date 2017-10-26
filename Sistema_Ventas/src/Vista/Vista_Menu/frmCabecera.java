@@ -215,7 +215,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
                         frmMenuInicioSeguridad.show();
                         estado=Estado.Abierto;
                     }else{
-                        frmMenuInicioSeguridad= new frmMenuInicioSeguridad();
+                        frmMenuInicioSeguridad= new frmMenuInicioSeguridad(this);
                         padre.add(frmMenuInicioSeguridad);
                         frmMenuInicioSeguridad.show();
                         estado=Estado.Abierto;
