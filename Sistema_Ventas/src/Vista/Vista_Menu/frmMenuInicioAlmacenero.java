@@ -5,6 +5,7 @@
  */
 package Vista.Vista_Menu;
 
+import Vista.frmDespachoPedido;
 import Vista.frmGenerarGuiaRemision;
 import Vista.frmOrdenCompra;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -53,6 +54,11 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
         });
 
         btnDespachoPedido.setText("Despacho pedido");
+        btnDespachoPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDespachoPedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,6 +92,16 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
         padre.setEstado(Estado.Cerrado);
         this.estado=Estado.Cerrado;
     }//GEN-LAST:event_btnGuiaRemisionActionPerformed
+
+    private void btnDespachoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespachoPedidoActionPerformed
+        // TODO add your handling code here:
+        frmDespachoPedido frmDespacho = new frmDespachoPedido();
+        padre.getDesktopPane().add(frmDespacho);
+        frmDespacho.show();
+        this.hide();
+        padre.setEstado(Estado.Cerrado);
+        this.estado=Estado.Cerrado;
+    }//GEN-LAST:event_btnDespachoPedidoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
