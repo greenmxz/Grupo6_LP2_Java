@@ -35,7 +35,8 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         estado=Estado.Abierto;
     }
     void setColor(JPanel panel){
-        panel.setBackground(new Color(136,161,192));
+        panel.setBackground(new Color(30,67,112));
+        //136,161,192
     }
     void resetColor(JPanel panel){
         panel.setBackground(new Color(173,192,206));
@@ -56,8 +57,8 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         panelOrdenCompra = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(136, 161, 192));
-        setBorder(null);
+        setBackground(new java.awt.Color(30, 67, 112));
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         panelProductosAgotados.setBackground(new java.awt.Color(173, 192, 206));
         panelProductosAgotados.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,7 +84,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProductosAgotadosLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
         panelProductosAgotadosLayout.setVerticalGroup(
             panelProductosAgotadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,9 +116,9 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         panelReportesGerencialesLayout.setHorizontalGroup(
             panelReportesGerencialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReportesGerencialesLayout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addContainerGap(104, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
         panelReportesGerencialesLayout.setVerticalGroup(
             panelReportesGerencialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,14 +153,14 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOrdenCompraLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30))
+                .addGap(25, 25, 25))
         );
         panelOrdenCompraLayout.setVerticalGroup(
             panelOrdenCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOrdenCompraLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(panelOrdenCompraLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -168,7 +169,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelProductosAgotados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelReportesGerenciales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelOrdenCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+            .addComponent(panelOrdenCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,7 +180,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
                 .addComponent(panelProductosAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(panelReportesGerenciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(225, Short.MAX_VALUE))
+                .addContainerGap(254, Short.MAX_VALUE))
         );
 
         pack();

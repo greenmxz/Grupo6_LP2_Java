@@ -64,7 +64,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
         this.setBorder(null);
         this.setLocation(0,0);
         //this.setBackground( new Color(165,198,231));
-        this.setBackground( new Color(30, 67, 112));
+        this.setBackground( new Color(136,161,192));
         /// boton Menu
         btnMenu.setBounds(0,0,40, 34);
         ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/menu.png"));
