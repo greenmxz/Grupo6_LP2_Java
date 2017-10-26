@@ -58,7 +58,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(30, 67, 112));
-        setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        setBorder(null);
 
         panelProductosAgotados.setBackground(new java.awt.Color(173, 192, 206));
         panelProductosAgotados.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -88,10 +88,10 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         );
         panelProductosAgotadosLayout.setVerticalGroup(
             panelProductosAgotadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProductosAgotadosLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
+            .addGroup(panelProductosAgotadosLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap())
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         panelReportesGerenciales.setBackground(new java.awt.Color(173, 192, 206));
@@ -116,7 +116,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         panelReportesGerencialesLayout.setHorizontalGroup(
             panelReportesGerencialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReportesGerencialesLayout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
+                .addContainerGap(102, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addContainerGap())
         );
@@ -169,7 +169,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panelProductosAgotados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelReportesGerenciales, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelOrdenCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+            .addComponent(panelOrdenCompra, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +180,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
                 .addComponent(panelProductosAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(panelReportesGerenciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(254, Short.MAX_VALUE))
+                .addContainerGap(256, Short.MAX_VALUE))
         );
 
         pack();
@@ -190,7 +190,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         // TODO add your handling code here:
         if (frmOrdenCompra==null){
-            frmOrdenCompra = new frmOrdenCompra(padre);
+           frmOrdenCompra = new frmOrdenCompra(padre);
            padre.getDesktopPane().add(frmOrdenCompra);
            frmOrdenCompra.show();
            this.hide();
