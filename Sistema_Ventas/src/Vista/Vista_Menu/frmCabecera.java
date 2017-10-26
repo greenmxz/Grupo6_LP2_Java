@@ -130,7 +130,7 @@ public class frmCabecera extends javax.swing.JInternalFrame {
             }
         });
 
-        panel1.setBackground(new java.awt.Color(136, 161, 192));
+        panel1.setBackground(new java.awt.Color(30, 67, 112));
 
         ImagenPerfil.setFocusable(false);
 

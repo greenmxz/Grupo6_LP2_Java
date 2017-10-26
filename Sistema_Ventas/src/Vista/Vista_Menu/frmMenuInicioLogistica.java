@@ -99,13 +99,24 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
 
     private void btnProductosAgotadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProductosAgotadosActionPerformed
         // TODO add your handling code here:
-         frmProductosAgotados = new frmProductosAgotados();
-        padre.getDesktopPane().add(frmProductosAgotados);
-        frmProductosAgotados.show();
-        this.hide();
-//        this.getDesktopPane().getTopLevelAncestor().getEstado();
-        this.estado=Estado.Cerrado;
-        padre.setEstado(Estado.Cerrado);
+        if (frmProductosAgotados==null){
+            frmProductosAgotados = new frmProductosAgotados();
+           padre.getDesktopPane().add(frmProductosAgotados);
+           frmProductosAgotados.show();
+           this.hide();
+   //        this.getDesktopPane().getTopLevelAncestor().getEstado();
+           this.estado=Estado.Cerrado;
+           padre.setEstado(Estado.Cerrado);
+        }else{
+            frmProductosAgotados.dispose();
+             frmProductosAgotados = new frmProductosAgotados();
+           padre.getDesktopPane().add(frmProductosAgotados);
+           frmProductosAgotados.show();
+           this.hide();
+   //        this.getDesktopPane().getTopLevelAncestor().getEstado();
+           this.estado=Estado.Cerrado;
+           padre.setEstado(Estado.Cerrado);
+        }
         if (frmOrdenCompra!=null) { 
             frmOrdenCompra.dispose() ;
             if(frmOrdenCompra.getFrmProductosAgotados()!=null){
@@ -118,26 +129,54 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
 
     private void btnOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenCompraActionPerformed
         // TODO add your handling code here:
-         frmOrdenCompra = new frmOrdenCompra(padre);
-        padre.getDesktopPane().add(frmOrdenCompra);
-        frmOrdenCompra.show();
-        this.hide();
-        padre.setEstado(Estado.Cerrado);
-        this.estado=Estado.Cerrado;
+        if (frmOrdenCompra==null){
+            frmOrdenCompra = new frmOrdenCompra(padre);
+           padre.getDesktopPane().add(frmOrdenCompra);
+           frmOrdenCompra.show();
+           this.hide();
+           padre.setEstado(Estado.Cerrado);
+           this.estado=Estado.Cerrado;
+        }else{
+           frmOrdenCompra.dispose();
+           if (frmOrdenCompra.getFrmProductosAgotados()!=null){
+               frmOrdenCompra.getFrmProductosAgotados().dispose();
+           }
+           frmOrdenCompra = new frmOrdenCompra(padre);
+           
+           padre.getDesktopPane().add(frmOrdenCompra);
+           frmOrdenCompra.show();
+           this.hide();
+           padre.setEstado(Estado.Cerrado);
+           this.estado=Estado.Cerrado;
+        }
         if (frmProductosAgotados!=null) frmProductosAgotados.dispose() ;
         if (frmReportesGerenciales!=null)frmReportesGerenciales.dispose();
     }//GEN-LAST:event_btnOrdenCompraActionPerformed
 
     private void btnReportesGerencialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesGerencialesActionPerformed
         // TODO add your handling code here:
-         frmReportesGerenciales = new frmReportesGerenciales();
-        padre.getDesktopPane().add(frmReportesGerenciales);
-        frmReportesGerenciales.show();
-        this.hide();
-        this.estado=Estado.Cerrado;
-        padre.setEstado(Estado.Cerrado);
-        if(frmOrdenCompra.getFrmProductosAgotados()!=null){
+        if (frmReportesGerenciales==null){
+           frmReportesGerenciales = new frmReportesGerenciales();
+           padre.getDesktopPane().add(frmReportesGerenciales);
+           frmReportesGerenciales.show();
+           this.hide();
+           this.estado=Estado.Cerrado;
+           padre.setEstado(Estado.Cerrado);
+        }else{
+           frmReportesGerenciales.dispose();
+           frmReportesGerenciales = new frmReportesGerenciales();
+           padre.getDesktopPane().add(frmReportesGerenciales);
+           frmReportesGerenciales.show();
+           this.hide();
+           this.estado=Estado.Cerrado;
+           padre.setEstado(Estado.Cerrado);
+        }
+        if (frmOrdenCompra!=null) { 
+            frmOrdenCompra.dispose() ;
+            if(frmOrdenCompra.getFrmProductosAgotados()!=null){
                 frmOrdenCompra.getFrmProductosAgotados().dispose();
+            }
+            
         }
         if (frmProductosAgotados!=null)frmProductosAgotados.dispose();
     }//GEN-LAST:event_btnReportesGerencialesActionPerformed
