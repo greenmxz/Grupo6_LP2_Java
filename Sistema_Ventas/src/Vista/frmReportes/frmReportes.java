@@ -83,16 +83,16 @@ public class frmReportes extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Reporte 1");
+        jLabel1.setText("Productos");
 
         javax.swing.GroupLayout btnReporte1Layout = new javax.swing.GroupLayout(btnReporte1);
         btnReporte1.setLayout(btnReporte1Layout);
         btnReporte1Layout.setHorizontalGroup(
             btnReporte1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReporte1Layout.createSequentialGroup()
-                .addContainerGap(115, Short.MAX_VALUE)
+                .addContainerGap(142, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(62, 62, 62))
+                .addGap(35, 35, 35))
         );
         btnReporte1Layout.setVerticalGroup(
             btnReporte1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +123,7 @@ public class frmReportes extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReporte3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addGap(62, 62, 62))
+                .addGap(36, 36, 36))
         );
         btnReporte3Layout.setVerticalGroup(
             btnReporte3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +148,7 @@ public class frmReportes extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Reporte 2");
+        jLabel2.setText("Clientes");
 
         javax.swing.GroupLayout btnReporte2Layout = new javax.swing.GroupLayout(btnReporte2);
         btnReporte2.setLayout(btnReporte2Layout);
@@ -157,7 +157,7 @@ public class frmReportes extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReporte2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(62, 62, 62))
+                .addGap(45, 45, 45))
         );
         btnReporte2Layout.setVerticalGroup(
             btnReporte2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

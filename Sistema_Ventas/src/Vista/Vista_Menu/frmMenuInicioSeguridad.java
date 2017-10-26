@@ -7,6 +7,8 @@ package Vista.Vista_Menu;
 
 import Vista.frmGenerarGuiaRemision;
 import Vista.frmOpcionesCuenta;
+import java.awt.Color;
+import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -27,7 +29,13 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
         this.padre = padre;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
     }
-
+    void setColor(JPanel panel){
+        panel.setBackground(new Color(30,67,112));
+        //136,161,192
+    }
+    void resetColor(JPanel panel){
+        panel.setBackground(new Color(173,192,206));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,8 +46,10 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         btnCuentasAcceso = new javax.swing.JButton();
+        panelCuentasAcceso = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(136, 161, 192));
+        setBackground(new java.awt.Color(30, 67, 112));
         setBorder(null);
 
         btnCuentasAcceso.setText("Cuentas de acceso");
@@ -49,21 +59,58 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
             }
         });
 
+        panelCuentasAcceso.setBackground(new java.awt.Color(173, 192, 206));
+        panelCuentasAcceso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                panelCuentasAccesoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                panelCuentasAccesoMouseEntered(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                panelCuentasAccesoMouseReleased(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 13)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Cuentas de acceso");
+
+        javax.swing.GroupLayout panelCuentasAccesoLayout = new javax.swing.GroupLayout(panelCuentasAcceso);
+        panelCuentasAcceso.setLayout(panelCuentasAccesoLayout);
+        panelCuentasAccesoLayout.setHorizontalGroup(
+            panelCuentasAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuentasAccesoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
+        );
+        panelCuentasAccesoLayout.setVerticalGroup(
+            panelCuentasAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuentasAccesoLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnCuentasAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                .addGap(20, 20, 20))
+                .addGap(28, 28, 28)
+                .addComponent(btnCuentasAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(panelCuentasAcceso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(110, 110, 110)
+                .addComponent(panelCuentasAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
                 .addComponent(btnCuentasAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
         );
 
         pack();
@@ -78,8 +125,30 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
         this.estado=Estado.Cerrado;
     }//GEN-LAST:event_btnCuentasAccesoActionPerformed
 
+    private void panelCuentasAccesoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCuentasAccesoMouseClicked
+        // TODO add your handling code here:
+        frmOpcionesCuenta frmOpc = new frmOpcionesCuenta(padre);
+        padre.getDesktopPane().add(frmOpc);
+        frmOpc.show();
+        this.hide();
+        padre.setEstado(Estado.Cerrado);
+        this.estado=Estado.Cerrado;
+    }//GEN-LAST:event_panelCuentasAccesoMouseClicked
+
+    private void panelCuentasAccesoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCuentasAccesoMouseEntered
+        // TODO add your handling code here:
+        setColor(panelCuentasAcceso);
+    }//GEN-LAST:event_panelCuentasAccesoMouseEntered
+
+    private void panelCuentasAccesoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCuentasAccesoMouseReleased
+        // TODO add your handling code here:
+        resetColor(panelCuentasAcceso);
+    }//GEN-LAST:event_panelCuentasAccesoMouseReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCuentasAcceso;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel panelCuentasAcceso;
     // End of variables declaration//GEN-END:variables
 }
