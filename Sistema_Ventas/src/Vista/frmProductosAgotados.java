@@ -13,7 +13,6 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Moises
  */
 public class frmProductosAgotados extends javax.swing.JInternalFrame {
-
     /**
      * Creates new form frmProductosAgotados
      */
@@ -52,7 +51,7 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
         btnSeleccionar = new javax.swing.JButton();
         btnTerminar = new javax.swing.JButton();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
         setPreferredSize(new java.awt.Dimension(585, 531));
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
@@ -61,7 +60,7 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 585, Short.MAX_VALUE)
+            .addGap(0, 581, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,7 +120,7 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -138,7 +137,7 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         // TODO add your handling code here:
-        this.hide();
+        this.dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
     private void btnTerminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminarActionPerformed

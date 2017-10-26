@@ -15,6 +15,14 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 public class frmOrdenCompra extends javax.swing.JInternalFrame {
     private frmCabecera padre;
     frmProductosAgotados frmProductosAgotados;
+
+    public frmProductosAgotados getFrmProductosAgotados() {
+        return frmProductosAgotados;
+    }
+
+    public void setFrmProductosAgotados(frmProductosAgotados frmProductosAgotados) {
+        this.frmProductosAgotados = frmProductosAgotados;
+    }
     /**
      * Creates new form frmOrdenCompra
      */
@@ -53,9 +61,10 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setBorder(null);
+        setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -198,7 +207,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
                             .addComponent(btnCancelar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -208,11 +217,16 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         // TODO add your handling code here:
-        frmProductosAgotados = new frmProductosAgotados(2);
-        frmProductosAgotados.show();
-        padre.getDesktopPane().add(frmProductosAgotados);
-        //frmProductosAgotados.setSize(420, 544);
-        //frmProductosAgotados.setLocation(600,112);
+        if (frmProductosAgotados==null){
+            frmProductosAgotados = new frmProductosAgotados(2);
+            frmProductosAgotados.show();
+            padre.getDesktopPane().add(frmProductosAgotados);
+        }else{
+            frmProductosAgotados.dispose();
+            frmProductosAgotados = new frmProductosAgotados(2);
+            frmProductosAgotados.show();
+            padre.getDesktopPane().add(frmProductosAgotados);
+        }
         
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
