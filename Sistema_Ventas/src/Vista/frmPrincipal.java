@@ -62,7 +62,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         jdpPrincipal = new javax.swing.JDesktopPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1021, 680));
 
         jdpPrincipal.setBackground(new java.awt.Color(240, 240, 240));
         jdpPrincipal.setPreferredSize(new java.awt.Dimension(549, 319));

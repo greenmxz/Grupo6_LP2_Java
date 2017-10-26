@@ -107,7 +107,7 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
 
     private void btnOrdenCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrdenCompraActionPerformed
         // TODO add your handling code here:
-        frmOrdenCompra frmOrdenCompra = new frmOrdenCompra();
+        frmOrdenCompra frmOrdenCompra = new frmOrdenCompra(padre);
         padre.getDesktopPane().add(frmOrdenCompra);
         frmOrdenCompra.show();
         this.hide();
