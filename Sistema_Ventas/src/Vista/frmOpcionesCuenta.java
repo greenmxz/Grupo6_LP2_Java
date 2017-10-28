@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Vista.Vista_Menu.frmCabecera;
+
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -18,8 +18,8 @@ public class frmOpcionesCuenta extends javax.swing.JInternalFrame {
      * Creates new form frmOpcionesCuenta
      */
     
-    private frmCabecera padre;
-    public frmOpcionesCuenta(frmCabecera padre) {
+    private frmPrincipal padre;
+    public frmOpcionesCuenta(frmPrincipal padre) {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.padre = padre;
@@ -79,14 +79,14 @@ public class frmOpcionesCuenta extends javax.swing.JInternalFrame {
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
         frmCrearCuenta frmCrear = new frmCrearCuenta();
-        padre.getDesktopPane().add(frmCrear);
+        padre.getJdpInterno().add(frmCrear);
         frmCrear.show();
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // TODO add your handling code here:
         frmModificarCuenta frmMod = new frmModificarCuenta();
-        padre.getDesktopPane().add(frmMod);
+        padre.getJdpInterno().add(frmMod);
         frmMod.show();
     }//GEN-LAST:event_button2ActionPerformed
 

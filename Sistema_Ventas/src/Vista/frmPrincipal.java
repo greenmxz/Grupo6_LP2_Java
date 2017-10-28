@@ -5,24 +5,44 @@
  */
 package Vista;
 
-import Vista.Vista_Menu.frmCabecera;
+import Vista.Vista_Menu.frmMenuInicioAlmacenero;
+import Vista.Vista_Menu.frmMenuInicioLogistica;
+import Vista.Vista_Menu.frmMenuInicioSeguridad;
+import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
+import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
  *
  * @author Moises
  */
+//enum  Estado {Abierto,Cerrado,Nuevo}
 public class frmPrincipal extends javax.swing.JFrame {
     private static String nombreUsuario;
+    private JDesktopPane jdpInterno;
+    private frmMenuInicioLogistica frmMenuInicioLogistica;
+    private frmMenuInicioSeguridad frmMenuInicioSeguridad;
+    private frmMenuInicioAlmacenero frmMenuInicioAlmacenero;
+
+    private boolean abierto=false;
+
+    public boolean isAbierto() {
+        return abierto;
+    }
+
+    public void setAbierto(boolean abierto) {
+        this.abierto = abierto;
+    }
 
     
-    private  JDesktopPane jdpPrin;
-    
-        public JDesktopPane getJdpPrincipal() {
+        public JDesktopPane getJdpInterno() {
         return jdpPrincipal;
     }
 
-    public  void setJdpPrincipal(JDesktopPane jdpPrincipal) {
+    public  void setJdpInterno(JDesktopPane jdpPrincipal) {
         this.jdpPrincipal = jdpPrincipal;
     }
     public String getNombreUsuario() {
@@ -38,18 +58,46 @@ public class frmPrincipal extends javax.swing.JFrame {
      */
     public frmPrincipal(String nombreUsuario) {
         initComponents();
-        this.setNombreUsuario(nombreUsuario);
-        //System.out.println(this.getNombreUsuario());
-        this.jdpPrin=jdpPrincipal;
-        this.setResizable(false);
-        //this.setUndecorated(false);
         
-        frmCabecera cabecera = new frmCabecera(jdpPrin, getNombreUsuario());
-        jdpPrin.add(cabecera);
-        //cabecera.show();
-        //cabecera.show();
+        lblNombreUsuario.setText(nombreUsuario);
+
+        this.jdpInterno=jdpPrincipal;
+        this.setResizable(false);
+        inicializar();
+        this.setNombreUsuario(nombreUsuario);
     }
 
+      private void inicializar(){
+////PARA EL DISEÑO DEL PANEL cabecera 
+//        ((javax.swing.plaf.basic.BasicInternalFrameUI)this.getUI()).setNorthPane(null);
+//        getRootPane().setWindowDecorationStyle(JRootPane.NONE);
+        
+//        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
+//        this.setBorder(null);
+        this.setLocation(0,0);
+        //this.setBackground( new Color(165,198,231));
+        this.setBackground( new Color(136,161,192));
+        /// boton Menu
+        btnMenu.setBounds(0,0,40, 34);
+        ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/menu.png"));
+        ImageIcon icono = new ImageIcon (img.getImage().
+                getScaledInstance(btnMenu.getWidth(), btnMenu.getHeight(), Image.SCALE_SMOOTH));
+        btnMenu.setIcon(icono);
+        
+        ///boton cerrar sesion
+        btnCerrarSesion.setBounds(0,0,23,21);
+        ImageIcon img2 = new ImageIcon(getClass().getResource("/Imagenes/power-button-off.png"));
+        ImageIcon icono2 = new ImageIcon (img2.getImage().
+                getScaledInstance(btnCerrarSesion.getWidth(), btnCerrarSesion.getHeight(), Image.SCALE_SMOOTH));
+        btnCerrarSesion.setIcon(icono2);
+        
+        //Imagen perfil
+        ImagenPerfil.setBounds(0,0,84,84);
+        ImageIcon imgPerfil = new ImageIcon(getClass().getResource("/Imagenes/customer2.png"));
+        ImageIcon iconoPerfil = new ImageIcon (imgPerfil.getImage().
+                getScaledInstance(ImagenPerfil.getWidth(), ImagenPerfil.getHeight(), Image.SCALE_SMOOTH));
+        ImagenPerfil.setIcon(iconoPerfil);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,10 +108,15 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jdpPrincipal = new javax.swing.JDesktopPane();
+        panelCabecera = new javax.swing.JPanel();
+        btnMenu = new javax.swing.JLabel();
+        ImagenPerfil = new javax.swing.JLabel();
+        lblNombreUsuario = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        btnCerrarSesion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jdpPrincipal.setBackground(new java.awt.Color(240, 240, 240));
         jdpPrincipal.setPreferredSize(new java.awt.Dimension(549, 319));
 
         javax.swing.GroupLayout jdpPrincipalLayout = new javax.swing.GroupLayout(jdpPrincipal);
@@ -74,7 +127,73 @@ public class frmPrincipal extends javax.swing.JFrame {
         );
         jdpPrincipalLayout.setVerticalGroup(
             jdpPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 680, Short.MAX_VALUE)
+            .addGap(0, 571, Short.MAX_VALUE)
+        );
+
+        panelCabecera.setBackground(new java.awt.Color(30, 67, 112));
+
+        btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMenuMouseClicked(evt);
+            }
+        });
+
+        lblNombreUsuario.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
+        lblNombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        lblNombreUsuario.setText("Nombre de usuario");
+
+        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Perfil de usuario");
+
+        btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCerrarSesionMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelCabeceraLayout = new javax.swing.GroupLayout(panelCabecera);
+        panelCabecera.setLayout(panelCabeceraLayout);
+        panelCabeceraLayout.setHorizontalGroup(
+            panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCabeceraLayout.createSequentialGroup()
+                .addGroup(panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCabeceraLayout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCabeceraLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)))
+                .addComponent(ImagenPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblNombreUsuario)
+                    .addComponent(jLabel4))
+                .addGap(79, 79, 79))
+        );
+        panelCabeceraLayout.setVerticalGroup(
+            panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCabeceraLayout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelCabeceraLayout.createSequentialGroup()
+                        .addGroup(panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ImagenPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addGroup(panelCabeceraLayout.createSequentialGroup()
+                        .addComponent(lblNombreUsuario)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(21, 21, 21))))
+            .addGroup(panelCabeceraLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnCerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -82,14 +201,78 @@ public class frmPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jdpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE)
+            .addComponent(panelCabecera, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jdpPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(panelCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(jdpPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 571, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
+        // TODO add your handling code here:
+         //if (estado == Estado.Cerrado){//Si está abierto el menu
+            switch (nombreUsuario) {
+                case "log":
+                    if (abierto){
+                        frmMenuInicioLogistica.dispose();
+                        abierto=false;
+                    }else{
+                        abierto = true;
+                        //frmMenuInicioLogistica.dispose();
+                        frmMenuInicioLogistica= new frmMenuInicioLogistica(this);
+                        
+                        jdpInterno.add(frmMenuInicioLogistica);
+                        frmMenuInicioLogistica.show();
+                        frmMenuInicioLogistica.toFront();
+                        
+                    }
+
+                    break;
+                case "seg":
+                    //jdpInterno.removeAll();
+                    if (abierto){
+                        frmMenuInicioSeguridad.dispose();
+                        abierto=false;
+                    
+                    }else{
+                        //frmMenuInicioSeguridad.dispose();
+                        frmMenuInicioSeguridad= new frmMenuInicioSeguridad(this);
+                        
+                        jdpInterno.add(frmMenuInicioSeguridad);
+                        frmMenuInicioSeguridad.show();
+                        frmMenuInicioSeguridad.toFront();
+                        abierto=true;
+                    }
+                    
+                    break;
+                case "alm":
+                    //jdpInterno.removeAll();
+                    if(abierto){
+                        frmMenuInicioAlmacenero.dispose();
+                        abierto=false;
+                    }else{
+                        //frmMenuInicioAlmacenero.dispose();
+                        frmMenuInicioAlmacenero= new frmMenuInicioAlmacenero(this);
+                        
+                        jdpInterno.add(frmMenuInicioAlmacenero);
+                        frmMenuInicioAlmacenero.show();
+                        frmMenuInicioAlmacenero.toFront();
+                        abierto=true;
+                    }                    
+                    break;
+            }
+    }//GEN-LAST:event_btnMenuMouseClicked
+
+    private void btnCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarSesionMouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCerrarSesionMouseClicked
 
     /**
      * @param args the command line arguments
@@ -127,6 +310,12 @@ public class frmPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ImagenPerfil;
+    private javax.swing.JLabel btnCerrarSesion;
+    private javax.swing.JLabel btnMenu;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JDesktopPane jdpPrincipal;
+    private javax.swing.JLabel lblNombreUsuario;
+    private javax.swing.JPanel panelCabecera;
     // End of variables declaration//GEN-END:variables
 }

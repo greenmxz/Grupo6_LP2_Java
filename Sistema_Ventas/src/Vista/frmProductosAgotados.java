@@ -20,14 +20,14 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         //
-        this.setLocation(620,112);
-        setSize(400, 544);
+        this.setLocation(590,0);
+        setSize(430, 544);
         
     }
     public frmProductosAgotados() {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        this.setLocation(0,112);
+        this.setLocation(0,0);
         textTituloProducto.setText("Productos Agotados");
         btnSeleccionar.hide();
         
@@ -52,13 +52,14 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
         btnSeleccionar = new javax.swing.JButton();
         btnTerminar = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(54, 63, 69));
         setBorder(null);
         setPreferredSize(new java.awt.Dimension(585, 531));
 
-        jPanel1.setBackground(new java.awt.Color(0, 153, 153));
+        jPanel1.setBackground(new java.awt.Color(96, 125, 138));
 
         textTituloProducto.setBackground(new java.awt.Color(255, 255, 255));
-        textTituloProducto.setFont(new java.awt.Font("Microsoft JhengHei", 0, 24)); // NOI18N
+        textTituloProducto.setFont(new java.awt.Font("Microsoft JhengHei", 0, 15)); // NOI18N
         textTituloProducto.setForeground(new java.awt.Color(255, 255, 255));
         textTituloProducto.setText("Productos ");
 
@@ -69,14 +70,14 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(textTituloProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
+                .addContainerGap()
                 .addComponent(textTituloProducto)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -91,6 +92,8 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
 
         jButton1.setText("Consultar");
 
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Stock:");
 
         btnSeleccionar.setText("Seleccionar");
@@ -112,36 +115,36 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
+                        .addGap(18, 18, 18)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnSeleccionar)
-                        .addGap(50, 50, 50)
+                        .addGap(80, 80, 80)
                         .addComponent(btnTerminar)))
-                .addGap(42, 42, 42))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(btnSeleccionar)
                     .addComponent(btnTerminar))
-                .addGap(36, 36, 36)
+                .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         pack();

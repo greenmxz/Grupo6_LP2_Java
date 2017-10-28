@@ -13,14 +13,14 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Jose Bejarano
  */
 public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
-
+    private frmPrincipal padre;
     /**
      * Creates new form frmGenerarGuiaRemision
      */
     
-    private frmCabecera padre;
     
-    public frmGenerarGuiaRemision(frmCabecera padre) {
+    
+    public frmGenerarGuiaRemision(frmPrincipal padre) {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.padre = padre;
@@ -178,7 +178,7 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         frmBusquedaPedido frmBusqPed = new frmBusquedaPedido();
-        padre.getDesktopPane().add(frmBusqPed);
+        padre.getJdpInterno().add(frmBusqPed);
         frmBusqPed.show();
         
     }//GEN-LAST:event_jButton1ActionPerformed
