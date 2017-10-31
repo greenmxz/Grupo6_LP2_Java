@@ -5,10 +5,12 @@
  */
 package Vista.Vista_Menu;
 
-import Vista.frmOrdenCompra;
+import Vista.OrdenCompra.frmGestionarOrdenCompra;
+import Vista.frmPrincipal;
 import Vista.frmProductosAgotados;
 import Vista.frmReportesGerenciales;
 import java.awt.Color;
+import java.util.HashSet;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -19,16 +21,17 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
     private Estado estado ;
-    private frmCabecera padre;
+    private frmPrincipal padre;
     frmProductosAgotados frmProductosAgotados;
-    frmOrdenCompra frmOrdenCompra;
+    frmGestionarOrdenCompra frmOrdenCompra;
     frmReportesGerenciales frmReportesGerenciales;
     /**
      * Creates new form frmMenuInicioLogistica
      */
-    public frmMenuInicioLogistica(frmCabecera padre) {
+    public frmMenuInicioLogistica(frmPrincipal padre) {
         initComponents();
-        this.setLocation(0,111);
+        this.setLocation(0,0);
+        
         //this.contenedorPadre = contenedorPadre;
         this.padre=padre;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
@@ -72,27 +75,12 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
                 panelProductosAgotadosMouseReleased(evt);
             }
         });
+        panelProductosAgotados.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei", 0, 13)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Productos agotados");
-
-        javax.swing.GroupLayout panelProductosAgotadosLayout = new javax.swing.GroupLayout(panelProductosAgotados);
-        panelProductosAgotados.setLayout(panelProductosAgotadosLayout);
-        panelProductosAgotadosLayout.setHorizontalGroup(
-            panelProductosAgotadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelProductosAgotadosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addContainerGap())
-        );
-        panelProductosAgotadosLayout.setVerticalGroup(
-            panelProductosAgotadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelProductosAgotadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+        panelProductosAgotados.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(104, 11, -1, -1));
 
         panelReportesGerenciales.setBackground(new java.awt.Color(173, 192, 206));
         panelReportesGerenciales.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -106,27 +94,12 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
                 panelReportesGerencialesMouseReleased(evt);
             }
         });
+        panelReportesGerenciales.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Microsoft JhengHei", 0, 13)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Reportes gerenciales");
-
-        javax.swing.GroupLayout panelReportesGerencialesLayout = new javax.swing.GroupLayout(panelReportesGerenciales);
-        panelReportesGerenciales.setLayout(panelReportesGerencialesLayout);
-        panelReportesGerencialesLayout.setHorizontalGroup(
-            panelReportesGerencialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelReportesGerencialesLayout.createSequentialGroup()
-                .addContainerGap(102, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addContainerGap())
-        );
-        panelReportesGerencialesLayout.setVerticalGroup(
-            panelReportesGerencialesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelReportesGerencialesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+        panelReportesGerenciales.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(102, 11, -1, -1));
 
         panelOrdenCompra.setBackground(new java.awt.Color(173, 192, 206));
         panelOrdenCompra.setPreferredSize(new java.awt.Dimension(146, 43));
@@ -141,27 +114,12 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
                 panelOrdenCompraMouseReleased(evt);
             }
         });
+        panelOrdenCompra.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Orden de compra");
-
-        javax.swing.GroupLayout panelOrdenCompraLayout = new javax.swing.GroupLayout(panelOrdenCompra);
-        panelOrdenCompra.setLayout(panelOrdenCompraLayout);
-        panelOrdenCompraLayout.setHorizontalGroup(
-            panelOrdenCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelOrdenCompraLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(25, 25, 25))
-        );
-        panelOrdenCompraLayout.setVerticalGroup(
-            panelOrdenCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelOrdenCompraLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        panelOrdenCompra.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 11, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,40 +135,27 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
                 .addGap(114, 114, 114)
                 .addComponent(panelOrdenCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelProductosAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelProductosAgotados, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(panelReportesGerenciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(256, Short.MAX_VALUE))
+                .addComponent(panelReportesGerenciales, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(270, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void panelOrdenCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelOrdenCompraMouseClicked
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        if (frmOrdenCompra==null){
-           frmOrdenCompra = new frmOrdenCompra(padre);
-           padre.getDesktopPane().add(frmOrdenCompra);
-           frmOrdenCompra.show();
-           this.hide();
-           padre.setEstado(Estado.Cerrado);
-           this.estado=Estado.Cerrado;
-        }else{
-           frmOrdenCompra.dispose();
-           if (frmOrdenCompra.getFrmProductosAgotados()!=null){
-               frmOrdenCompra.getFrmProductosAgotados().dispose();
-           }
-           frmOrdenCompra = new frmOrdenCompra(padre);
-           
-           padre.getDesktopPane().add(frmOrdenCompra);
-           frmOrdenCompra.show();
-           this.hide();
-           padre.setEstado(Estado.Cerrado);
-           this.estado=Estado.Cerrado;
-        }
-        if (frmProductosAgotados!=null) frmProductosAgotados.dispose() ;
-        if (frmReportesGerenciales!=null)frmReportesGerenciales.dispose();
+
+        padre.getJdpInterno().removeAll();
+        padre.getJdpInterno().repaint();
+        frmOrdenCompra = new frmGestionarOrdenCompra(padre);
+        padre.getJdpInterno().add(frmOrdenCompra);
+        frmOrdenCompra.show();
+        frmOrdenCompra.setSize(padre.getJdpInterno().getWidth(),padre.getJdpInterno().getHeight());
+        padre.setAbierto(false);
+
+        
+
     }//GEN-LAST:event_panelOrdenCompraMouseClicked
 
     private void panelOrdenCompraMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelOrdenCompraMouseEntered
@@ -229,32 +174,17 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
 
     private void panelProductosAgotadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProductosAgotadosMouseClicked
         // TODO add your handling code here:
-        if (frmProductosAgotados==null){
-            frmProductosAgotados = new frmProductosAgotados();
-           padre.getDesktopPane().add(frmProductosAgotados);
-           frmProductosAgotados.show();
-           this.hide();
-   //        this.getDesktopPane().getTopLevelAncestor().getEstado();
-           this.estado=Estado.Cerrado;
-           padre.setEstado(Estado.Cerrado);
-        }else{
-            frmProductosAgotados.dispose();
-             frmProductosAgotados = new frmProductosAgotados();
-           padre.getDesktopPane().add(frmProductosAgotados);
-           frmProductosAgotados.show();
-           this.hide();
-   //        this.getDesktopPane().getTopLevelAncestor().getEstado();
-           this.estado=Estado.Cerrado;
-           padre.setEstado(Estado.Cerrado);
-        }
-        if (frmOrdenCompra!=null) { 
-            frmOrdenCompra.dispose() ;
-            if(frmOrdenCompra.getFrmProductosAgotados()!=null){
-                frmOrdenCompra.getFrmProductosAgotados().dispose();
-            }
-            
-        }
-        if (frmReportesGerenciales!=null)frmReportesGerenciales.dispose();
+        padre.getJdpInterno().removeAll();
+        padre.getJdpInterno().repaint();
+        frmProductosAgotados = new frmProductosAgotados();
+        padre.getJdpInterno().add(frmProductosAgotados);
+        frmProductosAgotados.show();
+        padre.setAbierto(false);
+        
+        frmProductosAgotados.setSize(padre.getJdpInterno().getWidth(),padre.getJdpInterno().getHeight());
+
+
+
     }//GEN-LAST:event_panelProductosAgotadosMouseClicked
 
     private void panelProductosAgotadosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelProductosAgotadosMouseEntered
@@ -272,32 +202,14 @@ public class frmMenuInicioLogistica extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_panelProductosAgotadosMouseReleased
 
     private void panelReportesGerencialesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReportesGerencialesMouseClicked
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        if (frmReportesGerenciales==null){
+           padre.getJdpInterno().removeAll();
+           padre.getJdpInterno().repaint();
            frmReportesGerenciales = new frmReportesGerenciales();
-           padre.getDesktopPane().add(frmReportesGerenciales);
+           padre.getJdpInterno().add(frmReportesGerenciales);
            frmReportesGerenciales.show();
-           this.hide();
-           this.estado=Estado.Cerrado;
-           padre.setEstado(Estado.Cerrado);
-        }else{
-           frmReportesGerenciales.dispose();
-           frmReportesGerenciales = new frmReportesGerenciales();
-           padre.getDesktopPane().add(frmReportesGerenciales);
-           frmReportesGerenciales.show();
-           this.hide();
-           this.estado=Estado.Cerrado;
-           padre.setEstado(Estado.Cerrado);
-        }
-        if (frmOrdenCompra!=null) { 
-            frmOrdenCompra.dispose() ;
-            if(frmOrdenCompra.getFrmProductosAgotados()!=null){
-                frmOrdenCompra.getFrmProductosAgotados().dispose();
-            }
-            
-        }
-        if (frmProductosAgotados!=null)frmProductosAgotados.dispose();
+           padre.setAbierto(false);
+           frmReportesGerenciales.setSize(padre.getJdpInterno().getWidth(),padre.getJdpInterno().getHeight());
+
     }//GEN-LAST:event_panelReportesGerencialesMouseClicked
 
     private void panelReportesGerencialesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelReportesGerencialesMouseEntered

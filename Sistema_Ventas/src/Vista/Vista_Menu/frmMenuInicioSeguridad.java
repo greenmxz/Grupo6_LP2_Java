@@ -7,6 +7,7 @@ package Vista.Vista_Menu;
 
 import Vista.frmGenerarGuiaRemision;
 import Vista.frmOpcionesCuenta;
+import Vista.frmPrincipal;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -16,16 +17,16 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  * @author Moises
  */
 public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
-
+    private boolean abierto=false;
     /**
      * Creates new form frmMenuInicioSeguridad
      */
     private Estado estado ;
-    private frmCabecera padre;
+    private frmPrincipal padre;
     
-    public frmMenuInicioSeguridad(frmCabecera padre) {
+    public frmMenuInicioSeguridad(frmPrincipal padre) {
         initComponents();
-        this.setLocation(0,111);
+        this.setLocation(0,0);
         this.padre = padre;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
     }
@@ -48,6 +49,8 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
         btnCuentasAcceso = new javax.swing.JButton();
         panelCuentasAcceso = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        panelMantenerPerfiles = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(30, 67, 112));
         setBorder(null);
@@ -88,8 +91,31 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
         panelCuentasAccesoLayout.setVerticalGroup(
             panelCuentasAccesoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCuentasAccesoLayout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
+                .addContainerGap())
+        );
+
+        panelMantenerPerfiles.setBackground(new java.awt.Color(173, 192, 206));
+
+        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei", 0, 13)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Mantener perfiles");
+
+        javax.swing.GroupLayout panelMantenerPerfilesLayout = new javax.swing.GroupLayout(panelMantenerPerfiles);
+        panelMantenerPerfiles.setLayout(panelMantenerPerfilesLayout);
+        panelMantenerPerfilesLayout.setHorizontalGroup(
+            panelMantenerPerfilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMantenerPerfilesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(20, 20, 20))
+        );
+        panelMantenerPerfilesLayout.setVerticalGroup(
+            panelMantenerPerfilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMantenerPerfilesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
                 .addContainerGap())
         );
 
@@ -97,18 +123,21 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelCuentasAcceso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(btnCuentasAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(panelCuentasAcceso, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelMantenerPerfiles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(110, 110, 110)
+                .addGap(114, 114, 114)
                 .addComponent(panelCuentasAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addComponent(panelMantenerPerfiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                 .addComponent(btnCuentasAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
@@ -118,20 +147,20 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
 
     private void btnCuentasAccesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCuentasAccesoActionPerformed
         frmOpcionesCuenta frmOpc = new frmOpcionesCuenta(padre);
-        padre.getDesktopPane().add(frmOpc);
+        padre.getJdpInterno().add(frmOpc);
         frmOpc.show();
         this.hide();
-        padre.setEstado(Estado.Cerrado);
+        //padre.setEstado(Estado.Cerrado);
         this.estado=Estado.Cerrado;
     }//GEN-LAST:event_btnCuentasAccesoActionPerformed
 
     private void panelCuentasAccesoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelCuentasAccesoMouseClicked
         // TODO add your handling code here:
         frmOpcionesCuenta frmOpc = new frmOpcionesCuenta(padre);
-        padre.getDesktopPane().add(frmOpc);
+        padre.getJdpInterno().add(frmOpc);
         frmOpc.show();
         this.hide();
-        padre.setEstado(Estado.Cerrado);
+       // padre.setEstado(Estado.Cerrado);
         this.estado=Estado.Cerrado;
     }//GEN-LAST:event_panelCuentasAccesoMouseClicked
 
@@ -149,6 +178,8 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCuentasAcceso;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel panelCuentasAcceso;
+    private javax.swing.JPanel panelMantenerPerfiles;
     // End of variables declaration//GEN-END:variables
 }

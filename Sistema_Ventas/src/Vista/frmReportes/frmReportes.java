@@ -63,7 +63,7 @@ public class frmReportes extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         dynamicPanel = new javax.swing.JPanel();
 
-        setBackground(new java.awt.Color(136, 161, 192));
+        setBackground(new java.awt.Color(54, 63, 69));
         setBorder(null);
 
         panelMenu.setBackground(new java.awt.Color(30, 67, 112));
@@ -187,13 +187,13 @@ public class frmReportes extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        dynamicPanel.setBackground(new java.awt.Color(136, 161, 192));
+        dynamicPanel.setBackground(new java.awt.Color(54, 63, 69));
 
         javax.swing.GroupLayout dynamicPanelLayout = new javax.swing.GroupLayout(dynamicPanel);
         dynamicPanel.setLayout(dynamicPanelLayout);
         dynamicPanelLayout.setHorizontalGroup(
             dynamicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 812, Short.MAX_VALUE)
+            .addGap(0, 782, Short.MAX_VALUE)
         );
         dynamicPanelLayout.setVerticalGroup(
             dynamicPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,8 +207,7 @@ public class frmReportes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(panelMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(dynamicPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(dynamicPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,14 +220,14 @@ public class frmReportes extends javax.swing.JInternalFrame {
 
     private void btnReporte1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporte1MouseClicked
         // TODO add your handling code here:
-        menu1.setVisible(true);
-        menu2.setVisible(false);
+        menu1.setVisible(false);
+        menu2.setVisible(true);
     }//GEN-LAST:event_btnReporte1MouseClicked
 
     private void btnReporte2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporte2MouseClicked
         // TODO add your handling code here:
-        menu2.setVisible(true);
-        menu1.setVisible(false);
+        menu2.setVisible(false);
+        menu1.setVisible(true);
     }//GEN-LAST:event_btnReporte2MouseClicked
 
     private void btnReporte1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporte1MouseEntered

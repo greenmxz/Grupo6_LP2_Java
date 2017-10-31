@@ -7,27 +7,29 @@ package Vista.Vista_Menu;
 
 import Vista.frmDespachoPedido;
 import Vista.frmGenerarGuiaRemision;
-import Vista.frmOrdenCompra;
+//import Vista.frmOrdenCompra;
+import Vista.frmPrincipal;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-
+import Vista.frmPrincipal;
 /**
  *
  * @author Moises
  */
+enum Estado {Abierto,Cerrado,Nuevo}
 public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form frmMenuInicioAlmacenero
      */
     private Estado estado ;
-    private frmCabecera padre;
+    private frmPrincipal padre;
     
-    public frmMenuInicioAlmacenero(frmCabecera padre) {
+    
+    public frmMenuInicioAlmacenero(frmPrincipal padre) {
         initComponents();
-        this.setLocation(0,111);
-        //this.contenedorPadre = contenedorPadre;
+        this.setLocation(0,0);
         this.padre=padre;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         estado=Estado.Abierto;
@@ -171,31 +173,33 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuiaRemisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiaRemisionActionPerformed
+        padre.getJdpInterno().removeAll();
         frmGenerarGuiaRemision frmGuiaRem = new frmGenerarGuiaRemision(padre);
-        padre.getDesktopPane().add(frmGuiaRem);
+        padre.getJdpInterno().add(frmGuiaRem);
         frmGuiaRem.show();
         this.hide();
-        padre.setEstado(Estado.Cerrado);
         this.estado=Estado.Cerrado;
+        
     }//GEN-LAST:event_btnGuiaRemisionActionPerformed
 
     private void btnDespachoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespachoPedidoActionPerformed
         // TODO add your handling code here:
+        padre.getJdpInterno().removeAll();
         frmDespachoPedido frmDespacho = new frmDespachoPedido();
-        padre.getDesktopPane().add(frmDespacho);
+        padre.getJdpInterno().add(frmDespacho);
         frmDespacho.show();
         this.hide();
-        padre.setEstado(Estado.Cerrado);
+        //padre.setEstado(1);
         this.estado=Estado.Cerrado;
     }//GEN-LAST:event_btnDespachoPedidoActionPerformed
 
     private void panelDespachoPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDespachoPedidoMouseClicked
         // TODO add your handling code here:
         frmDespachoPedido frmDespacho = new frmDespachoPedido();
-        padre.getDesktopPane().add(frmDespacho);
+        padre.getJdpInterno().add(frmDespacho);
         frmDespacho.show();
         this.hide();
-        padre.setEstado(Estado.Cerrado);
+        //padre.setEstado(Estado.Cerrado);
         this.estado=Estado.Cerrado;
     }//GEN-LAST:event_panelDespachoPedidoMouseClicked
 
@@ -215,10 +219,10 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
     private void panelGuiaRemisionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelGuiaRemisionMouseClicked
         // TODO add your handling code here:
         frmGenerarGuiaRemision frmGuiaRem = new frmGenerarGuiaRemision(padre);
-        padre.getDesktopPane().add(frmGuiaRem);
+        padre.getJdpInterno().add(frmGuiaRem);
         frmGuiaRem.show();
         this.hide();
-        padre.setEstado(Estado.Cerrado);
+        //padre.setEstado(Estado.Cerrado);
         this.estado=Estado.Cerrado;
     }//GEN-LAST:event_panelGuiaRemisionMouseClicked
 
