@@ -24,7 +24,7 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.padre = padre;
-        this.setLocation(0,112);
+        this.setLocation(0,0);
     }
 
     /**
@@ -177,9 +177,10 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        frmBusquedaPedido frmBusqPed = new frmBusquedaPedido();
+        frmBusquedaPedido frmBusqPed = new frmBusquedaPedido(this);
         padre.getJdpInterno().add(frmBusqPed);
         frmBusqPed.show();
+        this.hide();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -16,10 +16,14 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmBusquedaPedido
      */
-    public frmBusquedaPedido() {
+    
+    private frmGenerarGuiaRemision padre;
+    
+    public frmBusquedaPedido(frmGenerarGuiaRemision padre) {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        this.setLocation(660,112);
+        this.setLocation(0,0);
+        this.padre = padre;
     }
 
     /**
@@ -92,6 +96,7 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        padre.show();
     }//GEN-LAST:event_jButton2ActionPerformed
 
 
