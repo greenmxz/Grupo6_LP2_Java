@@ -9,6 +9,7 @@ import AccesoDatos.PedidosDA;
 import Modelo.Pedido;
 import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +22,7 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
      */
     
     private frmGenerarGuiaRemision padre;
+    private ArrayList<Pedido> pedidos;
     
     public frmBusquedaPedido(frmGenerarGuiaRemision padre) {
         initComponents();
@@ -30,9 +32,24 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
         
         PedidosDA pda = new PedidosDA();
         
-        ArrayList<Pedido> pedidos = pda.getPedidos();
-        //System.out.println(pedidos.size());
+        this.pedidos = pda.getPedidos();
+        LlenarTabla();
         
+    }
+    
+    public void LlenarTabla()
+    {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Object rowData[] = new Object[4];
+        for(int i = 0; i < this.pedidos.size(); i++)
+        {
+            rowData[0] = this.pedidos.get(i).getIdPedido();
+            rowData[1] = this.pedidos.get(i).getIdCliente();
+            rowData[2] = this.pedidos.get(i).getFecha();
+            rowData[3] = this.pedidos.get(i).getImporte();
+            model.addRow(rowData);
+        }
+                
     }
 
     /**

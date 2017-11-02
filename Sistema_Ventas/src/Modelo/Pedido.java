@@ -59,5 +59,19 @@ public class Pedido {
     public void setIdPedido(int idPedido) {
         this.idPedido = idPedido;
     }
+
+    /**
+     * @return the idCliente
+     */
+    public int getIdCliente() {
+        return idCliente;
+    }
+
+    /**
+     * @param idCliente the idCliente to set
+     */
+    public void setIdCliente(int idCliente) {
+        this.idCliente = idCliente;
+    }
     
 }
