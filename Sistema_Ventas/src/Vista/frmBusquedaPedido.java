@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import AccesoDatos.PedidosDA;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -24,6 +25,10 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(0,0);
         this.padre = padre;
+        
+        PedidosDA pda = new PedidosDA();
+        
+        
     }
 
     /**
