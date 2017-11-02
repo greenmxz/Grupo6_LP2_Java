@@ -23,7 +23,7 @@ public class frmOpcionesCuenta extends javax.swing.JInternalFrame {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.padre = padre;
-        this.setLocation(0,112);
+        this.setLocation(0,0);
     }
 
     /**

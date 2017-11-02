@@ -6,7 +6,13 @@
 package Vista;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.plaf.basic.BasicInternalFrameUI;import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -17,11 +23,11 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmCrearCuenta
      */
-    String[] roles = { "Almacenero", "Seguridad", "Logistica" };
+    String[] roles = { "Seguridad", "Almacenero", "Logistica" };
     public frmCrearCuenta() {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        this.setLocation(144,112);
+        this.setLocation(144,0);
         
         jComboBox1.setModel(new DefaultComboBoxModel(roles));
     }
@@ -47,7 +53,7 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
-        label1.setText("Id Usuario:");
+        label1.setText("Usuario:");
 
         label2.setText("Contraseña:");
 
@@ -66,6 +72,11 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
         jLabel1.setText("Rol:");
 
         jButton1.setText("Crear Usuario");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -101,7 +112,7 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,6 +144,8 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
                 .addGap(30, 30, 30))
         );
 
+        label1.getAccessibleContext().setAccessibleName("Usuario:");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -144,6 +157,49 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        if(!this.textField2.getText().equals(this.textField3.getText())){
+            JOptionPane.showMessageDialog(null, "Contraseñas no coinciden");
+            return;
+        }
+        
+        try{
+            //Registro del Driver
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6", "inf282g6", "ta1RQx6flDXdiTpr");
+            
+            Statement sentencia = con.createStatement();
+            
+            String instruccion = "SELECT count(*) as dato FROM Usuario";
+            ResultSet rs = sentencia.executeQuery(instruccion);
+            int idaux;
+            rs.next();
+            idaux = rs.getInt(1);
+            
+            int idtipo = 0;
+            if(this.jComboBox1.getSelectedItem().toString().equals(roles[0])) idtipo = 1;
+            else if(this.jComboBox1.getSelectedItem().toString().equals(roles[1])) idtipo = 2;
+            else if(this.jComboBox1.getSelectedItem().toString().equals(roles[2])) idtipo = 3;
+            
+            instruccion = "INSERT INTO Usuario(idUsuario, nombreUsuario, contraseña, idTipoUsuario)"
+                    + " values("+idaux+",'"+this.textField1.getText()+
+                    "','"+this.textField2.getText()+"',"+idtipo+")";
+            
+            sentencia.executeUpdate(instruccion);
+            
+            con.close();
+            JOptionPane.showMessageDialog(null, "Registro exitoso");
+            return;
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Error base de datos: " + ex.getMessage());
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

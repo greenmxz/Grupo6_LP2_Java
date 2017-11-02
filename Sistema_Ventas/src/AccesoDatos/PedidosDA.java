@@ -31,7 +31,7 @@ public class PedidosDA {
             //Registro del Driver
             Class.forName("com.mysql.jdbc.Driver");
             
-            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96", "inf282g6", "ta1RQx6flDXdiTpr");
+            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6", "inf282g6", "ta1RQx6flDXdiTpr");
             
             Statement sentencia = con.createStatement();
             
@@ -43,6 +43,7 @@ public class PedidosDA {
                 Pedido ped = new Pedido(rs.getInt("idCliente"));
                 ped.setFecha(rs.getString("fechaPedido"));
                 ped.setImporte(rs.getFloat("importeTotal"));
+                ped.setIdPedido(rs.getInt("idPedido"));
                 ret.add(ped);
             }
      

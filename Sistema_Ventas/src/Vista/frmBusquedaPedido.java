@@ -6,6 +6,8 @@
 package Vista;
 
 import AccesoDatos.PedidosDA;
+import Modelo.Pedido;
+import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -28,6 +30,8 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
         
         PedidosDA pda = new PedidosDA();
         
+        ArrayList<Pedido> pedidos = pda.getPedidos();
+        //System.out.println(pedidos.size());
         
     }
 
@@ -53,7 +57,7 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Cliente", "Fecha", "Precio"
             }
         ));
         jScrollPane1.setViewportView(jTable1);

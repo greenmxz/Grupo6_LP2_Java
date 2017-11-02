@@ -19,6 +19,7 @@ public class Pedido {
     private float importe;
     private String fecha;
     private ArrayList<Producto> ListaProd;
+    private int idPedido;
     
     public Pedido(int idCli){
         this.idCliente = idCli;
@@ -49,6 +50,14 @@ public class Pedido {
     
     public void setFecha(String fecha) {
         this.fecha = fecha;
+    }
+
+    public int getIdPedido() {
+        return idPedido;
+    }
+
+    public void setIdPedido(int idPedido) {
+        this.idPedido = idPedido;
     }
     
 }

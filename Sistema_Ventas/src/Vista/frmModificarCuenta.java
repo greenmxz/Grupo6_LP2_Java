@@ -6,6 +6,7 @@
 package Vista;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -21,7 +22,7 @@ public class frmModificarCuenta extends javax.swing.JInternalFrame {
     public frmModificarCuenta() {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
-        this.setLocation(144,112);
+        this.setLocation(144,0);
         jComboBox1.setModel(new DefaultComboBoxModel(roles));
     }
 
@@ -64,6 +65,11 @@ public class frmModificarCuenta extends javax.swing.JInternalFrame {
         jTextField4.setEnabled(false);
 
         jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.setEnabled(false);
@@ -116,7 +122,7 @@ public class frmModificarCuenta extends javax.swing.JInternalFrame {
                 .addComponent(jButton2)
                 .addGap(41, 41, 41)
                 .addComponent(jButton3)
-                .addGap(0, 75, Short.MAX_VALUE))
+                .addGap(0, 177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -156,6 +162,18 @@ public class frmModificarCuenta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        if(this.jTextField1.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Campo vacio");
+            return;
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
