@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.Usuario;
 import Vista.Vista_Menu.frmMenuInicioAlmacenero;
 import Vista.Vista_Menu.frmMenuInicioLogistica;
 import Vista.Vista_Menu.frmMenuInicioSeguridad;
@@ -21,14 +22,22 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 //enum  Estado {Abierto,Cerrado,Nuevo}
 public class frmPrincipal extends javax.swing.JFrame {
-    private static String nombreUsuario;
+    private static Usuario usuario;
     private JDesktopPane jdpInterno;
     private frmMenuInicioLogistica frmMenuInicioLogistica;
     private frmMenuInicioSeguridad frmMenuInicioSeguridad;
     private frmMenuInicioAlmacenero frmMenuInicioAlmacenero;
-
     private boolean abierto=false;
 
+    
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     public boolean isAbierto() {
         return abierto;
     }
@@ -45,26 +54,22 @@ public class frmPrincipal extends javax.swing.JFrame {
     public  void setJdpInterno(JDesktopPane jdpPrincipal) {
         this.jdpPrincipal = jdpPrincipal;
     }
-    public String getNombreUsuario() {
-        return nombreUsuario;
-    }
 
-    public void setNombreUsuario(String nombreUsuario) {
-        this.nombreUsuario = nombreUsuario;
-    }
     
     /**
      * Creates new form frmPrincipal
      */
-    public frmPrincipal(String nombreUsuario) {
+    public frmPrincipal(Usuario usuario) {
         initComponents();
+        this.usuario=usuario;
+        lblNombreUsuario.setText("Hola "+usuario.getNombre());
         
-        lblNombreUsuario.setText(nombreUsuario);
-
         this.jdpInterno=jdpPrincipal;
         this.setResizable(false);
         inicializar();
-        this.setNombreUsuario(nombreUsuario);
+
+        
+        System.out.println(usuario.getApellidoPaterno());
     }
 
       private void inicializar(){
@@ -130,7 +135,7 @@ public class frmPrincipal extends javax.swing.JFrame {
             .addGap(0, 571, Short.MAX_VALUE)
         );
 
-        panelCabecera.setBackground(new java.awt.Color(30, 67, 112));
+        panelCabecera.setBackground(new java.awt.Color(0, 0, 0));
 
         btnMenu.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -217,8 +222,8 @@ public class frmPrincipal extends javax.swing.JFrame {
     private void btnMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuMouseClicked
         // TODO add your handling code here:
          //if (estado == Estado.Cerrado){//Si está abierto el menu
-            switch (nombreUsuario) {
-                case "log":
+            switch (usuario.getTipoUsuario()) {
+                case 4:
                     if (abierto){
                         frmMenuInicioLogistica.dispose();
                         abierto=false;
@@ -234,7 +239,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                     }
 
                     break;
-                case "seg":
+                case 1:
                     //jdpInterno.removeAll();
                     if (abierto){
                         frmMenuInicioSeguridad.dispose();
@@ -251,7 +256,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                     }
                     
                     break;
-                case "alm":
+                case 3:
                     //jdpInterno.removeAll();
                     if(abierto){
                         frmMenuInicioAlmacenero.dispose();
@@ -304,7 +309,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmPrincipal(nombreUsuario ).setVisible(true);
+                new frmPrincipal(usuario ).setVisible(true);
             }
         });
     }

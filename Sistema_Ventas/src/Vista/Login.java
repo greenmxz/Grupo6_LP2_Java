@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Controlador.UsuarioBL;
+import Modelo.Usuario;
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -17,6 +19,8 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     private String nombreUsuario;
     //private char[] contrasenaUsuario;
+    private Usuario usuario;
+    private UsuarioBL logicaNegocioUsuario;
     public String getNombreUsuario() {
         return nombreUsuario;
     }
@@ -29,18 +33,18 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
-        initComponents();
+        initComponents(); 
+        inicializar();
+        logicaNegocioUsuario = new UsuarioBL();
         
+    }
+    private void inicializar(){
         this.setResizable(false);
         this.setBackground(new Color(60,141,188));
         ImageIcon img = new ImageIcon(getClass().getResource("/Imagenes/login.png"));
         ImageIcon icono = new ImageIcon (img.getImage().getScaledInstance(Imagen.getWidth(), Imagen.getHeight(), Image.SCALE_DEFAULT));
 
         Imagen.setIcon(icono);
-        inicializar();
-        
-    }
-    private void inicializar(){
         textUsuario.setText("Usuario");
         textContrasena.setText("\\u25cf");
     }
@@ -208,12 +212,14 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        setNombreUsuario(textUsuario.getText());
-        
+        //setNombreUsuario(textUsuario.getText());
         //System.out.println(getNombreUsuario());
-     
-            if ((nombreUsuario.equalsIgnoreCase("log"))||(nombreUsuario.equalsIgnoreCase("seg"))||(nombreUsuario.equalsIgnoreCase("alm"))){
-                frmPrincipal frmPrincipal = new frmPrincipal( getNombreUsuario()); 
+        
+        usuario = logicaNegocioUsuario.obtenerUsuario(textUsuario.getText(),textContrasena.getText());
+    //(nombreUsuario.equalsIgnoreCase("log"))||(nombreUsuario.equalsIgnoreCase("seg"))||(nombreUsuario.equalsIgnoreCase("alm")) 
+            if (usuario!=null){
+
+                frmPrincipal frmPrincipal = new frmPrincipal(usuario ); 
                 //frmPrincipal.setNombreUsuario(this.getNombreUsuario());
                 frmPrincipal.setVisible(true);
                 this.dispose(); 
