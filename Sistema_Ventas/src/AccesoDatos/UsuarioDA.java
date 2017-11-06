@@ -23,7 +23,7 @@ public class UsuarioDA {
             Statement sentencia= con.createStatement();
             
             String instruccion = "Select * from Usuario where idTipoUsuario not in ("+2+","+5+") and "+"nombreUsuario='"+nombreUsuario+"' and "+"contraseña='"+contrasena+"'";
-            System.out.println(instruccion);
+            //System.out.println(instruccion);
             ResultSet rs = sentencia.executeQuery(instruccion);
             while (rs.next( )){
                 Usuario user=new Usuario();
@@ -35,10 +35,11 @@ public class UsuarioDA {
                 user.setApellidoMaterno(rs.getString("apellidoMaterno"));
                 user.setCorreo(rs.getString("correo"));
                 user.setTipoUsuario(rs.getInt("idTipoUsuario"));
-                con.close();
+                
                 System.out.println(user.getNombreUsuario() +"  "+user.getContrasena()+ " "+user.getTipoUsuario());
                 return user;   
             }
+            con.close();
             System.out.println("Usuario no encontrado");
             return null;
         }catch(Exception ex){

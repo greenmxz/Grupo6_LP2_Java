@@ -13,6 +13,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class Menu1 extends javax.swing.JPanel {
     private String [] tipoReporte={"Clientes con mayores pedidos","Clientes con menores pedidos","Clientes con mayor facturación","Clientes con menor facturación"};
+    
     /**
      * Creates new form Menu1
      */
@@ -62,9 +63,9 @@ public class Menu1 extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jTable1);
 
         cboTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboTipoReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cboTipoReporteActionPerformed(evt);
+        cboTipoReporte.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cboTipoReporteItemStateChanged(evt);
             }
         });
 
@@ -131,9 +132,21 @@ public class Menu1 extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cboTipoReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTipoReporteActionPerformed
+    private void cboTipoReporteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTipoReporteItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_cboTipoReporteActionPerformed
+        int index=cboTipoReporte.getSelectedIndex();
+        
+        switch(index){
+            case 0:
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }//GEN-LAST:event_cboTipoReporteItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

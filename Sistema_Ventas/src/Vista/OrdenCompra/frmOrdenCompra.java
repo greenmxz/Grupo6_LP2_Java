@@ -6,17 +6,30 @@
 package Vista.OrdenCompra;
 
 
+import Modelo.DetalleOrdenCompra;
+import Modelo.OrdenCompra;
+import Modelo.Producto;
+import Vista.frmBusquedaProducto;
 import Vista.frmProductosAgotados;
+import java.awt.Frame;
+import java.util.concurrent.Semaphore;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
-
+//cardi b , bodak ylllow
 /**
  *
  * @author Moises
  */
-public class frmOrdenCompra extends javax.swing.JInternalFrame {
+public class frmOrdenCompra extends javax.swing.JInternalFrame{
     frmProductosAgotados frmProductosAgotados;
     frmGestionarOrdenCompra padre ;
     frmBuscarOrdenCompra frmBuscarOrdenCompra;
+    public static Semaphore semaforo= new Semaphore(1);
+    frmBusquedaProducto frmBusquedaProducto;
+    Frame f;
+    OrdenCompra ordenCompra;
+    Producto p;
+    
     /**
      * Creates new form frmOrdenCompra
      */
@@ -24,6 +37,10 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.padre=padre;
+        lblCodigo.setEnabled(false);
+        txtCodigoProducto.setEnabled(false);
+        txtNombreProducto.setEnabled(false);
+        ordenCompra = new OrdenCompra();
     }
 
     /**
@@ -38,23 +55,23 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
         jButton7 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboEstado = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblCodigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaDetalleOrdenCompra = new javax.swing.JTable();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         btnBuscarProducto = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        btnAnadir = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
+        btnQuitar = new javax.swing.JButton();
+        txtCodigoProducto = new javax.swing.JTextField();
+        txtNombreProducto = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
@@ -81,13 +98,13 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Código:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei", 0, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Fecha de Orden:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDetalleOrdenCompra.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -95,7 +112,9 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
                 "Código", "Nombre", "Cantidad"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tablaDetalleOrdenCompra.setAutoscrolls(false);
+        tablaDetalleOrdenCompra.setEnabled(false);
+        jScrollPane1.setViewportView(tablaDetalleOrdenCompra);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos del producto"));
 
@@ -112,11 +131,16 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton2.setText("Añadir");
+        btnAnadir.setText("Añadir");
+        btnAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnadirActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Modificar");
+        btnModificar.setText("Modificar");
 
-        jButton4.setText("Quitar");
+        btnQuitar.setText("Quitar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -132,22 +156,22 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCodigoProducto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCantidad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(83, 83, 83)
                                 .addComponent(btnBuscarProducto)
                                 .addGap(62, 62, 62)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
+                                .addComponent(btnAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(256, 256, 256)
-                                .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(btnQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addComponent(btnModificar)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -158,19 +182,19 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnBuscarProducto)
-                        .addComponent(jButton2)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnAnadir)
+                        .addComponent(txtCodigoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton3))
+                        .addComponent(txtNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnModificar))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
+                    .addComponent(btnQuitar)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -219,13 +243,13 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(149, 149, 149)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(37, 37, 37)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(33, 33, 33)
@@ -242,9 +266,9 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarOrdenDeCompra))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -272,23 +296,59 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
 
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         // TODO add your handling code here:
-        if (frmProductosAgotados==null){
-            frmProductosAgotados = new frmProductosAgotados(2);
-            
-            padre.getPaneOrdenCompra().add(frmProductosAgotados);
-            frmProductosAgotados.show();
-            frmProductosAgotados.setSize(padre.getPaneOrdenCompra().getWidth(),padre.getPaneOrdenCompra().getHeight());
-            frmProductosAgotados.setLocation(0,0);
-            frmProductosAgotados.toFront();
-        }else{
-            frmProductosAgotados.dispose();
-            frmProductosAgotados = new frmProductosAgotados(2);
-            
-            padre.getPaneOrdenCompra().add(frmProductosAgotados);
-            frmProductosAgotados.show();
-            frmProductosAgotados.setSize(padre.getPaneOrdenCompra().getWidth(),padre.getPaneOrdenCompra().getHeight());
-            frmProductosAgotados.setLocation(0,0);
-            frmProductosAgotados.toFront();
+        try{
+            //frmProductosAgotados
+            if (f==null){
+//                semaforo.acquire();                
+//                frmBusquedaProducto=new frmBusquedaProducto(this,true);
+//                padre.getPaneOrdenCompra().add(frmProductosAgotados);
+//                frmProductosAgotados.show();
+                
+                f = JOptionPane.getFrameForComponent(this.padre.getPaneOrdenCompra());
+                frmBusquedaProducto dialog = new frmBusquedaProducto(f, true);
+                dialog.setLocation(0,0);
+                dialog.setVisible(true);
+                
+                
+                p=dialog.getProductoSeleccionado();
+                txtCodigoProducto.setText(String.valueOf(p.getIdProducto()));
+                txtNombreProducto.setText(String.valueOf(p.getNombre()));
+                
+                
+                
+                //frmProductosAgotados = new frmProductosAgotados(2);
+                //padre.getPaneOrdenCompra().add(frmProductosAgotados);
+                //frmProductosAgotados.show();
+//                
+//                
+//                Producto p=frmProductosAgotados.getProductoSeleccionado();
+//                txtCodigoProducto.setText(String.valueOf(p.getIdProducto()));
+//                txtNombreProducto.setText(String.valueOf(p.getNombre()));
+//
+//                frmProductosAgotados.setSize(padre.getPaneOrdenCompra().getWidth(),padre.getPaneOrdenCompra().getHeight());
+//                frmProductosAgotados.setLocation(0,0);
+//                frmProductosAgotados.toFront();
+            }else{
+                
+                f = JOptionPane.getFrameForComponent(this.padre.getPaneOrdenCompra());
+                
+                frmBusquedaProducto dialog = new frmBusquedaProducto(f, true);
+                dialog.show();
+                dialog.setLocation(0,0);
+                 p=dialog.getProductoSeleccionado();
+                txtCodigoProducto.setText(String.valueOf(p.getIdProducto()));
+                txtNombreProducto.setText(String.valueOf(p.getNombre()));
+                
+//                frmProductosAgotados.dispose();
+//                frmProductosAgotados = new frmProductosAgotados(2);
+//                padre.getPaneOrdenCompra().add(frmProductosAgotados);
+//                frmProductosAgotados.show();
+//                frmProductosAgotados.setSize(padre.getPaneOrdenCompra().getWidth(),padre.getPaneOrdenCompra().getHeight());
+//                frmProductosAgotados.setLocation(0,0);
+//                frmProductosAgotados.toFront();
+            }
+        }catch(Exception ex){
+            //Excepcion
         }
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
@@ -319,19 +379,31 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_buscarOrdenDeCompraActionPerformed
 
+    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
+        // TODO add your handling code here:
+        
+        DetalleOrdenCompra detalle = new DetalleOrdenCompra();
+
+        detalle.setProducto(p);
+        detalle.setCantidad(Integer.parseInt(txtCantidad.getText()));
+        ordenCompra.getDetalleOrdenCompra().add(detalle);
+        Object[]fila=new Object[3];
+
+    }//GEN-LAST:event_btnAnadirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAnadir;
     private javax.swing.JButton btnBuscarProducto;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnQuitar;
     private javax.swing.JButton buscarOrdenDeCompra;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> cboEstado;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -342,11 +414,11 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField lblCodigo;
+    private javax.swing.JTable tablaDetalleOrdenCompra;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtCodigoProducto;
+    private javax.swing.JTextField txtNombreProducto;
     // End of variables declaration//GEN-END:variables
 }

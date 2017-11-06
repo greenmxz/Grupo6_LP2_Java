@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.UsuarioBL;
 import Modelo.Usuario;
+
 import java.awt.Color;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -19,7 +20,7 @@ import javax.swing.JOptionPane;
 public class Login extends javax.swing.JFrame {
     private String nombreUsuario;
     //private char[] contrasenaUsuario;
-    private Usuario usuario;
+    public  Usuario usuario;
     private UsuarioBL logicaNegocioUsuario;
     public String getNombreUsuario() {
         return nombreUsuario;
@@ -212,22 +213,18 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
-        //setNombreUsuario(textUsuario.getText());
-        //System.out.println(getNombreUsuario());
-        
         usuario = logicaNegocioUsuario.obtenerUsuario(textUsuario.getText(),textContrasena.getText());
-    //(nombreUsuario.equalsIgnoreCase("log"))||(nombreUsuario.equalsIgnoreCase("seg"))||(nombreUsuario.equalsIgnoreCase("alm")) 
-            if (usuario!=null){
+        //(nombreUsuario.equalsIgnoreCase("log"))||(nombreUsuario.equalsIgnoreCase("seg"))||(nombreUsuario.equalsIgnoreCase("alm")) 
+        if (usuario!=null){
 
                 frmPrincipal frmPrincipal = new frmPrincipal(usuario ); 
-                //frmPrincipal.setNombreUsuario(this.getNombreUsuario());
                 frmPrincipal.setVisible(true);
                 this.dispose(); 
-            }else{
-                textUsuario.setText("Usuario");
-                textContrasena.setText("\\u25cf");
-                JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrectos\nIngresa los datos nuevamente");
-            }
+        }else{
+            textUsuario.setText("Usuario");
+            textContrasena.setText("\\u25cf");
+            JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrectos\nIngresa los datos nuevamente");
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void textUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textUsuarioMouseClicked

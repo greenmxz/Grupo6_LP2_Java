@@ -5,33 +5,67 @@
  */
 package Vista;
 
+import Controlador.ProductoBL;
+import Modelo.Producto;
+import Vista.OrdenCompra.frmOrdenCompra;
 import java.awt.Color;
 import java.awt.Point;
+import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Moises
  */
 public class frmProductosAgotados extends javax.swing.JInternalFrame {
-    /**
-     * Creates new form frmProductosAgotados
-     */
+    private ProductoBL logicaNegocioProducto;
+    private Producto productoSeleccionado;
+    private ArrayList<Producto> lista ;
+    private int stock=20;
+    
+    DefaultTableModel modelo;
+    
+        public Producto getProductoSeleccionado() {
+        return productoSeleccionado;
+    }
+
+    public void setProductoSeleccionado(Producto productoSeleccionado) {
+        this.productoSeleccionado = productoSeleccionado;
+    }
     public frmProductosAgotados(int i){
         initComponents();
+        logicaNegocioProducto = new ProductoBL();
+        this.setSize(1021, 604);
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         panelTitulo.setBackground(new Color(54,63,69));
         textTituloProducto.hide();
         btnTerminar.hide();
+        lista = logicaNegocioProducto.devolverProductos();
         
+        actualizarTabla();
     }
     public frmProductosAgotados() {
         initComponents();
+        logicaNegocioProducto = new ProductoBL();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(0,0);
         textTituloProducto.setText("Productos Agotados");
         btnSeleccionar.hide();
-        
+        productoSeleccionado=new Producto(); 
+        lista = logicaNegocioProducto.devolverProductos(stock);
+        actualizarTabla();
+    }
+    private void actualizarTabla(){
+        DefaultTableModel modelo= (DefaultTableModel)tablaProductos.getModel();
+        Object fila[] = new Object[3];
+
+        for (int i=0; i < lista.size();i++){
+            fila[0]=lista.get(i).getIdProducto();
+            fila[1]=lista.get(i).getNombre();
+            fila[2]=lista.get(i).getStock();
+            modelo.addRow(fila);
+        }
     }
 
     /**
@@ -46,9 +80,9 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
         panelTitulo = new javax.swing.JPanel();
         textTituloProducto = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        tablaProductos = new javax.swing.JTable();
+        btnConsultar = new javax.swing.JButton();
+        btnStock = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnSeleccionar = new javax.swing.JButton();
         btnTerminar = new javax.swing.JButton();
@@ -81,7 +115,7 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -89,9 +123,14 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
                 "Codigo", "Nombre", "Stock"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaProductos);
 
-        jButton1.setText("Consultar");
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -120,18 +159,18 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
                 .addGap(226, 226, 226)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnStock, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 165, Short.MAX_VALUE)
+                .addComponent(btnConsultar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnTerminar)
                 .addGap(70, 70, 70)
                 .addComponent(btnSeleccionar)
                 .addGap(153, 153, 153))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(186, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(190, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,14 +178,14 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
                 .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnConsultar)
+                    .addComponent(btnStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
                     .addComponent(btnTerminar)
                     .addComponent(btnSeleccionar))
                 .addGap(34, 34, 34)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(208, Short.MAX_VALUE))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,6 +193,9 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
 
     private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
         // TODO add your handling code here:
+        int index=tablaProductos.getSelectedRow();
+        productoSeleccionado=lista.get(index);
+        frmOrdenCompra.semaforo.release();
         this.dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
@@ -161,17 +203,38 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
        this.dispose();
     }//GEN-LAST:event_btnTerminarActionPerformed
-/*lookandfeel */
 
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        // TODO add your handling code here:
+        lista=logicaNegocioProducto.devolverProductos(Integer.parseInt(btnStock.getText()));
+        modelo= (DefaultTableModel)tablaProductos.getModel();
+        Object fila[] = new Object[3];
+        deleteRows();
+        
+        for (int i=0;i<lista.size();i++){
+            fila[0]=lista.get(i).getIdProducto();
+            fila[1]=lista.get(i).getNombre();
+            fila[2]=lista.get(i).getStock();
+            modelo.addRow(fila);
+        }
+    }//GEN-LAST:event_btnConsultarActionPerformed
+/*lookandfeel */
+    public void deleteRows(){
+        modelo= (DefaultTableModel)tablaProductos.getModel();
+        int rowCount = modelo.getRowCount();
+        for (int i=rowCount-1;i>=0;i--){
+            modelo.removeRow(i);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JTextField btnStock;
     private javax.swing.JButton btnTerminar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel panelTitulo;
+    private javax.swing.JTable tablaProductos;
     private javax.swing.JLabel textTituloProducto;
     // End of variables declaration//GEN-END:variables
 }
