@@ -21,7 +21,6 @@ public class frmGestionarOrdenCompra extends javax.swing.JInternalFrame {
     private frmPrincipal padre;
     frmProductosAgotados frmProductosAgotados;
     frmOrdenCompra frmOrdenCompra;
-    frmBuscarOrdenCompra frmBuscarOrdenCompra;
     
     
     public JDesktopPane getPaneOrdenCompra() {

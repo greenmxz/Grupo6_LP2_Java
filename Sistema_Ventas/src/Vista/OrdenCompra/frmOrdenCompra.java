@@ -12,35 +12,39 @@ import Modelo.Producto;
 import Vista.frmBusquedaProducto;
 import Vista.frmProductosAgotados;
 import java.awt.Frame;
-import java.util.concurrent.Semaphore;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 //cardi b , bodak ylllow
 /**
  *
  * @author Moises
  */
 public class frmOrdenCompra extends javax.swing.JInternalFrame{
+    
     frmProductosAgotados frmProductosAgotados;
     frmGestionarOrdenCompra padre ;
-    frmBuscarOrdenCompra frmBuscarOrdenCompra;
-    public static Semaphore semaforo= new Semaphore(1);
+
     frmBusquedaProducto frmBusquedaProducto;
-    Frame f;
     OrdenCompra ordenCompra;
     Producto p;
+    DefaultTableModel modelo;
     
     /**
      * Creates new form frmOrdenCompra
      */
     public frmOrdenCompra(frmGestionarOrdenCompra padre) {
         initComponents();
+        String [] estados = { "No atendido","Atendido"};
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.padre=padre;
-        lblCodigo.setEnabled(false);
+        txtCodigo.setEnabled(false);
         txtCodigoProducto.setEnabled(false);
         txtNombreProducto.setEnabled(false);
         ordenCompra = new OrdenCompra();
+        cboEstado.setModel(new DefaultComboBoxModel(estados));
     }
 
     /**
@@ -57,10 +61,10 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         jLabel1 = new javax.swing.JLabel();
         cboEstado = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        lblCodigo = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDetalleOrdenCompra = new javax.swing.JTable();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        fechaOrden = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -75,10 +79,9 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton9 = new javax.swing.JButton();
         buscarOrdenDeCompra = new javax.swing.JButton();
+        txtTotal = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(54, 63, 69));
         setBorder(null);
@@ -112,8 +115,6 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 "Código", "Nombre", "Cantidad"
             }
         ));
-        tablaDetalleOrdenCompra.setAutoscrolls(false);
-        tablaDetalleOrdenCompra.setEnabled(false);
         jScrollPane1.setViewportView(tablaDetalleOrdenCompra);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Datos del producto"));
@@ -139,8 +140,18 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         });
 
         btnModificar.setText("Modificar");
+        btnModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModificarActionPerformed(evt);
+            }
+        });
 
         btnQuitar.setText("Quitar");
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,18 +216,17 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
 
         jButton8.setText("Eliminar");
 
-        jLabel7.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Correo:");
-
-        jButton9.setText("Enviar correo");
-
         buscarOrdenDeCompra.setText("Buscar Orden de compra");
         buscarOrdenDeCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buscarOrdenDeCompraActionPerformed(evt);
             }
         });
+
+        txtTotal.setText("0");
+
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Total:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -228,36 +238,35 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(jButton5)
-                        .addGap(57, 57, 57)
-                        .addComponent(jButton8)
-                        .addGap(87, 87, 87)
-                        .addComponent(jButton6)
-                        .addGap(97, 97, 97)
-                        .addComponent(jButton7))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(149, 149, 149)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(fechaOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(149, 149, 149)
                                 .addComponent(jLabel6)
                                 .addGap(37, 37, 37)
                                 .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(33, 33, 33)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(44, 44, 44)
+                                .addGap(47, 47, 47)
+                                .addComponent(jButton5)
+                                .addGap(57, 57, 57)
+                                .addComponent(jButton8)
+                                .addGap(87, 87, 87)
+                                .addComponent(jButton6)
+                                .addGap(97, 97, 97)
+                                .addComponent(jButton7)))
+                        .addGap(127, 127, 127)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(buscarOrdenDeCompra)
-                            .addComponent(jButton9))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(buscarOrdenDeCompra))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -266,18 +275,14 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscarOrdenDeCompra))
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton9)))
+                    .addComponent(fechaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -287,8 +292,10 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                     .addComponent(jButton5)
                     .addComponent(jButton8)
                     .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addContainerGap(126, Short.MAX_VALUE))
+                    .addComponent(jButton7)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
 
         pack();
@@ -297,56 +304,18 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
     private void btnBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductoActionPerformed
         // TODO add your handling code here:
         try{
-            //frmProductosAgotados
-            if (f==null){
-//                semaforo.acquire();                
-//                frmBusquedaProducto=new frmBusquedaProducto(this,true);
-//                padre.getPaneOrdenCompra().add(frmProductosAgotados);
-//                frmProductosAgotados.show();
-                
-                f = JOptionPane.getFrameForComponent(this.padre.getPaneOrdenCompra());
+           
+                Frame f = JOptionPane.getFrameForComponent(this.padre.getPaneOrdenCompra());
                 frmBusquedaProducto dialog = new frmBusquedaProducto(f, true);
                 dialog.setLocation(0,0);
                 dialog.setVisible(true);
                 
                 
                 p=dialog.getProductoSeleccionado();
+                
                 txtCodigoProducto.setText(String.valueOf(p.getIdProducto()));
                 txtNombreProducto.setText(String.valueOf(p.getNombre()));
-                
-                
-                
-                //frmProductosAgotados = new frmProductosAgotados(2);
-                //padre.getPaneOrdenCompra().add(frmProductosAgotados);
-                //frmProductosAgotados.show();
-//                
-//                
-//                Producto p=frmProductosAgotados.getProductoSeleccionado();
-//                txtCodigoProducto.setText(String.valueOf(p.getIdProducto()));
-//                txtNombreProducto.setText(String.valueOf(p.getNombre()));
-//
-//                frmProductosAgotados.setSize(padre.getPaneOrdenCompra().getWidth(),padre.getPaneOrdenCompra().getHeight());
-//                frmProductosAgotados.setLocation(0,0);
-//                frmProductosAgotados.toFront();
-            }else{
-                
-                f = JOptionPane.getFrameForComponent(this.padre.getPaneOrdenCompra());
-                
-                frmBusquedaProducto dialog = new frmBusquedaProducto(f, true);
-                dialog.show();
-                dialog.setLocation(0,0);
-                 p=dialog.getProductoSeleccionado();
-                txtCodigoProducto.setText(String.valueOf(p.getIdProducto()));
-                txtNombreProducto.setText(String.valueOf(p.getNombre()));
-                
-//                frmProductosAgotados.dispose();
-//                frmProductosAgotados = new frmProductosAgotados(2);
-//                padre.getPaneOrdenCompra().add(frmProductosAgotados);
-//                frmProductosAgotados.show();
-//                frmProductosAgotados.setSize(padre.getPaneOrdenCompra().getWidth(),padre.getPaneOrdenCompra().getHeight());
-//                frmProductosAgotados.setLocation(0,0);
-//                frmProductosAgotados.toFront();
-            }
+
         }catch(Exception ex){
             //Excepcion
         }
@@ -354,43 +323,105 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        
         this.dispose();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void buscarOrdenDeCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarOrdenDeCompraActionPerformed
         // TODO add your handling code here:
-        if( frmBuscarOrdenCompra!=null){
-            frmBuscarOrdenCompra.dispose();
-            frmBuscarOrdenCompra=new frmBuscarOrdenCompra();
-            padre.getPaneOrdenCompra().add(frmBuscarOrdenCompra);
-            frmBuscarOrdenCompra.show();
-            
-            frmBuscarOrdenCompra.setSize(padre.getPaneOrdenCompra().getWidth(),padre.getPaneOrdenCompra().getHeight());
-            frmBuscarOrdenCompra.setLocation(0,0);
-            frmBuscarOrdenCompra.toFront();
-        }else{
-            frmBuscarOrdenCompra=new frmBuscarOrdenCompra();
-            padre.getPaneOrdenCompra().add(frmBuscarOrdenCompra);
-            frmBuscarOrdenCompra.show();
-            
-            frmBuscarOrdenCompra.setSize(padre.getPaneOrdenCompra().getWidth(),padre.getPaneOrdenCompra().getHeight());
-            frmBuscarOrdenCompra.setLocation(0,0);
-            frmBuscarOrdenCompra.toFront();
-        }
+        frmBusquedaOrdenCompra fBOC = new frmBusquedaOrdenCompra(JOptionPane.getFrameForComponent(this.padre.getPaneOrdenCompra()),true);
+        fBOC.setVisible(true);
     }//GEN-LAST:event_buscarOrdenDeCompraActionPerformed
 
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
         // TODO add your handling code here:
-        
-        DetalleOrdenCompra detalle = new DetalleOrdenCompra();
 
+            if (txtCodigoProducto.getText().equals("")|| txtNombreProducto.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Seleccione al menos un producto");
+                //System.out.println("Error 1");
+                return;
+            }
+        
+    
+            if (txtCantidad.getText().equals("")){
+                //System.out.println("Error 2");
+                JOptionPane.showMessageDialog(null, "Ingrese una cantidad");
+                return;
+            }
+        
+        
+        DetalleOrdenCompra detalle = new DetalleOrdenCompra();        
         detalle.setProducto(p);
         detalle.setCantidad(Integer.parseInt(txtCantidad.getText()));
-        ordenCompra.getDetalleOrdenCompra().add(detalle);
-        Object[]fila=new Object[3];
-
+        
+        
+        if( ! esta(p,ordenCompra.getDetalleOrdenCompra())){
+            ordenCompra.getDetalleOrdenCompra().add(detalle);
+            
+            Object[]fila=new Object[3];
+            modelo=(DefaultTableModel)tablaDetalleOrdenCompra.getModel();
+            fila[0]=detalle.getProducto().getIdProducto();
+            fila[1]=detalle.getProducto().getNombre();
+            fila[2]=detalle.getCantidad();
+            modelo.addRow(fila);
+            ordenCompra.setCantidadTotalProducto(ordenCompra.getCantidadTotalProducto()+detalle.getCantidad());
+            txtTotal.setText(String.valueOf(ordenCompra.getCantidadTotalProducto()));
+        }else{
+            JOptionPane.showMessageDialog(null, "Ya ingresó ese producto en la orden de compra");
+            return;
+        }
+        
     }//GEN-LAST:event_btnAnadirActionPerformed
 
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        // TODO add your ohandling code here:
+        try{
+            int index = tablaDetalleOrdenCompra.getSelectedRow();
+            txtCodigoProducto.setText(String.valueOf(ordenCompra.getDetalleOrdenCompra().get(index).getProducto().getIdProducto()));
+            txtNombreProducto.setText(String.valueOf(ordenCompra.getDetalleOrdenCompra().get(index).getProducto().getNombre()));
+            txtCantidad.setText(String.valueOf(ordenCompra.getDetalleOrdenCompra().get(index).getCantidad()));
+            
+            ordenCompra.setCantidadTotalProducto(ordenCompra.getCantidadTotalProducto()-ordenCompra.getDetalleOrdenCompra().get(index).getCantidad());
+            
+            p=ordenCompra.getDetalleOrdenCompra().get(index).getProducto();
+            
+            ordenCompra.getDetalleOrdenCompra().remove(index);
+            modelo = (DefaultTableModel)tablaDetalleOrdenCompra.getModel();
+            modelo.removeRow(index);
+            
+            
+            txtTotal.setText(String.valueOf(ordenCompra.getCantidadTotalProducto()));
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        // TODO add your handling code here:
+        try{
+            int index = tablaDetalleOrdenCompra.getSelectedRow();
+            ordenCompra.setCantidadTotalProducto(ordenCompra.getCantidadTotalProducto()-ordenCompra.getDetalleOrdenCompra().get(index).getCantidad());
+            
+            //p=ordenCompra.getDetalleOrdenCompra().get(index).getProducto();
+            p=null;
+            ordenCompra.getDetalleOrdenCompra().remove(index);
+            modelo = (DefaultTableModel)tablaDetalleOrdenCompra.getModel();
+            
+            modelo.removeRow(index);
+            
+            txtTotal.setText(String.valueOf(ordenCompra.getCantidadTotalProducto()));
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+        }
+    }//GEN-LAST:event_btnQuitarActionPerformed
+    private boolean esta(Producto p , ArrayList<DetalleOrdenCompra> detalle){
+        for (int i=0; i<detalle.size();i++){
+            if (p.getIdProducto()==detalle.get(i).getProducto().getIdProducto()){
+                return true;
+            }
+        }
+        return false;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnadir;
@@ -399,12 +430,11 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
     private javax.swing.JButton btnQuitar;
     private javax.swing.JButton buscarOrdenDeCompra;
     private javax.swing.JComboBox<String> cboEstado;
+    private com.toedter.calendar.JDateChooser fechaOrden;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -414,11 +444,11 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField lblCodigo;
     private javax.swing.JTable tablaDetalleOrdenCompra;
     private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCodigoProducto;
     private javax.swing.JTextField txtNombreProducto;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

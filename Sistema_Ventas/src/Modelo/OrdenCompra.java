@@ -15,6 +15,11 @@ public class OrdenCompra {
     private Date fechaOrdenCompra;
     private ArrayList<DetalleOrdenCompra> detalleOrdenCompra;
     
+    public OrdenCompra(){
+        cantidadTotalProducto=0;
+        detalleOrdenCompra = new ArrayList<>();
+    }
+    
     public int getIdOrdenCompra() {
         return idOrdenCompra;
     }

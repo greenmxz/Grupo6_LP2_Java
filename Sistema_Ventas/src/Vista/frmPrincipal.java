@@ -63,7 +63,17 @@ public class frmPrincipal extends javax.swing.JFrame {
         initComponents();
         this.usuario=usuario;
         lblNombreUsuario.setText("Hola "+usuario.getNombre());
-        
+        switch (usuario.getTipoUsuario()){
+            case 3:
+                lblPerfil.setText("Almacenero");
+                break;
+            case 4:
+                lblPerfil.setText("Responsable de logística");
+                break;
+            case 1:
+                lblPerfil.setText("Adm. de seguridad");
+                break;
+        }
         this.jdpInterno=jdpPrincipal;
         this.setResizable(false);
         inicializar();
@@ -117,7 +127,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         btnMenu = new javax.swing.JLabel();
         ImagenPerfil = new javax.swing.JLabel();
         lblNombreUsuario = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        lblPerfil = new javax.swing.JLabel();
         btnCerrarSesion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -148,9 +158,9 @@ public class frmPrincipal extends javax.swing.JFrame {
         lblNombreUsuario.setForeground(new java.awt.Color(255, 255, 255));
         lblNombreUsuario.setText("Nombre de usuario");
 
-        jLabel4.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Perfil de usuario");
+        lblPerfil.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
+        lblPerfil.setForeground(new java.awt.Color(255, 255, 255));
+        lblPerfil.setText("Perfil de usuario");
 
         btnCerrarSesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -177,7 +187,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(panelCabeceraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNombreUsuario)
-                    .addComponent(jLabel4))
+                    .addComponent(lblPerfil))
                 .addGap(79, 79, 79))
         );
         panelCabeceraLayout.setVerticalGroup(
@@ -193,7 +203,7 @@ public class frmPrincipal extends javax.swing.JFrame {
                     .addGroup(panelCabeceraLayout.createSequentialGroup()
                         .addComponent(lblNombreUsuario)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
+                        .addComponent(lblPerfil)
                         .addGap(21, 21, 21))))
             .addGroup(panelCabeceraLayout.createSequentialGroup()
                 .addContainerGap()
@@ -318,9 +328,9 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel ImagenPerfil;
     private javax.swing.JLabel btnCerrarSesion;
     private javax.swing.JLabel btnMenu;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JDesktopPane jdpPrincipal;
     private javax.swing.JLabel lblNombreUsuario;
+    private javax.swing.JLabel lblPerfil;
     private javax.swing.JPanel panelCabecera;
     // End of variables declaration//GEN-END:variables
 }

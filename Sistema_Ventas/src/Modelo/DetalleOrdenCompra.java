@@ -15,6 +15,10 @@ public class DetalleOrdenCompra {
     private Producto producto;
     private int cantidad;
     
+    public DetalleOrdenCompra(){
+        producto = new Producto();
+    }
+    
     public Producto getProducto() {
         return producto;
     }

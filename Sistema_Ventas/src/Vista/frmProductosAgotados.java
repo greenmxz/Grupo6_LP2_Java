@@ -195,7 +195,6 @@ public class frmProductosAgotados extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int index=tablaProductos.getSelectedRow();
         productoSeleccionado=lista.get(index);
-        frmOrdenCompra.semaforo.release();
         this.dispose();
     }//GEN-LAST:event_btnSeleccionarActionPerformed
 
