@@ -48,6 +48,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         ordenCompra = new OrdenCompra();
         cboEstado.setModel(new DefaultComboBoxModel(estados));
         logicaNegocioOrdenCompra = new OrdenCompraBL();
+        buscarOrdenDeCompra.hide();
     }
 
     /**
@@ -268,14 +269,16 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                                 .addComponent(btnGuardar)
                                 .addGap(97, 97, 97)
                                 .addComponent(jButton7)))
-                        .addGap(127, 127, 127)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(127, 127, 127)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(buscarOrdenDeCompra))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(buscarOrdenDeCompra)))))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

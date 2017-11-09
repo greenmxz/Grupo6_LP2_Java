@@ -25,4 +25,12 @@ public class ProductoBL {
     public ArrayList<Producto> devolverProductos(int i){
         return accesoDatos.devolverProductos(i);
     }
+    
+    public ArrayList<Producto> devolverListaMayores(){
+        return accesoDatos.devolverListaMayores();
+    }
+    public ArrayList<Producto> devolverListaMenores(){
+        return accesoDatos.devolverListaMenores();
+    }
+    
 }

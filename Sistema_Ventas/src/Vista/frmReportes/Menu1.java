@@ -5,6 +5,7 @@
  */
 package Vista.frmReportes;
 
+import Controlador.ClienteBL;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -13,7 +14,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class Menu1 extends javax.swing.JPanel {
     private String [] tipoReporte={"Clientes con mayores pedidos","Clientes con menores pedidos"};
-    
+    private ClienteBL logicaNegocioCliente;
     /**
      * Creates new form Menu1
      */
@@ -35,7 +36,7 @@ public class Menu1 extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JTable();
         cboTipoReporte = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
@@ -51,15 +52,15 @@ public class Menu1 extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Fecha inicio:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tipo de reporte", "Nombre de archivo", "Fecha de creación"
+                "codigo", "nombre", "cantidad"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabla);
 
         cboTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cboTipoReporte.addItemListener(new java.awt.event.ItemListener() {
@@ -69,6 +70,11 @@ public class Menu1 extends javax.swing.JPanel {
         });
 
         jButton1.setText("Generar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -131,15 +137,19 @@ public class Menu1 extends javax.swing.JPanel {
         
         switch(index){
             case 0:
+                //clientes mayores pedidos
+                //logicaNegocioCliente.devolverListaMayores();
                 break;
             case 1:
-                break;
-            case 2:
-                break;
-            case 3:
+                //clientes menores pedidos
+                //logicaNegocioCliente.devolverListaMenores();
                 break;
         }
     }//GEN-LAST:event_cboTipoReporteItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -151,6 +161,6 @@ public class Menu1 extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
 }

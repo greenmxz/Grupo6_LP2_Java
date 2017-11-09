@@ -25,7 +25,9 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
     public frmBusquedaOrdenCompra(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       //lista = logicaNegocioOc.devolverLista();
+        logicaNegocioOc = new OrdenCompraBL();
+        lista = logicaNegocioOc.devolverLista();
+        actualizarTabla();
     }
 
     /**
@@ -95,17 +97,20 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Seleccione una orden de compra");
         }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
-//    private void actualizarTabla(){
-//        DefaultTableModel modelo= (DefaultTableModel)tablaOrdenCompra.getModel();
-//        Object fila[] = new Object[3];
-//
-//        for (int i=0; i < lista.size();i++){
-//            fila[0]=lista.get(i).getIdProducto();
-//            fila[1]=lista.get(i).getNombre();
-//            fila[2]=lista.get(i).getStock();
-//            modelo.addRow(fila);
-//        }
-//    }
+    private void actualizarTabla(){
+        DefaultTableModel modelo= (DefaultTableModel)tablaOrdenCompra.getModel();
+        Object fila[] = new Object[2];
+
+        for (int i=0; i < lista.size();i++){
+            fila[0]=lista.get(i).getIdOrdenCompra();
+            if (lista.get(i).getEstadoOrdenCompra()==1){
+                fila[1]="No atendida";
+            }else{
+                fila[1]="Atendida";
+            }
+            modelo.addRow(fila);
+        }
+    }
     /**
      * @param args the command line arguments
      */

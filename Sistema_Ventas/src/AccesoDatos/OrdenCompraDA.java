@@ -34,14 +34,33 @@ public class OrdenCompraDA {
             while (rs.next( )){
                 OrdenCompra oc = new OrdenCompra();
                 oc.setIdOrdenCompra(rs.getInt("idOrdenCompra"));
+                oc.setEstadoOrdenCompra(rs.getInt("estadoOrdenCompra"));
                 oc.setFechaOrdenCompra(rs.getDate("fechaOrdenCompra"));
                 oc.setCantidadTotalProducto(rs.getInt("CantidadTotalProducto"));
                 
-                String instruccion2 = "select * from DetalleCompra";//
                 
                 
-                //DetalleOrdenCompra d = new DetalleOrdenCompra();
-                
+                Statement sentencia2 = con.createStatement();
+                String instruccion2 = "select * from DetalleCompra where idOrdenCompra ="+oc.getIdOrdenCompra();//
+                ResultSet rs2 = sentencia2.executeQuery(instruccion2);
+                while (rs2.next()){
+                    DetalleOrdenCompra d = new DetalleOrdenCompra();
+                    Producto p = new Producto();
+                    d.setCantidad(rs2.getInt("cantidad"));
+                    
+                    Statement sentencia3 = con.createStatement();
+                    String instruccion3 ="select * from Producto where idProducto="+rs2.getInt("idProducto");
+                    ResultSet rs3 = sentencia3.executeQuery(instruccion3);
+                    
+                    p.setIdProducto(rs3.getInt("idProducto"));
+                    p.setDescripcion(rs3.getString("descripcion"));
+                    p.setNombre(rs3.getString("nombre"));
+                    p.setPeso(rs3.getDouble("peso"));
+                    p.setPrecioUnitario(rs3.getDouble("precioUnitario"));
+                    p.setStock(rs3.getInt("stock"));
+                    d.setProducto(p);
+                    oc.getDetalleOrdenCompra().add(d);
+                }
                 lista.add(oc);
             }
             con.close();

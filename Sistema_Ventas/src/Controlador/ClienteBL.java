@@ -6,6 +6,8 @@
 package Controlador;
 
 import AccesoDatos.ClienteDA;
+import Modelo.Cliente;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,5 +17,11 @@ public class ClienteBL {
     private ClienteDA accesoDatos;
     public ClienteBL (){
         accesoDatos=new ClienteDA();
+    }
+    public ArrayList<Cliente> devolverListaMayores(){
+        return accesoDatos.devolverListaMayores();
+    }
+    public ArrayList<Cliente> devolverListaMenores(){
+        return accesoDatos.devolverListaMenores();
     }
 }

@@ -19,7 +19,7 @@ public class OrdenCompraBL {
     public OrdenCompraBL(){
         accesoDatos = new OrdenCompraDA();
     }
-    public ArrayList<OrdenCompra> OrdenCompraBL(){
+    public ArrayList<OrdenCompra> devolverLista(){
         return accesoDatos.devolverLista();
     }
     public boolean registrarOrden(OrdenCompra oc,Usuario us){

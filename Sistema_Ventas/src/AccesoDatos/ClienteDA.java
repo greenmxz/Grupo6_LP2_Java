@@ -39,10 +39,56 @@ public class ClienteDA {
             con.close();
             return lista;
         
-    }catch(Exception ex){
-        return null;
+        }catch(Exception ex){
+            return null;
+        }
+        
+        
     }
-        
-        
+    
+    public ArrayList<Cliente> devolverListaMayores(){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
+            System.out.println("Se conecto correctamente");
+            ArrayList<Cliente> lista = new ArrayList<>();
+            Statement sentencia= con.createStatement();
+            String instruccion = "Select Count(P.idCliente) as _contador,P.idCliente as _idCliente,C.razonSocial as _razonSocial from Pedido as P inner join Cliente as C on (P.idCliente=C.idCliente) order by ASC";
+            //System.out.println(instruccion);
+            ResultSet rs = sentencia.executeQuery(instruccion);
+            while(rs.next()){
+                Cliente cliente = new Cliente();
+                cliente.setRazonSocial(rs.getString("_razonSocial"));
+                cliente.setIdCliente(rs.getInt("_idCliente"));
+                cliente.setRuc(String.valueOf(rs.getInt("_contador")));
+                lista.add(cliente);
+            }
+            return lista;
+        }catch(Exception ex){
+            return null;
+        }
+    }
+    
+    public ArrayList<Cliente> devolverListaMenores(){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
+            System.out.println("Se conecto correctamente");
+            ArrayList<Cliente> lista = new ArrayList<>();
+            Statement sentencia= con.createStatement();
+            String instruccion = "Select Count(P.idCliente) as _contador,P.idCliente as _idCliente,C.razonSocial as _razonSocial from Pedido as P inner join Cliente as C on (P.idCliente=C.idCliente) order by DESC";
+            //System.out.println(instruccion);
+            ResultSet rs = sentencia.executeQuery(instruccion);
+            while(rs.next()){
+                Cliente cliente = new Cliente();
+                cliente.setRazonSocial(rs.getString("_razonSocial"));
+                cliente.setIdCliente(rs.getInt("_idCliente"));
+                cliente.setRuc(String.valueOf(rs.getInt("_contador")));
+                lista.add(cliente);
+            }
+            return lista;
+        }catch(Exception ex){
+            return null;
+        }
     }
 }
