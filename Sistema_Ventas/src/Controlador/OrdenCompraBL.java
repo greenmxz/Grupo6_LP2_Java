@@ -7,6 +7,7 @@ package Controlador;
 
 import AccesoDatos.OrdenCompraDA;
 import Modelo.OrdenCompra;
+import Modelo.Usuario;
 import java.util.ArrayList;
 
 /**
@@ -15,7 +16,13 @@ import java.util.ArrayList;
  */
 public class OrdenCompraBL {
     private OrdenCompraDA accesoDatos;
+    public OrdenCompraBL(){
+        accesoDatos = new OrdenCompraDA();
+    }
     public ArrayList<OrdenCompra> OrdenCompraBL(){
         return accesoDatos.devolverLista();
+    }
+    public boolean registrarOrden(OrdenCompra oc,Usuario us){
+        return accesoDatos.registrarOrden(oc,us);
     }
 }

@@ -22,7 +22,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
  */
 //enum  Estado {Abierto,Cerrado,Nuevo}
 public class frmPrincipal extends javax.swing.JFrame {
-    private static Usuario usuario;
+    public static Usuario usuario;
     private JDesktopPane jdpInterno;
     private frmMenuInicioLogistica frmMenuInicioLogistica;
     private frmMenuInicioSeguridad frmMenuInicioSeguridad;

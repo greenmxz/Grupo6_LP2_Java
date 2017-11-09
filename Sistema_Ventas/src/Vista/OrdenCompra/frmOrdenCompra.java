@@ -6,10 +6,11 @@
 package Vista.OrdenCompra;
 
 
-import Modelo.DetalleOrdenCompra;
-import Modelo.OrdenCompra;
-import Modelo.Producto;
+import Controlador.*;
+
+import Modelo.*;
 import Vista.frmBusquedaProducto;
+import Vista.frmPrincipal;
 import Vista.frmProductosAgotados;
 import java.awt.Frame;
 import java.util.ArrayList;
@@ -24,13 +25,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmOrdenCompra extends javax.swing.JInternalFrame{
     
-    frmProductosAgotados frmProductosAgotados;
-    frmGestionarOrdenCompra padre ;
+    private frmProductosAgotados frmProductosAgotados;
+    private frmGestionarOrdenCompra padre ;
 
-    frmBusquedaProducto frmBusquedaProducto;
-    OrdenCompra ordenCompra;
-    Producto p;
-    DefaultTableModel modelo;
+    private frmBusquedaProducto frmBusquedaProducto;
+    private OrdenCompra ordenCompra;
+    private Producto p;
+    private DefaultTableModel modelo;
+    private OrdenCompraBL logicaNegocioOrdenCompra;
     
     /**
      * Creates new form frmOrdenCompra
@@ -45,6 +47,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         txtNombreProducto.setEnabled(false);
         ordenCompra = new OrdenCompra();
         cboEstado.setModel(new DefaultComboBoxModel(estados));
+        logicaNegocioOrdenCompra = new OrdenCompraBL();
     }
 
     /**
@@ -64,7 +67,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         txtCodigo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDetalleOrdenCompra = new javax.swing.JTable();
-        fechaOrden = new com.toedter.calendar.JDateChooser();
+        txtFechaOrden = new com.toedter.calendar.JDateChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -76,8 +79,8 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         txtCodigoProducto = new javax.swing.JTextField();
         txtNombreProducto = new javax.swing.JTextField();
         txtCantidad = new javax.swing.JTextField();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        btnRegistrar = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         buscarOrdenDeCompra = new javax.swing.JButton();
         txtTotal = new javax.swing.JTextField();
@@ -210,9 +213,14 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton5.setText("Guardar");
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Exportar");
+        btnGuardar.setText("Guardar Cambios");
 
         jButton8.setText("Eliminar");
 
@@ -245,7 +253,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                                     .addComponent(jLabel1))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(fechaOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtFechaOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(149, 149, 149)
                                 .addComponent(jLabel6)
@@ -253,11 +261,11 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                                 .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(47, 47, 47)
-                                .addComponent(jButton5)
+                                .addComponent(btnRegistrar)
                                 .addGap(57, 57, 57)
                                 .addComponent(jButton8)
                                 .addGap(87, 87, 87)
-                                .addComponent(jButton6)
+                                .addComponent(btnGuardar)
                                 .addGap(97, 97, 97)
                                 .addComponent(jButton7)))
                         .addGap(127, 127, 127)
@@ -267,7 +275,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(buscarOrdenDeCompra))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -282,16 +290,16 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
-                    .addComponent(fechaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFechaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
+                    .addComponent(btnRegistrar)
                     .addComponent(jButton8)
-                    .addComponent(jButton6)
+                    .addComponent(btnGuardar)
                     .addComponent(jButton7)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
@@ -414,6 +422,28 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
         }
     }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        // TODO add your handling code here:
+        if (ordenCompra.getDetalleOrdenCompra().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Seleccione al menos un producto");
+            return;
+        }
+        try{
+            ordenCompra.setFechaOrdenCompra(txtFechaOrden.getDate());
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ingrese una fecha");
+            return;
+        }
+        ordenCompra.setEstadoOrdenCompra(1);
+        if (logicaNegocioOrdenCompra.registrarOrden(ordenCompra,frmPrincipal.usuario)){
+            JOptionPane.showMessageDialog(null, "Se registro correctamente");
+            return;
+        }else {
+            JOptionPane.showMessageDialog(null, "No se pudo registrar, ocurrió un error");
+            return;
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
     private boolean esta(Producto p , ArrayList<DetalleOrdenCompra> detalle){
         for (int i=0; i<detalle.size();i++){
             if (p.getIdProducto()==detalle.get(i).getProducto().getIdProducto()){
@@ -426,13 +456,12 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnadir;
     private javax.swing.JButton btnBuscarProducto;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnQuitar;
+    private javax.swing.JButton btnRegistrar;
     private javax.swing.JButton buscarOrdenDeCompra;
     private javax.swing.JComboBox<String> cboEstado;
-    private com.toedter.calendar.JDateChooser fechaOrden;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
@@ -448,6 +477,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCodigoProducto;
+    private com.toedter.calendar.JDateChooser txtFechaOrden;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables

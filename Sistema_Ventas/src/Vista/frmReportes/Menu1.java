@@ -12,7 +12,7 @@ import javax.swing.DefaultComboBoxModel;
  * @author Moises
  */
 public class Menu1 extends javax.swing.JPanel {
-    private String [] tipoReporte={"Clientes con mayores pedidos","Clientes con menores pedidos","Clientes con mayor facturación","Clientes con menor facturación"};
+    private String [] tipoReporte={"Clientes con mayores pedidos","Clientes con menores pedidos"};
     
     /**
      * Creates new form Menu1
@@ -38,7 +38,6 @@ public class Menu1 extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         cboTipoReporte = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
 
@@ -71,8 +70,6 @@ public class Menu1 extends javax.swing.JPanel {
 
         jButton1.setText("Generar");
 
-        jButton2.setText("Exportar");
-
         jLabel3.setFont(new java.awt.Font("Microsoft JhengHei", 0, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Fecha fin:");
@@ -103,9 +100,7 @@ public class Menu1 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(137, 137, 137))
+                .addGap(137, 422, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,9 +119,7 @@ public class Menu1 extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)))
+                        .addComponent(jButton1))
                     .addComponent(jLabel3))
                 .addContainerGap(111, Short.MAX_VALUE))
         );
@@ -152,7 +145,6 @@ public class Menu1 extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cboTipoReporte;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;

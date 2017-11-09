@@ -13,6 +13,7 @@ public class OrdenCompra {
     private int idOrdenCompra;
     private int cantidadTotalProducto;
     private Date fechaOrdenCompra;
+    private int estadoOrdenCompra;
     private ArrayList<DetalleOrdenCompra> detalleOrdenCompra;
     
     public OrdenCompra(){
@@ -49,5 +50,13 @@ public class OrdenCompra {
 
     public void setDetalleOrdenCompra(ArrayList<DetalleOrdenCompra> detalleOrdenCompra) {
         this.detalleOrdenCompra = detalleOrdenCompra;
+    }
+    
+    public int getEstadoOrdenCompra() {
+        return estadoOrdenCompra;
+    }
+
+    public void setEstadoOrdenCompra(int estadoOrdenCompra) {
+        this.estadoOrdenCompra = estadoOrdenCompra;
     }
 }

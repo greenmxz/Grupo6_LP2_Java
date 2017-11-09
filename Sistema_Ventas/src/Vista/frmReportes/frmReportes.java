@@ -57,8 +57,6 @@ public class frmReportes extends javax.swing.JInternalFrame {
         panelMenu = new javax.swing.JPanel();
         btnReporte1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnReporte3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
         btnReporte2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         dynamicPanel = new javax.swing.JPanel();
@@ -102,37 +100,6 @@ public class frmReportes extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnReporte3.setBackground(new java.awt.Color(173, 192, 206));
-        btnReporte3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnReporte3MouseEntered(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnReporte3MouseReleased(evt);
-            }
-        });
-
-        jLabel3.setFont(new java.awt.Font("Microsoft JhengHei", 0, 13)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Reporte 3");
-
-        javax.swing.GroupLayout btnReporte3Layout = new javax.swing.GroupLayout(btnReporte3);
-        btnReporte3.setLayout(btnReporte3Layout);
-        btnReporte3Layout.setHorizontalGroup(
-            btnReporte3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnReporte3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(36, 36, 36))
-        );
-        btnReporte3Layout.setVerticalGroup(
-            btnReporte3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btnReporte3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         btnReporte2.setBackground(new java.awt.Color(173, 192, 206));
         btnReporte2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -172,7 +139,6 @@ public class frmReportes extends javax.swing.JInternalFrame {
         panelMenuLayout.setHorizontalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnReporte1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnReporte3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnReporte2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelMenuLayout.setVerticalGroup(
@@ -182,8 +148,6 @@ public class frmReportes extends javax.swing.JInternalFrame {
                 .addComponent(btnReporte1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btnReporte2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(btnReporte3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -234,12 +198,12 @@ public class frmReportes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         setColor(btnReporte1);
         resetColor(btnReporte2);
-        resetColor(btnReporte3);
+
     }//GEN-LAST:event_btnReporte1MouseEntered
 
     private void btnReporte1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporte1MouseReleased
         // TODO add your handling code here:
-        resetColor(btnReporte3);
+
         resetColor(btnReporte2);
         resetColor(btnReporte1);
     }//GEN-LAST:event_btnReporte1MouseReleased
@@ -248,39 +212,23 @@ public class frmReportes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         setColor(btnReporte2);
         resetColor(btnReporte1);
-        resetColor(btnReporte3);
+
     }//GEN-LAST:event_btnReporte2MouseEntered
 
     private void btnReporte2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporte2MouseReleased
         // TODO add your handling code here:
-        resetColor(btnReporte3);
+
         resetColor(btnReporte2);
         resetColor(btnReporte1);
     }//GEN-LAST:event_btnReporte2MouseReleased
-
-    private void btnReporte3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporte3MouseEntered
-        // TODO add your handling code here:
-        setColor(btnReporte3);
-        resetColor(btnReporte2);
-        resetColor(btnReporte1);
-    }//GEN-LAST:event_btnReporte3MouseEntered
-
-    private void btnReporte3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporte3MouseReleased
-        // TODO add your handling code here:
-        resetColor(btnReporte3);
-        resetColor(btnReporte2);
-        resetColor(btnReporte1);
-    }//GEN-LAST:event_btnReporte3MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnReporte1;
     private javax.swing.JPanel btnReporte2;
-    private javax.swing.JPanel btnReporte3;
     private javax.swing.JPanel dynamicPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel panelMenu;
     // End of variables declaration//GEN-END:variables
 }
