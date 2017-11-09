@@ -45,14 +45,12 @@
                       </Group>
                       <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="textField2" pref="139" max="32767" attributes="0"/>
-                              <Component id="textField3" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtApellidoPaterno" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtApellidoMaterno" alignment="0" max="32767" attributes="0"/>
-                              <Component id="txtCorreo" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="textField2" alignment="1" pref="139" max="32767" attributes="0"/>
+                          <Component id="textField3" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtApellidoPaterno" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtApellidoMaterno" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txtCorreo" alignment="0" max="32767" attributes="0"/>
                           <Component id="textField7" pref="139" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>

@@ -225,16 +225,28 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
             ResultSet rs = sentencia.executeQuery(instruccion);
             int idaux;
             rs.next();
-            idaux = rs.getInt(1);
+            idaux = rs.getInt(1)+1;
             
             int idtipo = 0;
             if(this.jComboBox1.getSelectedItem().toString().equals(roles[0])) idtipo = 1;
             else if(this.jComboBox1.getSelectedItem().toString().equals(roles[1])) idtipo = 2;
             else if(this.jComboBox1.getSelectedItem().toString().equals(roles[2])) idtipo = 3;
             
-            instruccion = "INSERT INTO Usuario(idUsuario, nombreUsuario, contraseña, idTipoUsuario)"
-                    + " values("+idaux+",'"+this.txtApellidoMaterno.getText()+
-                    "','"+this.textField2.getText()+"',"+idtipo+")";
+            /*INSERT INTO Usuario ( idUsuario, nombreUsuario, contraseña, nombre, apellidoPaterno, apellidoMaterno, correo, idTipoUsuario, estadoRegistro)
+   VALUES
+   ( 6, "jose", "nana", "Jose", "Bejarano", "Carranza", "jabcarranz@gmail.com", 1, 1 );*/
+            instruccion = "INSERT INTO Usuario(idUsuario, nombreUsuario, contraseña, nombre, apellidoPaterno, apellidoMaterno, correo, idTipoUsuario, estadoRegistro)"
+                    + " values("
+                    +idaux+
+                    ",'"+this.textField7.getText()+
+                    "','"+this.textField2.getText()+
+                    "','"+this.txtNombre.getText()+
+                    "','"+this.txtApellidoPaterno.getText()+
+                    "','"+this.txtApellidoMaterno.getText()+
+                    "','"+this.txtCorreo.getText()+
+                    "',"+idtipo+
+                    ","+1+
+                    ")";
             
             sentencia.executeUpdate(instruccion);
             
