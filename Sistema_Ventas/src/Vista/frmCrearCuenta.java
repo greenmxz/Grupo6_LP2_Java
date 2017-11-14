@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import AccesoDatos.UsuarioDA;
 
 
 /**
@@ -213,50 +214,19 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
             return;
         }
         
-        try{
-            //Registro del Driver
-            Class.forName("com.mysql.jdbc.Driver");
-            
-            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6", "inf282g6", "ta1RQx6flDXdiTpr");
-            
-            Statement sentencia = con.createStatement();
-            
-            String instruccion = "SELECT count(*) as dato FROM Usuario";
-            ResultSet rs = sentencia.executeQuery(instruccion);
-            int idaux;
-            rs.next();
-            idaux = rs.getInt(1)+1;
-            
-            int idtipo = 0;
+        int idtipo = 0;
             if(this.jComboBox1.getSelectedItem().toString().equals(roles[0])) idtipo = 1;
             else if(this.jComboBox1.getSelectedItem().toString().equals(roles[1])) idtipo = 2;
             else if(this.jComboBox1.getSelectedItem().toString().equals(roles[2])) idtipo = 3;
             
-            /*INSERT INTO Usuario ( idUsuario, nombreUsuario, contraseña, nombre, apellidoPaterno, apellidoMaterno, correo, idTipoUsuario, estadoRegistro)
-   VALUES
-   ( 6, "jose", "nana", "Jose", "Bejarano", "Carranza", "jabcarranz@gmail.com", 1, 1 );*/
-            instruccion = "INSERT INTO Usuario(idUsuario, nombreUsuario, contraseña, nombre, apellidoPaterno, apellidoMaterno, correo, idTipoUsuario, estadoRegistro)"
-                    + " values("
-                    +idaux+
-                    ",'"+this.textField7.getText()+
-                    "','"+this.textField2.getText()+
-                    "','"+this.txtNombre.getText()+
-                    "','"+this.txtApellidoPaterno.getText()+
-                    "','"+this.txtApellidoMaterno.getText()+
-                    "','"+this.txtCorreo.getText()+
-                    "',"+idtipo+
-                    ","+1+
-                    ")";
-            
-            sentencia.executeUpdate(instruccion);
-            
-            con.close();
-            JOptionPane.showMessageDialog(null, "Registro exitoso");
-            return;
-        }catch(Exception ex){
-            System.out.println(ex.getMessage());
-            JOptionPane.showMessageDialog(null, "Error base de datos: " + ex.getMessage());
-        }
+        UsuarioDA uda = new UsuarioDA();
+        uda.RegistrarUsuario(this.textField7.getText(),
+                                this.textField2.getText(),
+                                this.txtNombre.getText(),
+                                this.txtApellidoPaterno.getText(),
+                                this.txtApellidoMaterno.getText(),
+                                this.txtCorreo.getText(),
+                                idtipo);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
