@@ -18,6 +18,54 @@ import java.util.ArrayList;
  * @author Moises
  */
 public class ClienteDA {
+    
+    public String getNombreCliente(int id){
+        String ret = "";
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
+            System.out.println("Se conecto correctamente");
+            Statement sentencia= con.createStatement();
+            
+            //String instruccion = "Select * from Usuario where idTipoUsuario not in ("+2+","+5+") and "+"nombreUsuario='"+nombreUsuario+"' and "+"contraseña='"+contrasena+"'";
+            
+            String instruccion = "SELECT razonSocial FROM Cliente where idCliente="+id;
+            
+            ResultSet rs = sentencia.executeQuery(instruccion);
+            while (rs.next( )){
+                ret = ret + rs.getString("razonSocial");
+            }
+        
+        }catch(Exception e){
+            
+        }
+        
+        return ret;
+    }
+    
+    public String getRucCliente(int id){
+        String ret = "";
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
+            System.out.println("Se conecto correctamente");
+            Statement sentencia= con.createStatement();
+            
+            //String instruccion = "Select * from Usuario where idTipoUsuario not in ("+2+","+5+") and "+"nombreUsuario='"+nombreUsuario+"' and "+"contraseña='"+contrasena+"'";
+            
+            String instruccion = "SELECT ruc FROM Cliente where idCliente="+id;
+            
+            ResultSet rs = sentencia.executeQuery(instruccion);
+            while (rs.next( )){
+                ret = ret + rs.getString("ruc");
+            }
+        
+        }catch(Exception e){
+            
+        }
+        
+        return ret;
+    }
     public ArrayList<Cliente> devolverLista(int i){
         try{
             Class.forName("com.mysql.jdbc.Driver");

@@ -46,7 +46,8 @@ public class PedidosDA {
                 ped.setIdPedido(rs.getInt("idPedido"));
                 ret.add(ped);
             }
-     
+            
+             
             con.close();
         }catch(Exception ex){
             System.out.println(ex.getMessage());

@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import AccesoDatos.ClienteDA;
 import AccesoDatos.PedidosDA;
 import Modelo.Pedido;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
     
     private javax.swing.JInternalFrame padre;
     private ArrayList<Pedido> pedidos;
+    private Pedido pedidoSeleccionado;
     
     public frmBusquedaPedido(javax.swing.JInternalFrame padre) {
         initComponents();
@@ -37,14 +39,20 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
         
     }
     
+    public Pedido getPedidoSelec(){
+        return pedidoSeleccionado;
+    }
+    
     public void LlenarTabla()
     {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         Object rowData[] = new Object[4];
+        
+        ClienteDA cda = new ClienteDA();
         for(int i = 0; i < this.pedidos.size(); i++)
         {
             rowData[0] = this.pedidos.get(i).getIdPedido();
-            rowData[1] = this.pedidos.get(i).getIdCliente();
+            rowData[1] = cda.getNombreCliente(this.pedidos.get(i).getIdCliente());
             rowData[2] = this.pedidos.get(i).getFecha();
             rowData[3] = this.pedidos.get(i).getImporte();
             model.addRow(rowData);
@@ -68,10 +76,7 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Id", "Cliente", "Fecha", "Precio"
@@ -80,6 +85,11 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Seleccionar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
         jButton2.setToolTipText("");
@@ -124,6 +134,14 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
         this.dispose();
         padre.show();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int index = this.jTable1.getSelectedRow();
+        pedidoSeleccionado = pedidos.get(index);
+        padre.show();
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

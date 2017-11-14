@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import AccesoDatos.ClienteDA;
+import Modelo.Pedido;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 /**
@@ -17,6 +19,8 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
      * Creates new form frmDespachoPedido
      */
     private frmPrincipal padre;
+    private Pedido pedido;
+    
     public frmDespachoPedido(frmPrincipal padre) {
         initComponents();
         this.padre = padre;
@@ -150,10 +154,15 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
 
     private void btnBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPedidoActionPerformed
         // TODO add your handling code here:
+        ClienteDA cda = new ClienteDA();
         frmBusquedaPedido frmBusqPed = new frmBusquedaPedido(this);
         padre.getJdpInterno().add(frmBusqPed);
         frmBusqPed.show();
         this.hide();
+        
+        this.pedido = frmBusqPed.getPedidoSelec();
+        this.txtRazonSocial.setText( cda.getNombreCliente(pedido.getIdCliente()));
+        this.txtRuc.setText(cda.getRucCliente(pedido.getIdCliente()));
     }//GEN-LAST:event_btnBuscarPedidoActionPerformed
 
 
