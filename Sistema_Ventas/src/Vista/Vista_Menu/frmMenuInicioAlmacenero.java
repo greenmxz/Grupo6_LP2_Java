@@ -31,6 +31,8 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
         initComponents();
         this.setLocation(0,0);
         this.padre=padre;
+        this.btnDespachoPedido.setVisible(false);
+        this.btnGuiaRemision.setVisible(false);
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         estado=Estado.Abierto;
     }

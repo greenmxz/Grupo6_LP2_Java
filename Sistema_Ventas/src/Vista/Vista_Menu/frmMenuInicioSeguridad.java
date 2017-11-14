@@ -28,6 +28,7 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
         initComponents();
         this.setLocation(0,0);
         this.padre = padre;
+        this.btnCuentasAcceso.setVisible(false);
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
     }
     void setColor(JPanel panel){
