@@ -15,8 +15,9 @@ import Utilidades.PassHash;
  * @author Moises
  */
 public class UsuarioDA {
-    public Usuario obtenerUsuario(String nombreUsuario,String contrasen){
-        String contrasena = PassHash.MD5Hash(contrasen);
+    public Usuario obtenerUsuario(String nombreUsuario,String contra){
+        String contrasena = PassHash.MD5Hash(contra);
+        
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
