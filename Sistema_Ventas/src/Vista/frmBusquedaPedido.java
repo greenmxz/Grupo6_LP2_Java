@@ -21,10 +21,10 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
      * Creates new form frmBusquedaPedido
      */
     
-    private frmGenerarGuiaRemision padre;
+    private javax.swing.JInternalFrame padre;
     private ArrayList<Pedido> pedidos;
     
-    public frmBusquedaPedido(frmGenerarGuiaRemision padre) {
+    public frmBusquedaPedido(javax.swing.JInternalFrame padre) {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(0,0);

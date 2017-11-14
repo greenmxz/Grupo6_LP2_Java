@@ -187,7 +187,7 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
     private void btnDespachoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespachoPedidoActionPerformed
         // TODO add your handling code here:
         padre.getJdpInterno().removeAll();
-        frmDespachoPedido frmDespacho = new frmDespachoPedido();
+        frmDespachoPedido frmDespacho = new frmDespachoPedido(padre);
         padre.getJdpInterno().add(frmDespacho);
         frmDespacho.show();
         this.hide();
@@ -197,7 +197,7 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
 
     private void panelDespachoPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDespachoPedidoMouseClicked
         // TODO add your handling code here:
-        frmDespachoPedido frmDespacho = new frmDespachoPedido();
+        frmDespachoPedido frmDespacho = new frmDespachoPedido(padre);
         padre.getJdpInterno().add(frmDespacho);
         frmDespacho.show();
         this.hide();

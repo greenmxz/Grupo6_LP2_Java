@@ -22,8 +22,8 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
     
     public frmGenerarGuiaRemision(frmPrincipal padre) {
         initComponents();
-        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.padre = padre;
+        ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(0,0);
     }
 
