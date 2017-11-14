@@ -220,13 +220,23 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
             else if(this.jComboBox1.getSelectedItem().toString().equals(roles[2])) idtipo = 3;
             
         UsuarioDA uda = new UsuarioDA();
-        uda.RegistrarUsuario(this.textField7.getText(),
+        boolean flag = uda.RegistrarUsuario(this.textField7.getText(),
                                 this.textField2.getText(),
                                 this.txtNombre.getText(),
                                 this.txtApellidoPaterno.getText(),
                                 this.txtApellidoMaterno.getText(),
                                 this.txtCorreo.getText(),
                                 idtipo);
+        
+        if(flag){
+            this.textField7.setText("");
+            this.textField2.setText("");
+            this.textField3.setText("");
+            this.txtNombre.setText("");
+            this.txtApellidoPaterno.setText("");
+            this.txtApellidoMaterno.setText("");
+            this.txtCorreo.setText("");
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

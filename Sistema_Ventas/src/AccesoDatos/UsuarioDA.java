@@ -50,7 +50,7 @@ public class UsuarioDA {
         
     }
     
-    public void RegistrarUsuario(String usuario, String pass, String nombre, String appat, String apmat, String correo, int idtipo ){
+    public boolean RegistrarUsuario(String usuario, String pass, String nombre, String appat, String apmat, String correo, int idtipo ){
         
         try{
             //Registro del Driver
@@ -87,10 +87,11 @@ public class UsuarioDA {
             
             con.close();
             JOptionPane.showMessageDialog(null, "Registro exitoso");
-            
+            return true;
         }catch(Exception ex){
             System.out.println(ex.getMessage());
             JOptionPane.showMessageDialog(null, "Error base de datos: " + ex.getMessage());
+            return false;
         }
         
         
