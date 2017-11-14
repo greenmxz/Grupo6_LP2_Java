@@ -216,8 +216,8 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
         
         int idtipo = 0;
             if(this.jComboBox1.getSelectedItem().toString().equals(roles[0])) idtipo = 1;
-            else if(this.jComboBox1.getSelectedItem().toString().equals(roles[1])) idtipo = 2;
-            else if(this.jComboBox1.getSelectedItem().toString().equals(roles[2])) idtipo = 3;
+            else if(this.jComboBox1.getSelectedItem().toString().equals(roles[1])) idtipo = 3;
+            else if(this.jComboBox1.getSelectedItem().toString().equals(roles[2])) idtipo = 4;
             
         UsuarioDA uda = new UsuarioDA();
         boolean flag = uda.RegistrarUsuario(this.textField7.getText(),
