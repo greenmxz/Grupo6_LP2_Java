@@ -16,12 +16,21 @@ import javax.swing.table.DefaultTableModel;
  * @author Moises
  */
 public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
+
+
     private OrdenCompra ordenCompraSeleccionada;
     private ArrayList<OrdenCompra>lista;
     private OrdenCompraBL logicaNegocioOc;
     /**
      * Creates new form frmBusquedaOrdenCompra
      */
+    public OrdenCompra getOrdenCompraSeleccionada() {
+        return ordenCompraSeleccionada;
+    }
+
+    public void setOrdenCompraSeleccionada(OrdenCompra ordenCompraSeleccionada) {
+        this.ordenCompraSeleccionada = ordenCompraSeleccionada;
+    }
     public frmBusquedaOrdenCompra(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -50,7 +59,7 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Codigo", "Estado"
+                "Codigo", "Cantidad Total", "Fecha", "Estado"
             }
         ));
         jScrollPane1.setViewportView(tablaOrdenCompra);
@@ -92,22 +101,26 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
         // TODO add your handling code here:
         try{
             int index = tablaOrdenCompra.getSelectedRow();
-        
+            ordenCompraSeleccionada=lista.get(index);
+            this.dispose();
         }catch(Exception ex ){
             JOptionPane.showMessageDialog(null, "Seleccione una orden de compra");
         }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
     private void actualizarTabla(){
         DefaultTableModel modelo= (DefaultTableModel)tablaOrdenCompra.getModel();
-        Object fila[] = new Object[2];
+        Object fila[] = new Object[4];
 
         for (int i=0; i < lista.size();i++){
             fila[0]=lista.get(i).getIdOrdenCompra();
+            fila[1]=lista.get(i).getCantidadTotalProducto();
+            fila[2]=lista.get(i).getFechaOrdenCompra();
             if (lista.get(i).getEstadoOrdenCompra()==1){
-                fila[1]="No atendida";
+                fila[3]="No atendida";
             }else{
-                fila[1]="Atendida";
+                fila[3]="Atendida";
             }
+            
             modelo.addRow(fila);
         }
     }

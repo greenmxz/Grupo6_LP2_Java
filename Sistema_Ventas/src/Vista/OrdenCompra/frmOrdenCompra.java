@@ -48,7 +48,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         ordenCompra = new OrdenCompra();
         cboEstado.setModel(new DefaultComboBoxModel(estados));
         logicaNegocioOrdenCompra = new OrdenCompraBL();
-        buscarOrdenDeCompra.hide();
+        //buscarOrdenDeCompra.hide();
     }
 
     /**
@@ -222,6 +222,11 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         });
 
         btnGuardar.setText("Guardar Cambios");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("Eliminar");
 
@@ -342,8 +347,30 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         // TODO add your handling code here:
         frmBusquedaOrdenCompra fBOC = new frmBusquedaOrdenCompra(JOptionPane.getFrameForComponent(this.padre.getPaneOrdenCompra()),true);
         fBOC.setVisible(true);
+        ordenCompra = fBOC.getOrdenCompraSeleccionada();
+        txtCodigo.setText(String.valueOf(ordenCompra.getIdOrdenCompra()));
+        txtFechaOrden.setDate(ordenCompra.getFechaOrdenCompra());
+        
+        actualizarTabla();
     }//GEN-LAST:event_buscarOrdenDeCompraActionPerformed
-
+    private void actualizarTabla(){
+        modelo= (DefaultTableModel)tablaDetalleOrdenCompra.getModel();
+        Object fila[] = new Object[3];
+        deleteRows();
+        for (int i=0; i < ordenCompra.getDetalleOrdenCompra().size();i++){
+            fila[0]=ordenCompra.getDetalleOrdenCompra().get(i).getProducto().getIdProducto();
+            fila[1]=ordenCompra.getDetalleOrdenCompra().get(i).getProducto().getNombre();
+            fila[2]=ordenCompra.getDetalleOrdenCompra().get(i).getCantidad();            
+            modelo.addRow(fila);
+        }
+        
+    }
+    private void deleteRows(){
+        int rowCount = modelo.getRowCount();
+        for (int i=rowCount-1 ; i>=0;i--){
+            modelo.removeRow(i);
+        }
+    }
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
         // TODO add your handling code here:
 
@@ -447,6 +474,17 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
             return;
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        if(logicaNegocioOrdenCompra.actualizarOrden(ordenCompra,frmPrincipal.usuario)){
+            JOptionPane.showMessageDialog(null, "Actualizado correctamente");
+            return;
+        }else{
+            JOptionPane.showMessageDialog(null, "No se pudo registrar, ocurrió un error");
+            return;
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
     private boolean esta(Producto p , ArrayList<DetalleOrdenCompra> detalle){
         for (int i=0; i<detalle.size();i++){
             if (p.getIdProducto()==detalle.get(i).getProducto().getIdProducto()){
