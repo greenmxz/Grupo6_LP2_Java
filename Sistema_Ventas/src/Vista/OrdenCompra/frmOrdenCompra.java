@@ -39,7 +39,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
      */
     public frmOrdenCompra(frmGestionarOrdenCompra padre) {
         initComponents();
-        String [] estados = { "No atendido","Atendido"};
+        String [] estados = { "No atendida","Atendida"};
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.padre=padre;
         txtCodigo.setEnabled(false);
@@ -48,6 +48,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         ordenCompra = new OrdenCompra();
         cboEstado.setModel(new DefaultComboBoxModel(estados));
         logicaNegocioOrdenCompra = new OrdenCompraBL();
+        estado(1);
         //buscarOrdenDeCompra.hide();
     }
 
@@ -60,7 +61,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton7 = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cboEstado = new javax.swing.JComboBox<>();
@@ -82,18 +83,19 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         txtCantidad = new javax.swing.JTextField();
         btnRegistrar = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        buscarOrdenDeCompra = new javax.swing.JButton();
+        btnBuscarOrdenDeCompra = new javax.swing.JButton();
         txtTotal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        btnNuevo = new javax.swing.JButton();
+        btnEstado = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(54, 63, 69));
         setBorder(null);
 
-        jButton7.setText("Cancelar");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btnCancelarActionPerformed(evt);
             }
         });
 
@@ -228,12 +230,10 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
             }
         });
 
-        jButton8.setText("Eliminar");
-
-        buscarOrdenDeCompra.setText("Buscar Orden de compra");
-        buscarOrdenDeCompra.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscarOrdenDeCompra.setText("Buscar Orden de compra");
+        btnBuscarOrdenDeCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscarOrdenDeCompraActionPerformed(evt);
+                btnBuscarOrdenDeCompraActionPerformed(evt);
             }
         });
 
@@ -242,38 +242,59 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Total:");
 
+        btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
+
+        btnEstado.setText("Modificar");
+        btnEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEstadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(82, 82, 82)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtFechaOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(149, 149, 149)
-                                .addComponent(jLabel6)
-                                .addGap(37, 37, 37)
-                                .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
+                                .addGap(129, 129, 129)
                                 .addComponent(btnRegistrar)
-                                .addGap(57, 57, 57)
-                                .addComponent(jButton8)
-                                .addGap(87, 87, 87)
+                                .addGap(179, 179, 179)
                                 .addComponent(btnGuardar)
-                                .addGap(97, 97, 97)
-                                .addComponent(jButton7)))
+                                .addGap(131, 131, 131)
+                                .addComponent(btnCancelar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnEstado)
+                                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(35, 35, 35)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel2)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(txtFechaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(80, 80, 80)
+                                                .addComponent(jLabel6)
+                                                .addGap(37, 37, 37)
+                                                .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(127, 127, 127)
@@ -282,36 +303,48 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(51, 51, 51)
-                                .addComponent(buscarOrdenDeCompra)))))
+                                .addComponent(btnBuscarOrdenDeCompra))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(91, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(buscarOrdenDeCompra))
-                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscarOrdenDeCompra))
+                        .addGap(24, 24, 24))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnNuevo)
+                        .addGap(4, 4, 4)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(txtFechaOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(btnEstado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrar)
-                    .addComponent(jButton8)
                     .addComponent(btnGuardar)
-                    .addComponent(jButton7)
+                    .addComponent(btnCancelar)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         pack();
@@ -337,22 +370,31 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         }
     }//GEN-LAST:event_btnBuscarProductoActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
         
-        this.dispose();
-    }//GEN-LAST:event_jButton7ActionPerformed
+        estado(1);
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void buscarOrdenDeCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarOrdenDeCompraActionPerformed
+    private void btnBuscarOrdenDeCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarOrdenDeCompraActionPerformed
         // TODO add your handling code here:
-        frmBusquedaOrdenCompra fBOC = new frmBusquedaOrdenCompra(JOptionPane.getFrameForComponent(this.padre.getPaneOrdenCompra()),true);
-        fBOC.setVisible(true);
-        ordenCompra = fBOC.getOrdenCompraSeleccionada();
-        txtCodigo.setText(String.valueOf(ordenCompra.getIdOrdenCompra()));
-        txtFechaOrden.setDate(ordenCompra.getFechaOrdenCompra());
-        
-        actualizarTabla();
-    }//GEN-LAST:event_buscarOrdenDeCompraActionPerformed
+        try{
+            frmBusquedaOrdenCompra fBOC = new frmBusquedaOrdenCompra(JOptionPane.getFrameForComponent(this.padre.getPaneOrdenCompra()),true);
+            fBOC.setVisible(true);
+            ordenCompra = fBOC.getOrdenCompraSeleccionada();
+            txtCodigo.setText(String.valueOf(ordenCompra.getIdOrdenCompra()));
+            txtFechaOrden.setDate(ordenCompra.getFechaOrdenCompra());
+            txtTotal.setText(String.valueOf(ordenCompra.getCantidadTotalProducto()));
+            int i ;
+            if ( ordenCompra.getEstadoOrdenCompra()==1)
+                i=0;
+            else
+                i=1;
+            cboEstado.setSelectedIndex(i);
+            actualizarTabla();
+        }catch(Exception ex){
+        }
+    }//GEN-LAST:event_btnBuscarOrdenDeCompraActionPerformed
     private void actualizarTabla(){
         modelo= (DefaultTableModel)tablaDetalleOrdenCompra.getModel();
         Object fila[] = new Object[3];
@@ -468,11 +510,14 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         ordenCompra.setEstadoOrdenCompra(1);
         if (logicaNegocioOrdenCompra.registrarOrden(ordenCompra,frmPrincipal.usuario)){
             JOptionPane.showMessageDialog(null, "Se registro correctamente");
+            estado(1);
             return;
         }else {
             JOptionPane.showMessageDialog(null, "No se pudo registrar, ocurrió un error");
+            estado(1);
             return;
         }
+        
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -485,6 +530,16 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
             return;
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        // TODO add your handling code here:
+        estado(2);
+    }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoActionPerformed
+        // TODO add your handling code here:
+        estado(3);
+    }//GEN-LAST:event_btnEstadoActionPerformed
     private boolean esta(Producto p , ArrayList<DetalleOrdenCompra> detalle){
         for (int i=0; i<detalle.size();i++){
             if (p.getIdProducto()==detalle.get(i).getProducto().getIdProducto()){
@@ -493,18 +548,86 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         }
         return false;
     }
+        private void estado(int i){
+        switch (i){
+            
+            case 1:
+                txtCodigo.setEnabled(false);
+                txtCantidad.setEnabled(false);
+                txtCodigoProducto.setEnabled(false);
+                txtFechaOrden.setEnabled(false);
+                txtNombreProducto.setEnabled(false);
+                txtTotal.setEnabled(false);
+                btnEstado.setEnabled(false);
+
+                tablaDetalleOrdenCompra.setEnabled(false);
+                btnRegistrar.setEnabled(false);
+                btnBuscarOrdenDeCompra.setEnabled(false);
+                btnCancelar.setEnabled(true);
+                btnGuardar.setEnabled(false);
+                btnBuscarProducto.setEnabled(false);
+                btnAnadir.setEnabled(false);
+                btnModificar.setEnabled(false);
+                btnQuitar.setEnabled(false);
+                cboEstado.setEnabled(false);
+                break;
+            case 2:
+                txtCodigo.setEnabled(false);
+                txtCantidad.setEnabled(true);
+                txtCodigoProducto.setEnabled(true);
+                txtFechaOrden.setEnabled(true);
+                txtNombreProducto.setEnabled(true);
+                txtTotal.setEnabled(false);
+                btnEstado.setEnabled(true);
+
+                tablaDetalleOrdenCompra.setEnabled(true);
+                btnRegistrar.setEnabled(true);
+                btnBuscarOrdenDeCompra.setEnabled(false);
+                btnCancelar.setEnabled(true);
+                
+                btnGuardar.setEnabled(false);
+                btnBuscarProducto.setEnabled(true);
+                btnAnadir.setEnabled(true);
+                btnModificar.setEnabled(true);
+                btnQuitar.setEnabled(true);
+                cboEstado.setEnabled(false);
+                break;
+            case 3:
+                txtCodigo.setEnabled(false);
+                txtCantidad.setEnabled(false);
+                txtCodigoProducto.setEnabled(false);
+                txtFechaOrden.setEnabled(false);
+                txtNombreProducto.setEnabled(false);
+                txtTotal.setEnabled(false);
+                btnEstado.setEnabled(false);
+                jPanel1.setEnabled(false);
+                tablaDetalleOrdenCompra.setEnabled(false);
+                btnRegistrar.setEnabled(false);
+                btnBuscarOrdenDeCompra.setEnabled(true);
+                btnCancelar.setEnabled(false);
+                
+                btnGuardar.setEnabled(true);
+                btnBuscarProducto.setEnabled(false);
+                btnAnadir.setEnabled(false);
+                btnModificar.setEnabled(false);
+                btnQuitar.setEnabled(false);
+                cboEstado.setEnabled(true);
+                break;
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnadir;
+    private javax.swing.JButton btnBuscarOrdenDeCompra;
     private javax.swing.JButton btnBuscarProducto;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEstado;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnModificar;
+    private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnQuitar;
     private javax.swing.JButton btnRegistrar;
-    private javax.swing.JButton buscarOrdenDeCompra;
     private javax.swing.JComboBox<String> cboEstado;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

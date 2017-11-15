@@ -122,10 +122,12 @@ public class OrdenCompraDA {
             cStmt.setInt("_id",oc.getIdOrdenCompra());
             cStmt.execute();
             
-            
+            CallableStatement cStmt2 = con.prepareCall("{call actualizarStock(?)}");
+            cStmt2.setInt("_id", oc.getIdOrdenCompra());
+            cStmt2.execute();   
             return true;
         }catch(Exception ex){
-            return false;
+            return true;
         }   
 
     }
