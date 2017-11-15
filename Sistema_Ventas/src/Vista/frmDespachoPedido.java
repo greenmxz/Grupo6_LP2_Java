@@ -7,8 +7,12 @@ package Vista;
 
 import AccesoDatos.ClienteDA;
 import AccesoDatos.PedidosDA;
+import AccesoDatos.ProductoDA;
 import Modelo.Pedido;
+import Modelo.Producto;
+import java.util.ArrayList;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -31,9 +35,24 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
     
     public void FillTexts(Pedido pedido){
         ClienteDA cda = new ClienteDA();
+        ProductoDA pda = new ProductoDA();
         this.pedido = pedido;
         this.txtRazonSocial.setText( cda.getNombreCliente(pedido.getIdCliente()));
         this.txtRuc.setText(cda.getRucCliente(pedido.getIdCliente()));
+        
+        //aca tmb debemos llenar los productos
+        ArrayList<Producto> prods = pda.getProd_ped(pedido.getIdPedido());
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Object rowData[] = new Object[4];
+        for(int i = 0; i < prods.size(); i++)
+        {
+            rowData[0] = prods.get(i).getIdProducto();
+            rowData[1] = prods.get(i).getNombre();
+            rowData[2] = prods.get(i).getPeso();
+            rowData[3] = prods.get(i).getPrecioUnitario();
+            model.addRow(rowData);
+        }
     }
 
     /**
@@ -76,17 +95,27 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
         jLabel2.setText("Razon Social:");
 
         txtRuc.setEditable(false);
+        txtRuc.setEnabled(false);
 
         txtRazonSocial.setEditable(false);
+        txtRazonSocial.setEnabled(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre", "Peso", "Precio (S/)"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         btnActualizarEstado.setText("Actualiza Estado");

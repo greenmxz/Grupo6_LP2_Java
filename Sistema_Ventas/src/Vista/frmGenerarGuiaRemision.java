@@ -4,9 +4,15 @@
  * and open the template in the editor.
  */
 package Vista;
+import AccesoDatos.ClienteDA;
+import AccesoDatos.ProductoDA;
+import Modelo.Pedido;
+import Modelo.Producto;
 import Vista.Vista_Menu.*;
+import java.util.ArrayList;
 import javax.swing.JDesktopPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,12 +25,34 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
      */
     
     
-    
+    private Pedido pedido;
     public frmGenerarGuiaRemision(frmPrincipal padre) {
         initComponents();
         this.padre = padre;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(0,0);
+    }
+    
+    public void FillTexts(Pedido pedido){
+        ClienteDA cda = new ClienteDA();
+        ProductoDA pda = new ProductoDA();
+        this.pedido = pedido;
+        this.txtRs.setText( cda.getNombreCliente(pedido.getIdCliente()));
+        this.txtRuc.setText(cda.getRucCliente(pedido.getIdCliente()));
+        
+        //aca tmb debemos llenar los productos
+        ArrayList<Producto> prods = pda.getProd_ped(pedido.getIdPedido());
+        
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        Object rowData[] = new Object[4];
+        for(int i = 0; i < prods.size(); i++)
+        {
+            rowData[0] = prods.get(i).getIdProducto();
+            rowData[1] = prods.get(i).getNombre();
+            rowData[2] = prods.get(i).getPeso();
+            rowData[3] = prods.get(i).getPrecioUnitario();
+            model.addRow(rowData);
+        }
     }
 
     /**
@@ -38,8 +66,8 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        textField1 = new java.awt.TextField();
-        textField2 = new java.awt.TextField();
+        txtRs = new java.awt.TextField();
+        txtRuc = new java.awt.TextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -56,21 +84,26 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Razon Social:");
 
-        textField1.setEnabled(false);
+        txtRs.setEnabled(false);
 
-        textField2.setEnabled(false);
+        txtRuc.setEnabled(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "Nombre", "Peso", "Precio (S/)"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Buscar Pedido");
@@ -111,8 +144,8 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(textField2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
+                            .addComponent(txtRuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtRs, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(87, 87, 87))
@@ -138,9 +171,9 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtRs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -197,9 +230,9 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private java.awt.Label label1;
-    private java.awt.TextField textField1;
-    private java.awt.TextField textField2;
     private java.awt.TextField textField3;
     private java.awt.TextField textField4;
+    private java.awt.TextField txtRs;
+    private java.awt.TextField txtRuc;
     // End of variables declaration//GEN-END:variables
 }
