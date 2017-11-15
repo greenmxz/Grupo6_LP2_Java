@@ -50,8 +50,6 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
         btnCuentasAcceso = new javax.swing.JButton();
         panelCuentasAcceso = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        panelMantenerPerfiles = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(30, 67, 112));
         setBorder(null);
@@ -97,29 +95,6 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
-        panelMantenerPerfiles.setBackground(new java.awt.Color(173, 192, 206));
-
-        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei", 0, 13)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Mantener perfiles");
-
-        javax.swing.GroupLayout panelMantenerPerfilesLayout = new javax.swing.GroupLayout(panelMantenerPerfiles);
-        panelMantenerPerfiles.setLayout(panelMantenerPerfilesLayout);
-        panelMantenerPerfilesLayout.setHorizontalGroup(
-            panelMantenerPerfilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMantenerPerfilesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addGap(20, 20, 20))
-        );
-        panelMantenerPerfilesLayout.setVerticalGroup(
-            panelMantenerPerfilesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMantenerPerfilesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addContainerGap())
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -129,16 +104,13 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
                 .addGap(28, 28, 28)
                 .addComponent(btnCuentasAcceso, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(panelMantenerPerfiles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(114, 114, 114)
                 .addComponent(panelCuentasAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panelMantenerPerfiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
                 .addComponent(btnCuentasAcceso, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42))
         );
@@ -179,8 +151,6 @@ public class frmMenuInicioSeguridad extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCuentasAcceso;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel panelCuentasAcceso;
-    private javax.swing.JPanel panelMantenerPerfiles;
     // End of variables declaration//GEN-END:variables
 }
