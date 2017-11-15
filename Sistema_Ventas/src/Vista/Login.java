@@ -10,6 +10,9 @@ import Modelo.Usuario;
 
 import java.awt.Color;
 import java.awt.Image;
+//import javafx.scene.input.KeyEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -108,6 +111,11 @@ public class Login extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(60, 141, 188));
+        jPanel2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel2FocusGained(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Microsoft JhengHei", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -132,18 +140,38 @@ public class Login extends javax.swing.JFrame {
         textUsuario.setForeground(new java.awt.Color(255, 255, 255));
         textUsuario.setBorder(null);
         textUsuario.setPreferredSize(new java.awt.Dimension(134, 30));
+        textUsuario.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textUsuarioFocusGained(evt);
+            }
+        });
         textUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 textUsuarioMouseClicked(evt);
+            }
+        });
+        textUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textUsuarioKeyReleased(evt);
             }
         });
 
         textContrasena.setBackground(new java.awt.Color(60, 141, 188));
         textContrasena.setToolTipText("");
         textContrasena.setBorder(null);
+        textContrasena.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                textContrasenaFocusGained(evt);
+            }
+        });
         textContrasena.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 textContrasenaMouseClicked(evt);
+            }
+        });
+        textContrasena.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textContrasenaKeyReleased(evt);
             }
         });
 
@@ -213,6 +241,22 @@ public class Login extends javax.swing.JFrame {
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         // TODO add your handling code here:
+        /*usuario = logicaNegocioUsuario.obtenerUsuario(textUsuario.getText(),textContrasena.getText());
+        //(nombreUsuario.equalsIgnoreCase("log"))||(nombreUsuario.equalsIgnoreCase("seg"))||(nombreUsuario.equalsIgnoreCase("alm")) 
+        if (usuario!=null){
+
+                frmPrincipal frmPrincipal = new frmPrincipal(usuario ); 
+                frmPrincipal.setVisible(true);
+                this.dispose(); 
+        }else{
+            textUsuario.setText("Usuario");
+            textContrasena.setText("\\u25cf");
+            JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrectos\nIngresa los datos nuevamente");
+        }*/
+        log();
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void log(){
         usuario = logicaNegocioUsuario.obtenerUsuario(textUsuario.getText(),textContrasena.getText());
         //(nombreUsuario.equalsIgnoreCase("log"))||(nombreUsuario.equalsIgnoreCase("seg"))||(nombreUsuario.equalsIgnoreCase("alm")) 
         if (usuario!=null){
@@ -225,8 +269,7 @@ public class Login extends javax.swing.JFrame {
             textContrasena.setText("\\u25cf");
             JOptionPane.showMessageDialog(null, "Usuario o contrasena incorrectos\nIngresa los datos nuevamente");
         }
-    }//GEN-LAST:event_btnIngresarActionPerformed
-
+    }
     private void textUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textUsuarioMouseClicked
         // TODO add your handling code here:
         textUsuario.setText("");
@@ -236,6 +279,32 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         textContrasena.setText("");
     }//GEN-LAST:event_textContrasenaMouseClicked
+
+    private void textUsuarioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textUsuarioFocusGained
+        // TODO add your handling code here:
+        textUsuario.setText("");
+    }//GEN-LAST:event_textUsuarioFocusGained
+
+    private void jPanel2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel2FocusGained
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jPanel2FocusGained
+
+    private void textContrasenaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textContrasenaKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) log();
+        
+    }//GEN-LAST:event_textContrasenaKeyReleased
+
+    private void textUsuarioKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textUsuarioKeyReleased
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_textUsuarioKeyReleased
+
+    private void textContrasenaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textContrasenaFocusGained
+        // TODO add your handling code here:
+        textContrasena.setText("");
+    }//GEN-LAST:event_textContrasenaFocusGained
 
     /**
      * @param args the command line arguments
@@ -286,4 +355,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPasswordField textContrasena;
     private javax.swing.JTextField textUsuario;
     // End of variables declaration//GEN-END:variables
+
+    
 }
