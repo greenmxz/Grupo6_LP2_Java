@@ -35,8 +35,8 @@ public class frmReportes extends javax.swing.JInternalFrame {
         c.gridx=0;
         c.gridy=0;
         dynamicPanel.add(menu2,c);
-        menu1.setVisible(true);
-        menu2.setVisible(false);
+        menu1.setVisible(false);
+        menu2.setVisible(true);
     }
     void setColor(JPanel panel){
         panel.setBackground(new Color(30,67,112));

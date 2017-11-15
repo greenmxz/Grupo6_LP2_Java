@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="64e85e89-c731-4f2c-ba6b-12e9acba0154">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaInicial" class="java.lang.String"/>
+	<parameter name="fechaFinal" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[Select r.ruc as RUC , r.razonSocial as "RAZON SOCIAL",SUM(p.idCliente) as CANTIDAD
+from Pedido as p inner join Cliente as r on r.idCliente=p.idCliente
+where p.fechaPedido between $P{fechaInicial} and $P{fechaFinal}
+group by r.ruc
+having SUM(p.idCliente)<=10]]>
+	</queryString>
+	<field name="RUC" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="RAZON SOCIAL" class="java.lang.String"/>
+	<field name="CANTIDAD" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="165" y="22" width="280" height="46" uuid="c491fad0-a725-4426-96bc-5a6cb3cf75d5"/>
+				<textElement>
+					<font size="13"/>
+				</textElement>
+				<text><![CDATA[Reporte Clientes con menos pedidos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="39" y="15" width="100" height="20" uuid="3a371a91-b919-46d8-95fd-41b206887e5b"/>
+				<text><![CDATA[Fecha inicial:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="318" y="15" width="100" height="20" uuid="d65ab08a-734e-4cc7-84d0-350e2002b57d"/>
+				<text><![CDATA[Fecha final:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="139" y="15" width="100" height="20" uuid="14858597-cfd6-42cf-ae54-8135fce6247a"/>
+				<textFieldExpression><![CDATA[$P{fechaInicial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="418" y="15" width="100" height="20" uuid="686e2906-c222-4b4b-8ab6-cf6777bfc418"/>
+				<textFieldExpression><![CDATA[$P{fechaFinal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="46" y="41" width="100" height="20" uuid="55b7348b-98f4-4898-8377-9c4baa8da93a"/>
+				<text><![CDATA[RUC]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="239" y="41" width="100" height="20" uuid="df1a4b32-4c9c-4d44-8a6c-853897211b82"/>
+				<text><![CDATA[RAZON SOCIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="418" y="41" width="100" height="20" uuid="8dfac75c-fbcb-4cfd-9f2f-62723f2bca0b"/>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="33" splitType="Stretch">
+			<textField>
+				<reportElement x="46" y="9" width="100" height="20" uuid="09272264-c616-49e1-bdc8-2da92142e979"/>
+				<textFieldExpression><![CDATA[$F{RUC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="239" y="9" width="100" height="20" uuid="b253305d-e83b-4f9b-b2e1-2444e64cfc54"/>
+				<textFieldExpression><![CDATA[$F{RAZON SOCIAL}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="423" y="9" width="100" height="20" uuid="cbb9b0fe-043f-41f6-a0da-dfe61b965f32"/>
+				<textFieldExpression><![CDATA[$F{CANTIDAD}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

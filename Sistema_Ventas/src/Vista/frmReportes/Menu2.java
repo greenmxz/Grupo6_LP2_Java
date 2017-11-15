@@ -6,7 +6,15 @@
 package Vista.frmReportes;
 
 import Controlador.ProductoBL;
+import Vista.principal;
+import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -35,13 +43,13 @@ public class Menu2 extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        txtFechaInicial = new com.toedter.calendar.JDateChooser();
         cboTipoReporte = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnGenerar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        txtFechaFinal = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(54, 63, 69));
 
@@ -54,13 +62,13 @@ public class Menu2 extends javax.swing.JPanel {
         jLabel2.setText("Fecha inicio:");
 
         cboTipoReporte.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cboTipoReporte.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cboTipoReporteItemStateChanged(evt);
+
+        btnGenerar.setText("Generar");
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
             }
         });
-
-        jButton1.setText("Generar");
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,12 +88,11 @@ public class Menu2 extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jButton1)
-                .addGap(98, 430, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(btnGenerar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,14 +101,14 @@ public class Menu2 extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(17, 17, 17)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addComponent(cboTipoReporte, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(30, 30, 30)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -119,43 +126,103 @@ public class Menu2 extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(btnGenerar))
                     .addComponent(jLabel3))
                 .addContainerGap(124, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cboTipoReporteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cboTipoReporteItemStateChanged
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
         // TODO add your handling code here:
         int index=cboTipoReporte.getSelectedIndex();
+        SimpleDateFormat  sdf,sdf1;
+        String            f1,f2;
+        sdf = new SimpleDateFormat("yyyy-MM-dd");  // Or whatever format you need
+        sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        f1 = sdf.format(txtFechaInicial.getDate()); 
+        f2 = sdf1.format(txtFechaFinal.getDate());
         
+        if ( f1.equals("")|| f2.equals("")){
+            JOptionPane.showMessageDialog(null, "Seleccione las fechas");
+            return;
+        }
+        
+        if (txtFechaInicial.getDate().after(txtFechaFinal.getDate())){
+            JOptionPane.showMessageDialog(null, "Seleccione fechas válidas");
+            return;
+        }
+        
+        try{
         switch(index){
             case 0:
-                //clientes mayores pedidos
+                //productos mayores pedidos
                 //logicaNegocioProducto.devolverListaMayores();
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
+                System.out.println("Se conecto correctamente");
+                JasperReport jr = (JasperReport)
+                    JRLoader.loadObjectFromFile(
+                         Menu2.class.getResource
+                     ("repProductosMas.jasper").getFile());   
+                
+                
+                HashMap parametros = new HashMap();
+                parametros.put("fechaInicial", f1);
+                parametros.put("fechaFinal",f2);
+                
+                JasperPrint impresion =
+                    JasperFillManager.fillReport(
+                            jr, parametros, con);
+                JasperViewer viewer = new JasperViewer(impresion);
+            
+                viewer.setVisible(true);
+                con.close();
                 break;
             case 1:
-                //clientes menores pedidos
+                //productos  menores pedidos
                 //logicaNegocioProducto.devolverListaMenores();
+                Class.forName("com.mysql.jdbc.Driver");
+                Connection con2 = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
+                System.out.println("Se conecto correctamente");
+                JasperReport jr2 = (JasperReport)
+                    JRLoader.loadObjectFromFile(
+                         Menu2.class.getResource
+                     ("repProductosMenos.jasper").getFile());   
+                
+                HashMap parametros2 = new HashMap();
+                parametros2.put("fechaInicial", f1);
+                parametros2.put("fechaFinal",f2);
+                
+                JasperPrint impresion2 =
+                    JasperFillManager.fillReport(
+                            jr2, parametros2, con2);
+                JasperViewer viewer2 = new JasperViewer(impresion2);
+            
+                viewer2.setVisible(true);
+                con2.close();
                 break;
         }
-    }//GEN-LAST:event_cboTipoReporteItemStateChanged
+        }catch(Exception ex){
+            JOptionPane.showMessageDialog(null, "Ocurrió un error al generar reportes");
+            return;
+        }
+    }//GEN-LAST:event_btnGenerarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGenerar;
     private javax.swing.JComboBox<String> cboTipoReporte;
-    private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
+    private com.toedter.calendar.JDateChooser txtFechaFinal;
+    private com.toedter.calendar.JDateChooser txtFechaInicial;
     // End of variables declaration//GEN-END:variables
 }
