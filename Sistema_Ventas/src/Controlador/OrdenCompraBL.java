@@ -26,6 +26,6 @@ public class OrdenCompraBL {
         return accesoDatos.registrarOrden(oc,us);
     }
     public boolean actualizarOrden(OrdenCompra oc,Usuario us){
-        return accesoDatos.registrarOrden(oc, us);
+        return accesoDatos.actualizarOrden(oc, us);
     }
 }

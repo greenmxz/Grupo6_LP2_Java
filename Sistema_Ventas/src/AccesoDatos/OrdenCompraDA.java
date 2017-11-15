@@ -118,6 +118,10 @@ public class OrdenCompraDA {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
             System.out.println("Se conecto correctamente");
+            CallableStatement cStmt = con.prepareCall("{call actualizarOrdenCompra(?)}");
+            cStmt.setInt("_id",oc.getIdOrdenCompra());
+            cStmt.execute();
+            
             
             return true;
         }catch(Exception ex){
