@@ -6,6 +6,7 @@
 package Vista;
 
 import AccesoDatos.ClienteDA;
+import AccesoDatos.PedidosDA;
 import Modelo.Pedido;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 
@@ -26,6 +27,13 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
         this.padre = padre;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(0,0);
+    }
+    
+    public void FillTexts(Pedido pedido){
+        ClienteDA cda = new ClienteDA();
+        this.pedido = pedido;
+        this.txtRazonSocial.setText( cda.getNombreCliente(pedido.getIdCliente()));
+        this.txtRuc.setText(cda.getRucCliente(pedido.getIdCliente()));
     }
 
     /**
@@ -73,10 +81,7 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
@@ -85,6 +90,11 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         btnActualizarEstado.setText("Actualiza Estado");
+        btnActualizarEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarEstadoActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Despachado:");
 
@@ -96,29 +106,30 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBuscarPedido)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(28, 28, 28))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnActualizarEstado)
-                        .addGap(46, 46, 46))))
+                        .addGap(46, 46, 46))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtRuc, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnBuscarPedido)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1))
+                                    .addComponent(txtRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -141,7 +152,7 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
                         .addComponent(jLabel3)
                         .addComponent(jCheckBox1))
                     .addComponent(btnActualizarEstado))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -154,16 +165,22 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
 
     private void btnBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPedidoActionPerformed
         // TODO add your handling code here:
-        ClienteDA cda = new ClienteDA();
         frmBusquedaPedido frmBusqPed = new frmBusquedaPedido(this);
         padre.getJdpInterno().add(frmBusqPed);
         frmBusqPed.show();
         this.hide();
         
-        this.pedido = frmBusqPed.getPedidoSelec();
-        this.txtRazonSocial.setText( cda.getNombreCliente(pedido.getIdCliente()));
-        this.txtRuc.setText(cda.getRucCliente(pedido.getIdCliente()));
     }//GEN-LAST:event_btnBuscarPedidoActionPerformed
+
+    private void btnActualizarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEstadoActionPerformed
+        // TODO add your handling code here:
+        
+        if(this.jCheckBox1.isSelected()){
+            PedidosDA pda = new PedidosDA();
+            pda.setDespachado(this.pedido.getIdPedido());
+        }
+        
+    }//GEN-LAST:event_btnActualizarEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

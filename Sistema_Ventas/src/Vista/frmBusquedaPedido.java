@@ -140,6 +140,8 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
         int index = this.jTable1.getSelectedRow();
         pedidoSeleccionado = pedidos.get(index);
         padre.show();
+        
+        ((frmDespachoPedido) padre).FillTexts(pedidoSeleccionado);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
