@@ -135,6 +135,11 @@ public class Login extends javax.swing.JFrame {
 
         btnCancelar.setText("Salir");
         btnCancelar.setPreferredSize(new java.awt.Dimension(83, 23));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         textUsuario.setBackground(new java.awt.Color(60, 141, 188));
         textUsuario.setForeground(new java.awt.Color(255, 255, 255));
@@ -305,6 +310,11 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         textContrasena.setText("");
     }//GEN-LAST:event_textContrasenaFocusGained
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
