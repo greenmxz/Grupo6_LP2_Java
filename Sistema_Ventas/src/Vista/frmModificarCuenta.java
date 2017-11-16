@@ -20,7 +20,7 @@ public class frmModificarCuenta extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmModificarCuenta
      */
-    String[] roles = { "Almacenero", "Seguridad", "Logistica" };
+    String[] roles = { "Almacenero", "Seguridad", "Logistica", "Ventas", "Sistema" };
     Usuario user;
     public frmModificarCuenta() {
         initComponents();
@@ -174,6 +174,8 @@ public class frmModificarCuenta extends javax.swing.JInternalFrame {
         if(user.getTipoUsuario() == 1) index = 1;
         else if(user.getTipoUsuario() == 3) index = 0;
         else if(user.getTipoUsuario() == 4) index = 2;
+        else if(user.getTipoUsuario() == 2) index = 4;
+        else if(user.getTipoUsuario() == 5) index = 3;
         
         this.jTextField1.setEnabled(false);
         this.jComboBox1.setEnabled(true);
@@ -191,6 +193,8 @@ public class frmModificarCuenta extends javax.swing.JInternalFrame {
         if(this.jComboBox1.getSelectedItem().toString().equals(roles[0])) idtipo = 3;
         else if(this.jComboBox1.getSelectedItem().toString().equals(roles[1])) idtipo = 1;
         else if(this.jComboBox1.getSelectedItem().toString().equals(roles[2])) idtipo = 4;
+        else if(this.jComboBox1.getSelectedItem().toString().equals(roles[3])) idtipo = 5;
+        else if(this.jComboBox1.getSelectedItem().toString().equals(roles[4])) idtipo = 2;
         
         UsuarioDA uda = new UsuarioDA();
         
