@@ -5,9 +5,11 @@
  */
 package Vista;
 import AccesoDatos.ClienteDA;
+import AccesoDatos.GuiaRemDA;
 import AccesoDatos.ProductoDA;
 import Modelo.Pedido;
 import Modelo.Producto;
+import Modelo.Usuario;
 import Vista.Vista_Menu.*;
 import java.util.ArrayList;
 import javax.swing.JDesktopPane;
@@ -122,6 +124,11 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
         label1.setText("Fecha de Entrega:");
 
         button1.setLabel("Emitir Guia");
+        button1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button1ActionPerformed(evt);
+            }
+        });
 
         button2.setLabel("Cancelar");
         button2.addActionListener(new java.awt.event.ActionListener() {
@@ -218,6 +225,26 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
         this.hide();
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+        // TODO add your handling code here:
+        // ACA LO MANDO A LA BD FUNCIONA PORFAVAAAAARRRR
+        
+        if(this.pedido == null) return;
+        if(this.txtOrigen.getText().isEmpty() || this.txtOrigen.getText().isEmpty() || this.jDateChooser1.getDate().toString().isEmpty()) return;
+        
+        Usuario user = padre.getUsuario();
+        
+        GuiaRemDA grda = new GuiaRemDA();
+        
+        grda.registrarGuiaRem(user.getIdUsuario(),
+                this.jDateChooser1.getDate(),
+                this.txtOrigen.getText(),
+                this.txtDestino.getText(),
+                this.pedido.getIdPedido(),
+                this.pedido.getIdCliente());
+        
+    }//GEN-LAST:event_button1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
