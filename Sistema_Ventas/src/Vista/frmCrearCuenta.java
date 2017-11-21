@@ -24,7 +24,7 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
     /**
      * Creates new form frmCrearCuenta
      */
-    String[] roles = { "Seguridad", "Almacenero", "Logistica" };
+    String[] roles = { "Seguridad", "Almacenero", "Logistica", "Ventas", "Sistema" };
     public frmCrearCuenta() {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
@@ -218,6 +218,8 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
         if(this.jComboBox1.getSelectedItem().toString().equals(roles[0])) idtipo = 3;
         else if(this.jComboBox1.getSelectedItem().toString().equals(roles[1])) idtipo = 1;
         else if(this.jComboBox1.getSelectedItem().toString().equals(roles[2])) idtipo = 4;
+        else if(this.jComboBox1.getSelectedItem().toString().equals(roles[3])) idtipo = 5;
+        else if(this.jComboBox1.getSelectedItem().toString().equals(roles[4])) idtipo = 2;
             
         UsuarioDA uda = new UsuarioDA();
         boolean flag = uda.RegistrarUsuario(this.textField7.getText(),

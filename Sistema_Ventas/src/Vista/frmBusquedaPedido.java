@@ -139,13 +139,13 @@ public class frmBusquedaPedido extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         int index = this.jTable1.getSelectedRow();
         pedidoSeleccionado = pedidos.get(index);
-        padre.show();
+        
         
         String classname = padre.getClass().getName();
         
         if(classname.equals("Vista.frmDespachoPedido")) ((frmDespachoPedido) padre).FillTexts(pedidoSeleccionado);
         else ((frmGenerarGuiaRemision) padre).FillTexts(pedidoSeleccionado);
-        
+        padre.show();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
