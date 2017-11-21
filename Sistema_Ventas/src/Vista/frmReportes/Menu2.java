@@ -11,6 +11,7 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.util.JRLoader;
@@ -125,71 +126,79 @@ public class Menu2 extends javax.swing.JPanel {
         String            f1,f2;
         sdf = new SimpleDateFormat("yyyy-MM-dd");  // Or whatever format you need
         sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-        f1 = sdf.format(txtFechaInicial.getDate()); 
-        f2 = sdf1.format(txtFechaFinal.getDate());
-        
-        if ( f1.equals("")|| f2.equals("")){
-            JOptionPane.showMessageDialog(null, "Seleccione las fechas");
-            return;
-        }
-        
-        if (txtFechaInicial.getDate().after(txtFechaFinal.getDate())){
-            JOptionPane.showMessageDialog(null, "Seleccione fechas válidas");
-            return;
-        }
-        
         try{
-        switch(index){
-            case 0:
-                //productos mayores pedidos
-                //logicaNegocioProducto.devolverListaMayores();
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
-                System.out.println("Se conecto correctamente");
-                JasperReport jr = (JasperReport)
-                    JRLoader.loadObjectFromFile(
-                         Menu2.class.getResource
-                     ("repProductosMas.jasper").getFile());   
-                
-                
-                HashMap parametros = new HashMap();
-                parametros.put("fechaInicial", f1);
-                parametros.put("fechaFinal",f2);
-                
-                JasperPrint impresion =
-                    JasperFillManager.fillReport(
-                            jr, parametros, con);
-                JasperViewer viewer = new JasperViewer(impresion);
-            
-                viewer.setVisible(true);
-                con.close();
-                break;
-            case 1:
-                //productos  menores pedidos
-                //logicaNegocioProducto.devolverListaMenores();
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection con2 = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
-                System.out.println("Se conecto correctamente");
-                JasperReport jr2 = (JasperReport)
-                    JRLoader.loadObjectFromFile(
-                         Menu2.class.getResource
-                     ("repProductosMenos.jasper").getFile());   
-                
-                HashMap parametros2 = new HashMap();
-                parametros2.put("fechaInicial", f1);
-                parametros2.put("fechaFinal",f2);
-                
-                JasperPrint impresion2 =
-                    JasperFillManager.fillReport(
-                            jr2, parametros2, con2);
-                JasperViewer viewer2 = new JasperViewer(impresion2);
-            
-                viewer2.setVisible(true);
-                con2.close();
-                break;
-        }
+            f1 = sdf.format(txtFechaInicial.getDate()); 
+            f2 = sdf1.format(txtFechaFinal.getDate());
+
+            if ( f1.equals("")|| f2.equals("")){
+                JOptionPane.showMessageDialog(null, "Seleccione las fechas");
+                return;
+            }
+
+            if (txtFechaInicial.getDate().after(txtFechaFinal.getDate())){
+                JOptionPane.showMessageDialog(null, "Seleccione fechas válidas");
+                return;
+            }
+
+            try{
+            switch(index){
+                case 0:
+                    //productos mayores pedidos
+                    //logicaNegocioProducto.devolverListaMayores();
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
+                    System.out.println("Se conecto correctamente");
+                    JasperReport jr = (JasperReport)
+                        JRLoader.loadObjectFromFile(
+                             Menu2.class.getResource
+                         //("repProductosMas.jasper").getFile());   
+                         ("productosMasPedidos.jasper").getFile());   
+
+                    HashMap parametros = new HashMap();
+                    parametros.put("fechaInicio", f1);
+                    parametros.put("fechaFinal",f2);
+
+                    JasperPrint impresion =
+                        JasperFillManager.fillReport(
+                                jr, parametros, con);
+                    JasperViewer viewer = new JasperViewer(impresion,false);
+                    //viewer.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    viewer.setVisible(true);
+                    con.close();
+                    break;
+                case 1:
+                    //productos  menores pedidos
+                    //logicaNegocioProducto.devolverListaMenores();
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con2 = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
+                    System.out.println("Se conecto correctamente");
+                    JasperReport jr2 = (JasperReport)
+                        JRLoader.loadObjectFromFile(
+                             Menu2.class.getResource
+                         //("repProductosMenos.jasper").getFile());   
+                         ("productosMenosPedidos.jasper").getFile());   
+                    System.out.println("1111111");
+                    HashMap parametros2 = new HashMap();
+                    parametros2.put("fechaInicio", f1);
+                    parametros2.put("fechaFinal",f2);
+
+                    JasperPrint impresion2 =
+                        JasperFillManager.fillReport(
+                                jr2, parametros2, con2);
+                    JasperViewer viewer2 = new JasperViewer(impresion2,false);
+                    System.out.println("22222");
+                    viewer2.setVisible(true);
+                    //viewer2.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                    con2.close();
+                    break;
+            }
+            }catch(Exception ex){
+//                JOptionPane.showMessageDialog(null, "Ocurrió un error al generar reportes");
+//                return;
+                System.out.println(ex.getMessage());
+            }
         }catch(Exception ex){
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al generar reportes");
+            JOptionPane.showMessageDialog(null, "Seleccione las fechas");
             return;
         }
     }//GEN-LAST:event_btnGenerarActionPerformed

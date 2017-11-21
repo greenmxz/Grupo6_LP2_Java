@@ -387,9 +387,9 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
             txtTotal.setText(String.valueOf(ordenCompra.getCantidadTotalProducto()));
             int i ;
             if ( ordenCompra.getEstadoOrdenCompra()==1)
-                i=0;
+                i=0;//no atendida
             else
-                i=1;
+                i=1;//atendida
             cboEstado.setSelectedIndex(i);
             actualizarTabla();
         }catch(Exception ex){
@@ -522,6 +522,11 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
+        if (ordenCompra.getEstadoOrdenCompra()==0){
+            JOptionPane.showMessageDialog(null, "La orden de compra seleccionada ya ha sido atendida");
+            return;
+        }
+        
         if(logicaNegocioOrdenCompra.actualizarOrden(ordenCompra,frmPrincipal.usuario)){
             JOptionPane.showMessageDialog(null, "Actualizado correctamente");
             return;
@@ -558,18 +563,19 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 txtFechaOrden.setEnabled(false);
                 txtNombreProducto.setEnabled(false);
                 txtTotal.setEnabled(false);
-                btnEstado.setEnabled(false);
+                btnEstado.setEnabled(true);
 
                 tablaDetalleOrdenCompra.setEnabled(false);
                 btnRegistrar.setEnabled(false);
                 btnBuscarOrdenDeCompra.setEnabled(false);
-                btnCancelar.setEnabled(true);
+                btnCancelar.setEnabled(false);
                 btnGuardar.setEnabled(false);
                 btnBuscarProducto.setEnabled(false);
                 btnAnadir.setEnabled(false);
                 btnModificar.setEnabled(false);
                 btnQuitar.setEnabled(false);
                 cboEstado.setEnabled(false);
+                btnNuevo.setEnabled(true);
                 break;
             case 2:
                 txtCodigo.setEnabled(false);
@@ -580,7 +586,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 txtTotal.setEnabled(false);
                 btnEstado.setEnabled(true);
 
-                tablaDetalleOrdenCompra.setEnabled(true);
+               // tablaDetalleOrdenCompra.setEnabled(true);
                 btnRegistrar.setEnabled(true);
                 btnBuscarOrdenDeCompra.setEnabled(false);
                 btnCancelar.setEnabled(true);
@@ -591,6 +597,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 btnModificar.setEnabled(true);
                 btnQuitar.setEnabled(true);
                 cboEstado.setEnabled(false);
+                //btnNuevo.setEnabled(false);
                 break;
             case 3:
                 txtCodigo.setEnabled(false);
@@ -600,11 +607,11 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 txtNombreProducto.setEnabled(false);
                 txtTotal.setEnabled(false);
                 btnEstado.setEnabled(false);
-                jPanel1.setEnabled(false);
-                tablaDetalleOrdenCompra.setEnabled(false);
+               // jPanel1.setEnabled(false);
+                //tablaDetalleOrdenCompra.setEnabled(false);
                 btnRegistrar.setEnabled(false);
                 btnBuscarOrdenDeCompra.setEnabled(true);
-                btnCancelar.setEnabled(false);
+                btnCancelar.setEnabled(true);
                 
                 btnGuardar.setEnabled(true);
                 btnBuscarProducto.setEnabled(false);
@@ -612,6 +619,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 btnModificar.setEnabled(false);
                 btnQuitar.setEnabled(false);
                 cboEstado.setEnabled(true);
+                btnNuevo.setEnabled(false);
                 break;
         }
     }
