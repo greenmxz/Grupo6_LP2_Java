@@ -16,7 +16,7 @@ on p.idPedido = d.idPedido
 inner join Producto as r on r.idProducto=d.idProducto
 where p.fechaPedido between $P{fechaInicio} and $P{fechaFinal}
 group by d.idProducto
-having SUM(d.Cantidad)<=10]]>
+having SUM(d.Cantidad)>10]]>
 	</queryString>
 	<field name="ID" class="java.lang.Integer"/>
 	<field name="NOMBRE" class="java.lang.String">

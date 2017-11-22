@@ -230,7 +230,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
             }
         });
 
-        btnBuscarOrdenDeCompra.setText("Buscar Orden de compra");
+        btnBuscarOrdenDeCompra.setText("Buscar Orden ");
         btnBuscarOrdenDeCompra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarOrdenDeCompraActionPerformed(evt);
@@ -273,9 +273,10 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                                 .addComponent(btnCancelar))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnEstado)
-                                    .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(btnEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnBuscarOrdenDeCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(35, 35, 35)
@@ -295,15 +296,10 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(36, 36, 36)
                                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(127, 127, 127)
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(51, 51, 51)
-                                .addComponent(btnBuscarOrdenDeCompra))))
+                        .addGap(127, 127, 127)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(129, 129, 129)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 693, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -319,9 +315,8 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                             .addComponent(jLabel1)
                             .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6)
-                            .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnBuscarOrdenDeCompra))
-                        .addGap(24, 24, 24))
+                            .addComponent(cboEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnNuevo)
                         .addGap(4, 4, 4)))
@@ -333,7 +328,9 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                         .addGap(18, 18, 18)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(4, 4, 4)
+                        .addGap(2, 2, 2)
+                        .addComponent(btnBuscarOrdenDeCompra)
+                        .addGap(18, 18, 18)
                         .addComponent(btnEstado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,7 +341,7 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                     .addComponent(btnCancelar)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
 
         pack();
@@ -374,6 +371,11 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         // TODO add your handling code here:
         
         estado(1);
+        if (modelo!=null){
+            ordenCompra=null;
+            ordenCompra=new OrdenCompra();
+            deleteRows();
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBuscarOrdenDeCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarOrdenDeCompraActionPerformed
@@ -385,13 +387,19 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
             txtCodigo.setText(String.valueOf(ordenCompra.getIdOrdenCompra()));
             txtFechaOrden.setDate(ordenCompra.getFechaOrdenCompra());
             txtTotal.setText(String.valueOf(ordenCompra.getCantidadTotalProducto()));
+            estado(3);
             int i ;
-            if ( ordenCompra.getEstadoOrdenCompra()==1)
+            if ( ordenCompra.getEstadoOrdenCompra()==1){
                 i=0;//no atendida
-            else
+                cboEstado.setEnabled(true);
+            }
+            else{
                 i=1;//atendida
+                cboEstado.setEnabled(false);
+            }
             cboEstado.setSelectedIndex(i);
             actualizarTabla();
+            //btnGuardar.setEnabled(true);
         }catch(Exception ex){
         }
     }//GEN-LAST:event_btnBuscarOrdenDeCompraActionPerformed
@@ -408,9 +416,15 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         
     }
     private void deleteRows(){
-        int rowCount = modelo.getRowCount();
-        for (int i=rowCount-1 ; i>=0;i--){
-            modelo.removeRow(i);
+        try{
+            int rowCount = modelo.getRowCount();
+            for (int i=rowCount-1 ; i>=0;i--){
+                modelo.removeRow(i);
+            }
+        }catch(Exception ex){
+            //JOptionPane.showMessageDialog(null, "No se registro orden de compra aún");
+            System.out.println("No se ha registrado orden de compra aún");
+            return;
         }
     }
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
@@ -511,10 +525,12 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         if (logicaNegocioOrdenCompra.registrarOrden(ordenCompra,frmPrincipal.usuario)){
             JOptionPane.showMessageDialog(null, "Se registro correctamente");
             estado(1);
+            //deleteRows();
             return;
         }else {
             JOptionPane.showMessageDialog(null, "No se pudo registrar, ocurrió un error");
             estado(1);
+            //deleteRows();
             return;
         }
         
@@ -529,6 +545,10 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         
         if(logicaNegocioOrdenCompra.actualizarOrden(ordenCompra,frmPrincipal.usuario)){
             JOptionPane.showMessageDialog(null, "Actualizado correctamente");
+            estado(1);
+            deleteRows();
+            ordenCompra=null;
+            ordenCompra=new OrdenCompra();
             return;
         }else{
             JOptionPane.showMessageDialog(null, "No se pudo registrar, ocurrió un error");
@@ -539,6 +559,9 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
         estado(2);
+        deleteRows();
+        ordenCompra=null;
+        ordenCompra=new OrdenCompra();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEstadoActionPerformed
@@ -553,21 +576,21 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
         }
         return false;
     }
-        private void estado(int i){
+    private void estado(int i){
         switch (i){
             
-            case 1:
+            case 1://inicial
                 txtCodigo.setEnabled(false);
                 txtCantidad.setEnabled(false);
                 txtCodigoProducto.setEnabled(false);
                 txtFechaOrden.setEnabled(false);
                 txtNombreProducto.setEnabled(false);
                 txtTotal.setEnabled(false);
-                btnEstado.setEnabled(true);
-
+//                btnEstado.setEnabled(true);
+                btnEstado.hide();
                 tablaDetalleOrdenCompra.setEnabled(false);
                 btnRegistrar.setEnabled(false);
-                btnBuscarOrdenDeCompra.setEnabled(false);
+                btnBuscarOrdenDeCompra.setEnabled(true);
                 btnCancelar.setEnabled(false);
                 btnGuardar.setEnabled(false);
                 btnBuscarProducto.setEnabled(false);
@@ -576,19 +599,21 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 btnQuitar.setEnabled(false);
                 cboEstado.setEnabled(false);
                 btnNuevo.setEnabled(true);
+                limpiar();
+                
                 break;
-            case 2:
+            case 2://nuevo
                 txtCodigo.setEnabled(false);
                 txtCantidad.setEnabled(true);
-                txtCodigoProducto.setEnabled(true);
+                txtCodigoProducto.setEnabled(false);
                 txtFechaOrden.setEnabled(true);
-                txtNombreProducto.setEnabled(true);
+                txtNombreProducto.setEnabled(false);
                 txtTotal.setEnabled(false);
-                btnEstado.setEnabled(true);
-
+                //btnEstado.setEnabled(true);
+                btnEstado.hide();
                // tablaDetalleOrdenCompra.setEnabled(true);
                 btnRegistrar.setEnabled(true);
-                btnBuscarOrdenDeCompra.setEnabled(false);
+                btnBuscarOrdenDeCompra.setEnabled(true);
                 btnCancelar.setEnabled(true);
                 
                 btnGuardar.setEnabled(false);
@@ -598,15 +623,17 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 btnQuitar.setEnabled(true);
                 cboEstado.setEnabled(false);
                 //btnNuevo.setEnabled(false);
+                btnRegistrar.setEnabled(true);
                 break;
-            case 3:
+            case 3://busqueda
                 txtCodigo.setEnabled(false);
                 txtCantidad.setEnabled(false);
                 txtCodigoProducto.setEnabled(false);
                 txtFechaOrden.setEnabled(false);
                 txtNombreProducto.setEnabled(false);
                 txtTotal.setEnabled(false);
-                btnEstado.setEnabled(false);
+                //btnEstado.setEnabled(false);
+                btnEstado.hide();
                // jPanel1.setEnabled(false);
                 //tablaDetalleOrdenCompra.setEnabled(false);
                 btnRegistrar.setEnabled(false);
@@ -619,9 +646,19 @@ public class frmOrdenCompra extends javax.swing.JInternalFrame{
                 btnModificar.setEnabled(false);
                 btnQuitar.setEnabled(false);
                 cboEstado.setEnabled(true);
-                btnNuevo.setEnabled(false);
+                btnNuevo.setEnabled(true);
                 break;
         }
+    }
+    private void limpiar(){
+        txtCantidad.setText("");
+        txtCodigo.setText("");
+        txtCodigoProducto.setText("");
+        txtFechaOrden.setDate(null);
+        txtNombreProducto.setText("");
+        txtTotal.setText("");
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

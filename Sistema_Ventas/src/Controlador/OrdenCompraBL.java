@@ -28,4 +28,7 @@ public class OrdenCompraBL {
     public boolean actualizarOrden(OrdenCompra oc,Usuario us){
         return accesoDatos.actualizarOrden(oc, us);
     }
+    public OrdenCompra devolverOrden(int cod){
+        return accesoDatos.devolverOrden(cod);
+    }
 }

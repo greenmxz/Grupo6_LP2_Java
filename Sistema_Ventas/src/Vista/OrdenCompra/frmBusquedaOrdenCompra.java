@@ -7,6 +7,7 @@ package Vista.OrdenCompra;
 
 import Controlador.OrdenCompraBL;
 import Modelo.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
 
-
+    DefaultTableModel modelo;
     private OrdenCompra ordenCompraSeleccionada;
     private ArrayList<OrdenCompra>lista;
     private OrdenCompraBL logicaNegocioOc;
@@ -36,6 +37,7 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
         initComponents();
         logicaNegocioOc = new OrdenCompraBL();
         lista = logicaNegocioOc.devolverLista();
+        this.setBackground(Color.yellow);
         actualizarTabla();
     }
 
@@ -51,6 +53,9 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaOrdenCompra = new javax.swing.JTable();
         btnSeleccionar = new javax.swing.JButton();
+        txtCodigo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -59,7 +64,7 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
 
             },
             new String [] {
-                "Codigo", "Cantidad Total", "Fecha", "Estado"
+                "Código", "Cantidad Total", "Fecha", "Estado"
             }
         ));
         jScrollPane1.setViewportView(tablaOrdenCompra);
@@ -71,27 +76,50 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setText("Código:");
+
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnSeleccionar)
-                .addGap(201, 201, 201))
             .addGroup(layout.createSequentialGroup()
                 .addGap(89, 89, 89)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSeleccionar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(btnSeleccionar)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(btnSeleccionar)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(btnBuscar))
+                        .addGap(28, 28, 28)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(171, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         pack();
@@ -107,8 +135,50 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Seleccione una orden de compra");
         }
     }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        // TODO add your handling code here:
+        try{
+            deleteRows();
+            Object fila[] = new Object[4];
+            ordenCompraSeleccionada=logicaNegocioOc.devolverOrden(Integer.parseInt(txtCodigo.getText()));
+            if (ordenCompraSeleccionada!=null){
+                fila[0]=ordenCompraSeleccionada.getIdOrdenCompra();
+                fila[1]=ordenCompraSeleccionada.getCantidadTotalProducto();
+                fila[2]=ordenCompraSeleccionada.getFechaOrdenCompra();
+                if (ordenCompraSeleccionada.getEstadoOrdenCompra()==1){
+                    fila[3]="No atendida";
+                }else{
+                    fila[3]="Atendida";
+                }
+
+                modelo.addRow(fila);
+            }else{
+                //lista=null;
+                //lista = logicaNegocioOc.devolverLista();
+                
+                JOptionPane.showMessageDialog(null, "La orden de compra consultada no existe");
+                actualizarTabla();
+                return;
+            }
+        }catch(Exception ex){
+            //lista=null;
+            //lista = logicaNegocioOc.devolverLista();
+            
+            JOptionPane.showMessageDialog(null, "Ingrese un codigo válido");
+            actualizarTabla();
+            return;
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+    private void deleteRows(){
+        int rowCount = modelo.getRowCount();
+       
+        for (int i=rowCount-1 ; i>=0;i--){
+            modelo.removeRow(i);
+        }
+    }
     private void actualizarTabla(){
-        DefaultTableModel modelo= (DefaultTableModel)tablaOrdenCompra.getModel();
+        modelo= (DefaultTableModel)tablaOrdenCompra.getModel();
         Object fila[] = new Object[4];
 
         for (int i=0; i < lista.size();i++){
@@ -167,8 +237,11 @@ public class frmBusquedaOrdenCompra extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaOrdenCompra;
+    private javax.swing.JTextField txtCodigo;
     // End of variables declaration//GEN-END:variables
 }

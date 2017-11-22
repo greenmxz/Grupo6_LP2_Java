@@ -26,7 +26,7 @@ public class OrdenCompraDA {
             Statement sentencia= con.createStatement();
             
             //String instruccion = "Select * from Usuario where idTipoUsuario not in ("+2+","+5+") and "+"nombreUsuario='"+nombreUsuario+"' and "+"contraseña='"+contrasena+"'";
-            String instruccion = "select * from OrdenCompra";
+            String instruccion = "select * from OrdenCompra order by estadoOrdenCompra DESC";
             //System.out.println(instruccion);
             ResultSet rs = sentencia.executeQuery(instruccion);
             
@@ -125,11 +125,62 @@ public class OrdenCompraDA {
             CallableStatement cStmt2 = con.prepareCall("{call actualizarStock(?)}");
             cStmt2.setInt("_id", oc.getIdOrdenCompra());
             cStmt2.execute();   
+            con.close();
             return true;
         }catch(Exception ex){
             return true;
         }   
 
+    }
+    public OrdenCompra devolverOrden(int cod){
+        try{
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
+            System.out.println("Se conecto correctamente");
+            Statement sentencia= con.createStatement();
+            
+            //String instruccion = "Select * from Usuario where idTipoUsuario not in ("+2+","+5+") and "+"nombreUsuario='"+nombreUsuario+"' and "+"contraseña='"+contrasena+"'";
+            String instruccion = "select * from OrdenCompra where idOrdenCompra="+cod;
+            //System.out.println(instruccion);
+            ResultSet rs = sentencia.executeQuery(instruccion);
+            
+            
+            while (rs.next( )){
+                OrdenCompra oc = new OrdenCompra();
+                oc.setIdOrdenCompra(rs.getInt("idOrdenCompra"));
+                oc.setEstadoOrdenCompra(rs.getInt("estadoOrdenCompra"));
+                oc.setFechaOrdenCompra(rs.getDate("fechaOrdenCompra"));
+                oc.setCantidadTotalProducto(rs.getInt("CantidadTotalProducto"));
+                
+                
+                
+                Statement sentencia2 = con.createStatement();
+                String instruccion2 = "select * from DetalleOrdenCompra as d inner join Producto as p on d.idOrdenCompra = "+oc.getIdOrdenCompra()+ " and p.idProducto=d.idProducto;";//
+                ResultSet rs2 = sentencia2.executeQuery(instruccion2);
+                while (rs2.next()){
+                    DetalleOrdenCompra d = new DetalleOrdenCompra();
+                    Producto p = new Producto();
+                    d.setCantidad(rs2.getInt("cantidad"));
+                    
+                    
+                    p.setIdProducto(rs2.getInt("idProducto"));
+                    p.setDescripcion(rs2.getString("descripcion"));
+                    p.setNombre(rs2.getString("nombre"));
+                    p.setPeso(rs2.getDouble("peso"));
+                    p.setPrecioUnitario(rs2.getDouble("precioUnitario"));
+                    p.setStock(rs2.getInt("stock"));
+                    d.setProducto(p);
+                    oc.getDetalleOrdenCompra().add(d);
+                }
+                rs2.close();
+                con.close();
+                return oc;
+            }
+            
+        }catch(Exception ex){
+            return null;
+        } 
+        return null;
     }
 
 }
