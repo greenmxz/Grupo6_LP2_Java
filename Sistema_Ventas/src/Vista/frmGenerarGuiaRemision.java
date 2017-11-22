@@ -251,7 +251,8 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
             model.setRowCount(0);
             this.txtDestino.setText("");
             this.txtOrigen.setText("");
-            this.jDateChooser1.cleanup();
+            this.jDateChooser1.setCalendar(null);
+            this.pedido = null;
         }
         
     }//GEN-LAST:event_button1ActionPerformed
