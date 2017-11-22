@@ -237,12 +237,22 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
         
         GuiaRemDA grda = new GuiaRemDA();
         
-        grda.registrarGuiaRem(user.getIdUsuario(),
+        boolean flag = grda.registrarGuiaRem(user.getIdUsuario(),
                 this.jDateChooser1.getDate(),
                 this.txtOrigen.getText(),
                 this.txtDestino.getText(),
                 this.pedido.getIdPedido(),
                 this.pedido.getIdCliente());
+        
+        if(flag){
+            this.txtRuc.setText("");
+            this.txtRs.setText("");
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            model.setRowCount(0);
+            this.txtDestino.setText("");
+            this.txtOrigen.setText("");
+            this.jDateChooser1.cleanup();
+        }
         
     }//GEN-LAST:event_button1ActionPerformed
 

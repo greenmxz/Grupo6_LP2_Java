@@ -23,7 +23,7 @@ public class GuiaRemDA {
         
     }
     
-    public void registrarGuiaRem(int idalm, Date fechat, String origen, String destino, int idped, int idcli){
+    public boolean registrarGuiaRem(int idalm, Date fechat, String origen, String destino, int idped, int idcli){
         try{
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6","inf282g6","ta1RQx6flDXdiTpr" );
@@ -62,8 +62,10 @@ public class GuiaRemDA {
             sentencia.executeUpdate(instruccion);
             con.close();
             JOptionPane.showMessageDialog(null, "Guia registrada");
+            return true;
         }catch(Exception ex){
             JOptionPane.showMessageDialog(null, "Error de Registro" + ex.getMessage());
+            return false;
         }
         
         
