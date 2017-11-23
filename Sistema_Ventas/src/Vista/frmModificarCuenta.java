@@ -22,10 +22,13 @@ public class frmModificarCuenta extends javax.swing.JInternalFrame {
      */
     String[] roles = { "Almacenero", "Seguridad", "Logistica", "Ventas", "Sistema" };
     Usuario user;
-    public frmModificarCuenta() {
+    private frmOpcionesCuenta padre;
+    
+    public frmModificarCuenta(frmOpcionesCuenta padre) {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(144,0);
+        this.padre = padre;
         jComboBox1.setModel(new DefaultComboBoxModel(roles));
     }
 
@@ -152,6 +155,7 @@ public class frmModificarCuenta extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        padre.nullfrms(2);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

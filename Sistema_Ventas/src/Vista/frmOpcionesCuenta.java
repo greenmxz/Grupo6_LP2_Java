@@ -19,11 +19,28 @@ public class frmOpcionesCuenta extends javax.swing.JInternalFrame {
      */
     
     private frmPrincipal padre;
+    private frmCrearCuenta frmCrear;
+    private frmModificarCuenta frmMod;
     public frmOpcionesCuenta(frmPrincipal padre) {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.padre = padre;
         this.setLocation(0,0);
+    }
+    
+    public void nullfrms(int flag){
+        if(flag == 1) this.frmCrear = null;
+        if(flag == 2) this.frmMod = null;
+    }
+    
+    public boolean instCrear(){
+        if(this.frmCrear == null) return false;
+        else return true;
+    }
+    
+    public boolean instModificar(){
+        if(this.frmMod == null) return false;
+        else return true;
     }
 
     /**
@@ -78,14 +95,24 @@ public class frmOpcionesCuenta extends javax.swing.JInternalFrame {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         // TODO add your handling code here:
-        frmCrearCuenta frmCrear = new frmCrearCuenta();
+        if(instCrear())return;
+        if(instModificar()){
+            this.frmMod.dispose();
+            this.frmMod = null;
+        }
+        this.frmCrear = new frmCrearCuenta(this);
         padre.getJdpInterno().add(frmCrear);
         frmCrear.show();
     }//GEN-LAST:event_button1ActionPerformed
 
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // TODO add your handling code here:
-        frmModificarCuenta frmMod = new frmModificarCuenta();
+        if(instModificar())return;
+        if(instCrear()){
+            this.frmCrear.dispose();
+            this.frmCrear = null;
+        }
+        this.frmMod = new frmModificarCuenta(this);
         padre.getJdpInterno().add(frmMod);
         frmMod.show();
     }//GEN-LAST:event_button2ActionPerformed

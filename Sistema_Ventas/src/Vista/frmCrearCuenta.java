@@ -25,11 +25,12 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
      * Creates new form frmCrearCuenta
      */
     String[] roles = { "Seguridad", "Almacenero", "Logistica", "Ventas", "Sistema" };
-    public frmCrearCuenta() {
+    private frmOpcionesCuenta padre;
+    public frmCrearCuenta(frmOpcionesCuenta padre) {
         initComponents();
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(144,0);
-        
+        this.padre = padre;
         jComboBox1.setModel(new DefaultComboBoxModel(roles));
     }
 
@@ -200,6 +201,7 @@ public class frmCrearCuenta extends javax.swing.JInternalFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        padre.nullfrms(1);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
