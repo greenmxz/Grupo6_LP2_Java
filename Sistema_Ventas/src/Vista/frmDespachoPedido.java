@@ -11,6 +11,7 @@ import AccesoDatos.ProductoDA;
 import Modelo.Pedido;
 import Modelo.Producto;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -29,6 +30,8 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
     public frmDespachoPedido(frmPrincipal padre) {
         initComponents();
         this.padre = padre;
+        this.jLabel3.setVisible(false);
+        this.jCheckBox1.setVisible(false);
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(0,0);
     }
@@ -118,7 +121,7 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        btnActualizarEstado.setText("Actualiza Estado");
+        btnActualizarEstado.setText("Despachar pedido");
         btnActualizarEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarEstadoActionPerformed(evt);
@@ -204,10 +207,17 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
     private void btnActualizarEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarEstadoActionPerformed
         // TODO add your handling code here:
         
-        if(this.jCheckBox1.isSelected()){
+        if(this.pedido != null){
             PedidosDA pda = new PedidosDA();
             pda.setDespachado(this.pedido.getIdPedido());
+        }else{
+            JOptionPane.showMessageDialog(null, "No hay pedido seleccionado");
         }
+        
+//        if(this.jCheckBox1.isSelected()){
+//            PedidosDA pda = new PedidosDA();
+//            pda.setDespachado(this.pedido.getIdPedido());
+//        }
         
     }//GEN-LAST:event_btnActualizarEstadoActionPerformed
 

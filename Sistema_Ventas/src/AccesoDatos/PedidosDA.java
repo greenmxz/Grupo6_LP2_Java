@@ -25,6 +25,37 @@ public class PedidosDA {
         
     }
     
+    public Pedido BuscarPedido(String codigo){
+        
+        try{
+            //Registro del Driver
+            Class.forName("com.mysql.jdbc.Driver");
+            
+            Connection con = DriverManager.getConnection("jdbc:mysql://200.16.7.96/inf282g6", "inf282g6", "ta1RQx6flDXdiTpr");
+            
+            Statement sentencia = con.createStatement();
+            
+            String instruccion = "SELECT * FROM Pedido Where idEstadoPedido = 1 AND idPedido = "+codigo;
+            
+            ResultSet rs = sentencia.executeQuery(instruccion);
+            
+            Pedido ped = null;
+            while(rs.next()){
+                ped = new Pedido(rs.getInt("idCliente"));
+                ped.setFecha(rs.getString("fechaPedido"));
+                ped.setImporte(rs.getFloat("importeTotal"));
+                ped.setIdPedido(rs.getInt("idPedido"));
+                
+            }
+            
+            con.close();
+            return ped;
+        }catch(Exception ex){
+            System.out.println(ex.getMessage());
+            return null;
+        }
+    }
+    
     public void setDespachado(int id){
         try{
             Class.forName("com.mysql.jdbc.Driver");
