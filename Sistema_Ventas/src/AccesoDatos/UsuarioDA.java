@@ -70,10 +70,9 @@ public class UsuarioDA {
             if(pass.isEmpty())throw new Exception();
             System.out.println(auxpass);
             
-            instruccion = "INSERT INTO Usuario(idUsuario, nombreUsuario, contraseña, nombre, apellidoPaterno, apellidoMaterno, correo, idTipoUsuario, estadoRegistro)"
-                    + " values("
-                    +idaux+
-                    ",'"+usuario+
+            instruccion = "INSERT INTO Usuario(nombreUsuario, contraseña, nombre, apellidoPaterno, apellidoMaterno, correo, idTipoUsuario, estadoRegistro)"
+                    + " values("+                   
+                    "'"+usuario+
                     "','"+auxpass+
                     "','"+nombre+
                     "','"+appat+
