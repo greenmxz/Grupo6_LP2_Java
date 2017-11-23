@@ -25,8 +25,8 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
      */
     private Estado estado ;
     private frmPrincipal padre;
-    
-    
+    private frmGenerarGuiaRemision frmGuiaRem;
+    private frmDespachoPedido frmDespacho;
     public frmMenuInicioAlmacenero(frmPrincipal padre) {
         initComponents();
         this.setLocation(0,0);
@@ -35,6 +35,22 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
         this.btnGuiaRemision.setVisible(false);
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         estado=Estado.Abierto;
+        
+    }
+    
+    public void nullfrms(int flag){
+        if(flag == 1) this.frmDespacho = null;
+        else this.frmGuiaRem = null;
+    }
+    
+    private boolean instDesp(){
+        if(this.frmDespacho == null) return false;
+        else return true;
+    }
+    
+    private boolean instGuia(){
+        if(this.frmGuiaRem == null) return false;
+        else return true;
     }
     void setColor(JPanel panel){
         panel.setBackground(new Color(30,67,112));
@@ -63,18 +79,8 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
         setBorder(null);
 
         btnGuiaRemision.setText("Guia de remisión");
-        btnGuiaRemision.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuiaRemisionActionPerformed(evt);
-            }
-        });
 
         btnDespachoPedido.setText("Despacho pedido");
-        btnDespachoPedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDespachoPedidoActionPerformed(evt);
-            }
-        });
 
         panelDespachoPedido.setBackground(new java.awt.Color(173, 192, 206));
         panelDespachoPedido.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -174,30 +180,22 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuiaRemisionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuiaRemisionActionPerformed
-        padre.getJdpInterno().removeAll();
-        frmGenerarGuiaRemision frmGuiaRem = new frmGenerarGuiaRemision(padre);
-        padre.getJdpInterno().add(frmGuiaRem);
-        frmGuiaRem.show();
-        this.hide();
-        this.estado=Estado.Cerrado;
-        
-    }//GEN-LAST:event_btnGuiaRemisionActionPerformed
-
-    private void btnDespachoPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDespachoPedidoActionPerformed
-        // TODO add your handling code here:
-        padre.getJdpInterno().removeAll();
-        frmDespachoPedido frmDespacho = new frmDespachoPedido(padre);
-        padre.getJdpInterno().add(frmDespacho);
-        frmDespacho.show();
-        this.hide();
-        //padre.setEstado(1);
-        this.estado=Estado.Cerrado;
-    }//GEN-LAST:event_btnDespachoPedidoActionPerformed
-
     private void panelDespachoPedidoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelDespachoPedidoMouseClicked
         // TODO add your handling code here:
-        frmDespachoPedido frmDespacho = new frmDespachoPedido(padre);
+//        if(instDesp()) return;
+//        if(instGuia()){
+//            this.frmGuiaRem.dispose();
+//            this.frmGuiaRem = null;
+//        }
+        
+        try{
+            this.frmDespacho.dispose();
+            this.frmGuiaRem.dispose();
+        }catch(Exception e){
+            
+        }
+        
+        this.frmDespacho = new frmDespachoPedido(padre, this);
         padre.getJdpInterno().add(frmDespacho);
         frmDespacho.show();
         this.hide();
@@ -220,7 +218,18 @@ public class frmMenuInicioAlmacenero extends javax.swing.JInternalFrame {
 
     private void panelGuiaRemisionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panelGuiaRemisionMouseClicked
         // TODO add your handling code here:
-        frmGenerarGuiaRemision frmGuiaRem = new frmGenerarGuiaRemision(padre);
+//        if(instGuia()) return;
+//        if(instDesp()){
+//            this.frmDespacho.dispose();
+//            this.frmDespacho = null;
+//        }
+        try{
+            this.frmDespacho.dispose();
+            this.frmGuiaRem.dispose();
+        }catch(Exception e){
+            
+        }
+        this.frmGuiaRem = new frmGenerarGuiaRemision(padre, this);
         padre.getJdpInterno().add(frmGuiaRem);
         frmGuiaRem.show();
         this.hide();

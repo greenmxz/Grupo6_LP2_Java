@@ -10,6 +10,7 @@ import AccesoDatos.PedidosDA;
 import AccesoDatos.ProductoDA;
 import Modelo.Pedido;
 import Modelo.Producto;
+import Vista.Vista_Menu.frmMenuInicioAlmacenero;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
@@ -26,10 +27,12 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
      */
     private frmPrincipal padre;
     private Pedido pedido;
+    private frmMenuInicioAlmacenero padre2;
     
-    public frmDespachoPedido(frmPrincipal padre) {
+    public frmDespachoPedido(frmPrincipal padre, frmMenuInicioAlmacenero padre2) {
         initComponents();
         this.padre = padre;
+        this.padre2 = padre2;
         this.jLabel3.setVisible(false);
         this.jCheckBox1.setVisible(false);
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
@@ -193,6 +196,7 @@ public class frmDespachoPedido extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        padre2.nullfrms(1);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnBuscarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarPedidoActionPerformed

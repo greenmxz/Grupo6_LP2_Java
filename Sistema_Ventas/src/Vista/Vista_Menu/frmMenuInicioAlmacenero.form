@@ -60,17 +60,11 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Guia de remisi&#xf3;n"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuiaRemisionActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnDespachoPedido">
       <Properties>
         <Property name="text" type="java.lang.String" value="Despacho pedido"/>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDespachoPedidoActionPerformed"/>
-      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="panelDespachoPedido">
       <Properties>

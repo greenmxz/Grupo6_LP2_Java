@@ -28,9 +28,11 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
     
     
     private Pedido pedido;
-    public frmGenerarGuiaRemision(frmPrincipal padre) {
+    private frmMenuInicioAlmacenero padre2;
+    public frmGenerarGuiaRemision(frmPrincipal padre, frmMenuInicioAlmacenero padre2) {
         initComponents();
         this.padre = padre;
+        this.padre2 = padre2;
         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         this.setLocation(0,0);
     }
@@ -215,6 +217,7 @@ public class frmGenerarGuiaRemision extends javax.swing.JInternalFrame {
     private void button2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button2ActionPerformed
         // TODO add your handling code here:
         this.dispose();
+        padre2.nullfrms(2);
     }//GEN-LAST:event_button2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
